@@ -51,7 +51,7 @@ Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymon
 
 ### 问题：有课程视频可以观看吗？
 
-没有，这门课程是让你写代码的，而不是看别人写代码。
+没有，这门课程是让您写代码的，而不是看别人写代码。
 
 ### 问题: 这门课程是如何授权的?
 
@@ -71,7 +71,7 @@ Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymon
 
 ### 问题: 我可以直播课程或者制作视频吗?
 
-可以，去做吧。如果你这样做，你将会学到很多 Python 知识。
+可以，去做吧。如果您这样做，您将会学到很多 Python 知识。
 
 ### 问题: 为什么没有包含某个内容?
 
@@ -81,5 +81,5 @@ Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymon
 
 如果您能为本课程报告 Bug，我们将不胜感激，可以通过 [issue tracker](https://github.com/dabeaz-course/practical-python/issues) 进行提交。
 
-除非是被邀请，否则不接受 pull 请求，请先提交 issue。
+除非是被邀请，否则不接受拉取请求，请先提交 issue。
 
