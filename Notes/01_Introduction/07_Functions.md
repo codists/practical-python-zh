@@ -1,13 +1,12 @@
-[Contents](../Contents.md) \| [Previous (1.6 Files)](06_Files.md) \| [Next (2.0 Working with Data)](../02_Working_with_data/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (1.6 文件)](06_Files.md) \| [下一节 (2.0 处理数据)](../02_Working_with_data/00_Overview.md)
 
-# 1.7 Functions
+# 1.7 函数
 
-As your programs start to get larger, you'll want to get organized.  This section
-briefly introduces functions and library modules.  Error handling with exceptions is also introduced.
+随着程序开始变大，您会想要有条理地组织这些程序。本节简要介绍函数、库模块以及带有异常的错误处理。
 
-### Custom Functions
+### 自定义函数
 
-Use functions for code you want to reuse. Here is a function definition:
+对您要重用的代码使用函数。下面是一个函数的定义方式：
 
 ```python
 def sumcount(n):
@@ -21,20 +20,17 @@ def sumcount(n):
     return total
 ```
 
-To call a function.
+函数调用：
 
 ```python
 a = sumcount(100)
 ```
 
-A function is a series of statements that perform some task and return a result.
-The `return` keyword is needed to explicitly specify the return value of the function.
+函数是执行某些任务并返回结果的一系列语句。 `return` 关键字需要显式指定函数的返回值。
 
-### Library Functions
+### 库函数
 
-Python comes with a large standard library.
-Library modules are accessed using `import`.
-For example:
+Python 带有一个大型的标准库。使用 `import` 访问库模块。示例：
 
 ```python
 import math
@@ -45,14 +41,13 @@ u = urllib.request.urlopen('http://www.python.org/')
 data = u.read()
 ```
 
-We will cover libraries and modules in more detail later.
+稍后，我们将更详细地介绍库和模块。
 
-### Errors and exceptions
+### 错误和异常
 
-Functions report errors as exceptions.  An exception causes a function to abort and may
-cause your entire program to stop if unhandled.
+函数将错误报告为异常。异常会导致函数中止，如果未处理，可能会导致整个程序终止。
 
-Try this in your python REPL.
+在您的 Python 解释器（REPL）中尝试一下：
 
 ```python
 >>> int('N/A')
@@ -62,14 +57,11 @@ ValueError: invalid literal for int() with base 10: 'N/A'
 >>>
 ```
 
-For debugging purposes, the message describes what happened, where the error occurred,
-and a traceback showing the other function calls that led to the failure.
+出于调试的目的，上面的错误信息描述了发生的情况，错误产生的位置以及回溯。该回溯显示导致失败的其它函数调用。
 
-### Catching and Handling Exceptions
+### 捕获和处理异常
 
-Exceptions can be caught and handled.
-
-To catch, use the `try - except` statement.
+异常可以被捕获并处理。要捕获异常，使用 `try - except` 语句：
 
 ```python
 for line in f:
@@ -81,23 +73,21 @@ for line in f:
     ...
 ```
 
-The name `ValueError` must match the kind of error you are trying to catch.
+该名称`ValueError` 必须匹配与您尝试捕获的错误类型匹配。
 
-It is often difficult to know exactly what kinds of errors might occur
-in advance depending on the operation being performed.  For better or
-for worse, exception handling often gets added *after* a program has
-unexpectedly crashed (i.e., "oh, we forgot to catch that error. We
-should handle that!").
+通常，根据所执行的操作，很难提前确切地知道可能会发生哪种错误。不管是好是坏，通常会添加在程序意外奔溃后的异常处理（示例：”天哪，我们忘记捕获错误了。我们应该处理错误的。“）。
 
-### Raising Exceptions
+### 触发异常
 
-To raise an exception, use the `raise` statement.
+要触发异常，请使用 `raise` 语句：
 
 ```python
 raise RuntimeError('What a kerfuffle')
 ```
 
 This will cause the program to abort with an exception traceback. Unless caught by a `try-except` block.
+
+这将导致程序因异常回溯而中止，除非该异常通过 `try-except` 代码块捕获。 
 
 ```bash
 % python3 foo.py
@@ -107,11 +97,11 @@ Traceback (most recent call last):
 RuntimeError: What a kerfuffle
 ```
 
-## Exercises
+## 练习
 
-### Exercise 1.29: Defining a function
+### 练习 1.29：定义一个函数
 
-Try defining a simple function:
+尝试定义一个简单的函数：
 
 ```python
 >>> def greeting(name):
@@ -125,18 +115,13 @@ Hello Paula
 >>>
 ```
 
-If the first statement of a function is a string, it serves as documentation.
-Try typing a command such as `help(greeting)` to see it displayed.
+如果函数的第一条语句是字符串，那么它被当做文档字符串。尝试输入一个命令来显示该文档字符串，例如 `help(greeting)`。
 
-### Exercise 1.30: Turning a script into a function
+### 练习 1.30：将脚本转换为函数
 
-Take the code you wrote for the `pcost.py` program in [Exercise 1.27](06_Files.md)
-and turn it into a function `portfolio_cost(filename)`.  This
-function takes a filename as input, reads the portfolio data in that
-file, and returns the total cost of the portfolio as a float.
+把您在 [练习1.27](06_Files.md) 为 `pcost.py` 程序编写的代码放到  `portfolio_cost(filename)` 函数里面。此函数以文件名作为输入，读取文件中的投资组合数据，把投资组合总的费用作为浮点数返回。
 
-To use your function, change your program so that it looks something
-like this:
+要使用您的函数，请修改程序，使其看起来像下面这样：
 
 ```python
 def portfolio_cost(filename):
@@ -148,15 +133,13 @@ cost = portfolio_cost('Data/portfolio.csv')
 print('Total cost:', cost)
 ```
 
-When you run your program, you should see the same output as before.
-After you’ve run your program, you can also call your function
-interactively by typing this:
+运行程序时，您应该会看到和以前一样的输出。运行程序后，您也可以输入一下命令来交互式地调用函数：
 
 ```bash
 bash $ python3 -i pcost.py
 ```
 
-This will allow you to call your function from the interactive mode.
+这将允许您从交互模式调用函数：
 
 ```python
 >>> portfolio_cost('Data/portfolio.csv')
@@ -164,12 +147,11 @@ This will allow you to call your function from the interactive mode.
 >>>
 ```
 
-Being able to experiment with your code interactively is useful for
-testing and debugging.
+能够交互地试验代码对调试和测试非常有用。
 
-### Exercise 1.31: Error handling
+### 练习 1.31：错误处理
 
-What happens if you try your function on a file with some missing fields?
+如果您在缺少某些字段的文件上使用函数，会发生什么情况？
 
 ```python
 >>> portfolio_cost('Data/missing.csv')
@@ -181,20 +163,13 @@ ValueError: invalid literal for int() with base 10: ''
 >>>
 ```
 
-At this point, you’re faced with a decision. To make the program work
-you can either sanitize the original input file by eliminating bad
-lines or you can modify your code to handle the bad lines in some
-manner.
+在这一点上，您面临一个决定：要使程序正常工作，您可以通过消除错误行（bad lines）来清理原始输入文件，或者修改代码，以某种方式处理错误行。
 
-Modify the `pcost.py` program to catch the exception, print a warning
-message, and continue processing the rest of the file.
+请修改 `pcost.py` 程序以捕获异常，打印警告信息然后继续处理文件余下部分。
 
-### Exercise 1.32: Using a library function
+### 练习1.32：使用库函数
 
-Python comes with a large standard library of useful functions.  One
-library that might be useful here is the `csv` module. You should use
-it whenever you have to work with CSV data files.  Here is an example
-of how it works:
+Python 带有一个拥有大量有用函数的大型标准库。`csv` 模块是一个在这里可能有用的库。无论何时，每当必须必须使用 CSV 数据文件时，都应使用 `csv` 模块。这是一个有关 `csv` 模块是如何工作的示例：
 
 ```python
 >>> import csv
@@ -216,18 +191,13 @@ of how it works:
 >>> f.close()
 >>>
 ```
+`csv` 模块有一个非常棒的功能——它处理各种底层细节，例如引号和适当的逗号拆分。在上面的输出中，您会注意到它从第一列的名称（names）中删除了双引号。
 
-One nice thing about the `csv` module is that it deals with a variety
-of low-level details such as quoting and proper comma splitting.  In
-the above output, you’ll notice that it has stripped the double-quotes
-away from the names in the first column.
+修改您的 `pcost.py` 程序，以使用 `csv` 模块进行解析，然后尝试运行前面的示例。
 
-Modify your `pcost.py` program so that it uses the `csv` module for
-parsing and try running earlier examples.
+### 练习 1.33：从命令行读取
 
-### Exercise 1.33: Reading from the command line
-
-In the `pcost.py` program, the name of the input file has been hardwired into the code:
+在 `pcost.py` 程序中，输入文件的名称已经被硬编码到代码中：
 
 ```python
 # pcost.py
@@ -241,11 +211,9 @@ cost = portfolio_cost('Data/portfolio.csv')
 print('Total cost:', cost)
 ```
 
-That’s fine for learning and testing, but in a real program you
-probably wouldn’t do that.
+虽然用于学习和测试还行，但在实际的程序中，您可能不会这么做。
 
-Instead, you might pass the name of the file in as an argument to a
-script. Try changing the bottom part of the program as follows:
+相反，您可以把文件名作为参数传递给脚本。尝试按以下步骤修改程序的底部：
 
 ```python
 # pcost.py
@@ -265,12 +233,11 @@ cost = portfolio_cost(filename)
 print('Total cost:', cost)
 ```
 
-`sys.argv` is a list that contains passed arguments on the command line (if any).
+`sys.argv` 是一个列表，该列表包含了在命令行上传递的参数（如果有）。
 
-To run your program, you’ll need to run Python from the
-terminal.
+要运行程序，您需要从终端（terminal）运行 Python。
 
-For example, from bash on Unix:
+示例，从 Unix系统中的 bash 运行：
 
 ```bash
 bash % python3 pcost.py Data/portfolio.csv
@@ -278,4 +245,4 @@ Total cost: 44671.15
 bash %
 ```
 
-[Contents](../Contents.md) \| [Previous (1.6 Files)](06_Files.md) \| [Next (2.0 Working with Data)](../02_Working_with_data/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (1.6 文件)](06_Files.md) \| [下一节 (2.0 处理数据)](../02_Working_with_data/00_Overview.md)

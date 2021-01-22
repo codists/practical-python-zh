@@ -6,7 +6,7 @@
 
 该课程最初是作为一个由讲师主导的，持续 3 -4 天的现场培训。要全部完成本课程，您应该最少计划用25-35小时进行学习。大部分的参与者发现，在不浏览题解代码的情况下，学习材料是相当具有挑战性的（见下文）
 
-## Setup and Python Installation
+## 设置和 Python 安装
 
 您只需要安装 3.6 或者更新版本的 Python 即可。不依赖于任何特定的操作系统，编辑器，IDE，或者其它与 Python 相关的工具。没有第三方依赖。
 
@@ -16,7 +16,7 @@
 
 ## 派生（Forking）/克隆（Cloning） 课程仓库
 
-为了准备本课程的环境，我推荐您从本课程的仓库 [https://github.com/dabeaz-course/practical-python](https://github.com/dabeaz-course/practical-python).派生您自己的 GitHub 仓库。完成后，您可以将其克隆到本地计算机上：
+为了准备本课程的环境，我推荐您从本课程的仓库 [https://github.com/dabeaz-course/practical-python](https://github.com/dabeaz-course/practical-python) 派生您自己的 GitHub 仓库。完成后，您可以将其克隆到本地计算机上：
 
 ```
 bash % git clone https://github.com/yourname/practical-python

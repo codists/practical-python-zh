@@ -1,180 +1,68 @@
-# Practical Python Programming - Instructor Notes
+# 实用的 Python 编程——讲师说明
 
-Author: David Beazley
+作者:戴维.比兹利（David Beazley） 
 
-## Overview
+## 概述
 
-This document provides some general notes and advice on teaching the
-content of my “Practical Python” course including objectives, target
-audience, tricky bits, etc.   
+本文档提供一些有关“实用 Python” 教学的一般说明和建议，包括课程目标、课程受众、棘手的内容等。
 
-These instructions were given to people teaching the course in
-a typical three-day corporate training environment.  They might
-give you some insight about teaching your own course.
+一些人员会在一个典型的、为期三天的公司培训中进行教学，本说明就是提供给这些教学人员的。在如何教授自己的课程方面，这些说明可能会给您带来一些启发。
 
-## Target Audience and General Approach
+## 目标受众和一般方法
 
-This course is intended to be an “Introduction to Python” course for
-people who already have some programming experience.  This is
-definitely not a course designed to teach people “programming 101.”
+本课程旨在作为已经有一定的编程经验人员的“Python 入门”课程。这绝对不是一门为编程新手而设计的课程。
 
-Having said that, I have observed that the typical student in a Python
-course is also not likely to be a hard-core software engineer or
-programmer.  Instead, you are probably going to get a mix of
-engineers, scientists, web programmers, and more inexperienced
-developers.  Student background varies widely.  You might have some
-students with a lot of C,C++, Java experience, others might know PHP
-and HTML, others may be coming from tools like MATLAB, and others
-still might have almost no traditional “programming” experience at all
-despite my best attempts to make the prerequisites clear.
+话虽如此，我发现 Python 课程中的学生也不大可能是硬核软件工程师或者程序员。相反，您可能会遇到工程师，科学家, web 程序员以及经验不足的开发者。学生背景差异很大。有些学生可能具有丰富的 C,C++, Java 经验，有些学生可能了解 PHP 和 HTML，有些学生可能掌握的是诸如 MATLAB 这样的工具，尽管我已经尽了最大努力把课程的先决条件说清楚，但是有些学生可能仍然几乎没有传统的"编程"经验。
 
-With this in mind, the course aims to teach Python through the general
-problem of manipulating data (stock market data in particular).  This
-domain has been chosen because it’s simple and something everyone
-should know about it regardless of their background.  Just as an example,
-students with weak programming skills are still likely to know about
-common things like using a spreadsheet (e.g., Excel).  So, if they’re
-really stuck, you can tell them things like “well, this list of tuples
-is kind of like rows of data in a spreadsheet” or “a list
-comprehension is the same idea as applying an operation to a
-spreadsheet column and putting the result in a different column.”  The
-key idea is to stay grounded in a real-world setting as opposed to
-getting sidetracked into esoteric “computer science” problems (e.g.,
-“let’s go compute fibonacci numbers.”).
+考虑到这一点，本课程旨在通过操作数据（尤其是股市数据）的一般问题来教 Python。之所以选择这个领域是因为它很简单，并且无论每个人的背景如何，都应该对此有所了解。举个例子，编程能力很较弱的学生仍然可能要了解一些常用的东西，例如使用电子表格（Excel）。所以，如果他们真的被卡住了，您可以像这样告诉他们“元组的就像电子表格里面的数据行”或者“列表的操作和电子表格的列进行操作并且把结果放到新的一列中类似。”关键思想是扎根于现实世界环境中，而不是偏离到深奥的“计算机科学”问题上（例如：计算斐波那契数列）。
 
-This problem domain also works well for introducing other programming
-topics.  For example, scientists/engineers might want to know about
-data analysis or plotting.  So, you can show them how to make a plot
-using matplotlib. Web programmers might want to know how to present
-stock market data on a web-page.  So, you can talk about template
-engines.  Syadmins might want to do something with log files.  So, you
-can point them at a log file of real-time streaming stock data.
-Software engineers might want to know about design.  So, you can have
-them look at ways to encapsulate stock data inside an object or making
-a program extensible (e.g., how would make this program produce output
-in 10 different table formats).  You get the idea.
+这个领域的问题也可以很好的引入其它编程主题。例如，科学家/工程师可能想了解数据分析或者数据可视化，所以您可以给他们展示如果使用 matplotlib 绘图。Web 程序员可能想要了解如何在网页展示股市数据，所以，您可以讨论模板引擎。系统管理员可能想使用日志文件做一些事情，所以，您可以引导他们查看实时的股票数据流日志文件。软件工程师可能想了解设计，所以，您可以让他们看看将股票数据封装到对象内部或者使程序可扩展的方法（例如，如何让程序以 10 种不同的表格形式产生输出）。你懂的。
 
-## Presentation Guidelines
+## 演示指南
 
-The presentation slides (notes) are there to provide a narrative
-structure to the course and for reference by students when they work
-on exercises.  Do not laboriously go over every bullet point on every
-slide--assume that students can read and that they will have time to
-go back when coding.  I tend to go through the slides at a pretty
-brisk pace, showing short examples interactively as I go.  I often
-skip slides entirely in favor of live demos.  For example, you don't
-really need to do a bunch of slides on lists.  Just go to the
-interpreter and do some list examples live instead. Rule of thumb: No
-more than 1 minute per slide unless it’s something unusually tricky.
-Honestly, you could probably skip most of the slides and simply
-lecture using live demos if you feel that it works for you.  I often
-do this.
+演示幻灯片（notes）为课程提供了叙述结构，供学生练习时参考。加入学生能够阅读那些幻灯片并且他们写代码时有时间回头查看，那么就没必要一字不落的讲解。我倾向于快速地浏览幻灯片，并在前进的过程中展示一些简短的例子。我经常跳过这些幻灯片，进行现场演示。例如，您真的不需要那么多关于列表（list）的幻灯片，而是走向解释器，现场执行一些列表示例即可。经验法则：每张幻灯片的时间不超过 1 分钟，除非是特别棘手的内容。老实说，如果您觉得适合自己的话，可以跳过大部分的幻灯片，而只使用实时演示讲课。我经常这样做。
 
-## Course Exercises
+## 课程练习
 
-The course has about 130 hands-on exercises.  If you do every single
-exercise and give students time to think and code, it will likely take
-them about 10-12 hours. In practice, you will probably find that students
-require more time on certain exercises.  I have some notes about this
-below.
+本课程大约有 130 个动手练习。如果您进行每一项练习，并让学生有时间思考和写代码，则可能需要大约 10-12 小时。在实践中，您可能会发现学生在某些练习中需要更多的时间。对此，我在下面有一些说明。
 
-You should repeatedly emphasize to students that solution code is
-available and that it is okay to look at it and copy it--especially
-due to time requirements.
+您应该向学生反复强调，题解代码是可用的，并且查看和复制题解代码也是可以的——尤其是有时间限制的时候。
 
-Prior to teaching the course, I would strongly advise that you go
-through and work every single course exercise so that there are no
-surprises.
+在教授课程之前，我强烈建议您浏览并完成每一道练习，以免发生意外。
 
-During course delivery, I usually work every single exercise from
-scratch, without looking at the solution, on my computer while the
-students also work.  For this, I strongly advise you to have a printed
-copy of the exercises on hand that you can look at without having to
-pull it up on the computer screen (which is being projected).  Near
-the end of the exercise time period, I will start discussing my
-solution code, emphasizes different bits on the screen and talking
-about them.  If there are any potential problems with the solution
-(including design considerations), I’ll also talk about it.  Emphasize
-to students that they may want to look at/copy solution code before
-going forward.
+在授课期间，当学生做练习的时候，我通常也在自己的电脑上从头开始不看答案地完成每一道练习。为此，我强烈建议您手头准备一份练习的打印副本，而不必在电脑上查看练习（电脑屏幕那时可能正在投影）。在练习时间快要结束时，我将会开始讨论我的题解代码，强调屏幕上的不同点并对此进行讨论。如果题解存在任何潜在问题（包括设计注意事项），我也将进行讨论。请向学生强调，在继续之前，他们可能要看看或者复制题解代码。
 
-## Section 1:  Introduction
+## 第 1 节:  简介
 
-The major goal of this section is to get people started with the
-environment.  This includes using the interactive shell and
-editing/run short programs.  By the end of the section, students
-should be able to write short scripts that read data files and perform
-small calculations.  They will know about numbers, strings, lists, and
-files.  There will also be some exposure to functions, exceptions, and
-modules, but a lot of details will be missing.
+本节的主要目标是让学生从编程环境开始入手。包括使用交互式shell，编辑或者运行简短的程序。在本节结束时，学生应该能够编写用于读取数据文件并执行简单的计算的简短脚本。他们将会了解数字，字符串，列表和文件，也会了解函数，异常和模块，但是不会介绍得太详细。
 
-The first part of this course is often the longest because students
-are new to the tools and may have various problems getting things to
-work.  It is absolutely critical that you go around the room and make
-sure that everyone can edit, run, and debug simple programs.  Make
-sure Python is installed correctly.  Make sure they have the course
-exercises downloaded.  Make sure the internet works.  Fix anything
-else that comes up.
+本节往往所耗费的时间是最长的，因为学生对工具不熟悉，可能会遇到各种问题。您应该在教室到处走走并且确保每个人可以编辑，运行和调试简单的代码，这是至关重要的。确保学生正确安装了 Python，下载了课程练习，网络正常运行。解决出现的任何其他问题。
 
-Timing: I aim to finish section 1 around lunch on the first day. 
+时间：我打算在第 1 天的中午结束第 1 节。
 
-## Section 2 : Working with Data
+## 第 2 节：数据操作
 
-This section is probably the most important in the course.  It covers
-the basics of data representation and manipulation including tuples,
-lists, dicts, and sets.
+在这门课程中，本节可能是最重要的。它覆盖了数据表示和操作的基础，包括元组，列表，字典和集合。
 
-Section 2.2 the most important.  Give students as much time as
-they need to get exercises working within reason.  Depending on audience,
-the exercises might last 45 minutes.  In the middle of this exercise,
-I will often move forward to Section 2.3 (formatted printing) and
-give students more time to keep working.  Together, Sections 2.2/2.3
-might take an hour or more.
+2.2 节是重中之重，请在合理的情况下，给学生足够的时间让他们完成练习。这些练习可能会持续 45 分钟，具体取决于学生。在本练习的中间，我往往会前进到 2.3 节（格式化输出），给学生足够多的时间来继续做练习。综上所述，2.2 或 2.3 可能需要 1 个小时以上的时间。
 
-Section 2.4 has people explore the use of enumerate(), and zip().  I
-consider these functions essential so don’t skimp on it.
+2.4 节让学生探索 enumerate() 和 zip() 函数的用法。我认为这两个函数是必不可少的，所以，请不要跳过它们。
 
-Section 2.5 introduces the collections module.  There is a LOT that
-could be said about collections, but it won't be fully appreciated by
-students at this time.  Approach this more from the standpoint of
-"here's this cool module you should look at later. Here are a few cool
-examples."
+2.5 节介绍 collections 模块。关于 collections，大量的内容可以说，但这个时候，学生可能还不完全能领会其重要性。不要停留在“collections 是一个很酷的模块，稍后再看。这仅仅是一些示例”的观点中，而要详细了解collections。
 
-Section 2.6 introduces list comprehensions which are an important
-feature for processing list data.  Emphasize to students that list
-comprehensions are very similar to things like SQL database queries.
-At the end of this exercise, I often do an interactive demo involving
-something more advanced.  Maybe do a list comprehension and plot some
-data with matplotlib.  Also an opportunity to introduce Jupyter if
-you're so inclined.
+2.6 节介绍列表推导式，这是一个用于处理列表数据的重要特性。向学生强调列表推导式与 SQL 数据库查询非常相似。在练习结束时，我经常做一些涉及更高级内容的交互性示例，如写一个列表推导式，或者使用 matplotlib 将数据可视化。如果您愿意，这也是一个介绍 Jupyter 的机会。
 
-Section 2.7 is the most sophisticated exercise.  It relates to the use
-of first-class data in Python and the fact that data structures like
-lists can hold any kind of object that you want.  The exercises are
-related to parsing columns of data in CSV files and concepts are later reused in
-Section 3.2.
+2.7 节是最复杂的练习。它涉及到在 Python 中一级数据的使用，以及事实——诸如列表之类的数据结构可以存储任何类型对象，只要你想。这些练习与解析 CSV 中的数据列相关，稍后在 3.2 节中会再次使用相关的概念。
 
-Timing: Ideally, you want to be done with section 2 on the first day.
-However, it is common to finish with section 2.5 or 2.6.  So, don't
-panic if you feel that you're a bit behind.
+时间：理想情况下，您希望第一天就完成第 2 节。但是，通常以第 2.5 节或者第 2.6 节结束。因此，如果您觉得自己有写落后，也不要惊慌。
 
-## 3. Program Organization
+## 第 3 节：程序组织
 
-The main goal of this section is to introduce more details about
-functions and to encourage students to use them.  The section builds
-from functions into modules and script writing.
+本节的主要目标是介绍有关函数的更相信的信息，并且鼓励学生使用函数。本节将函数构建到模块和脚本编写中。
 
-Section 3.1 is about going from simple “scripting” to functions.
-Students should be discouraged from writing disorganized “scripts.”
-Instead, code should at least be modularized into functions.  It makes
-the code easier to understand, it makes it easier to make changes
-later, and it actually runs a little bit faster.  Functions are good.
+3.1 节是关于如何将简单的“脚本”转变为函数。不要鼓励学生写乱七八糟的“脚本”，相反，代码至少应该模块化到函数中。这使代码更易于理解，更易于后续变更，运行更快。函数很好。
 
-Section 3.2 is probably the most advanced set of exercises in the
-whole course.  It has students write a general purpose utility
-function for parsing column-oriented data.  However, it makes heavy
-use of list comprehensions as well as lists of functions (e.g.,
-functions as first-class objects).  You will probably need to guide
+You will probably need to guide
 people through every single step of this code, showing how it works in
 great detail.  The payoff is huge however---you can show people a
 short general purpose function that does something amazingly powerful
@@ -182,6 +70,8 @@ and which would be virtually impossible to write in C, C++, or Java
 without having a *LOT* of very complicated code.  There are a lot of
 possible design/discussion avenues for this code.  Use your
 imagination.
+
+在整个课程中，3.2 节可能是最高级的一组练习。它让学生编写一个通用的实用函数来解析面向列的数据。但是，这会大量使用列表推导式和函数（例如，作为一等对象的函数）。您可能需要指导学生完成此代码的每一个步骤，展示它是如何工作的。
 
 Section 3.3 adds error handling to the function created in Section 3.2
 This is a good time to talk about exception handling generally.
