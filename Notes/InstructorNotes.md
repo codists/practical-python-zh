@@ -62,6 +62,20 @@
 
 3.1 节是关于如何将简单的“脚本”转变为函数。不要鼓励学生写乱七八糟的“脚本”，相反，代码至少应该模块化到函数中。这使代码更易于理解，更易于后续变更，运行更快。函数很好。
 
+在整个课程中，3.2 节可能是最高级的一组练习。它让学生编写一个通用的实用函数来解析面向列的数据。但是，这会大量使用列表推导式和函数（例如，作为一等对象的函数）。您可能需要指导学生完成此代码的每一个步骤，详细地展示它的工作原理。回报是巨大的，但是——您可以向学生展示一个简短的通用目标函数，这些函数做一些令人惊讶的，强大的事情，如果没有大量复杂的代码，这些功能几乎不可能在C，C++ 或者 Java 中实现。对于这些代码，有很多可能的设计或者讨论方法。请发挥您的想象力。
+
+3.3 节增加错误处理到在 3.2 节中创建的函数。一般而言，这是非常不错的时机去讨论异常处理。明确地讨论捕获所有异常的危险。这可能是一个好的时机去讨论“错误永不应该默默的传递”——“Python 之禅”里面的一项。
+
+注意：在练习 3.4 之前，确保学生获取了足够的有关report.py, pcost.py 和 fileparse.py的练习版本。如果需要，请从 Solution 目录复制。
+
+3.4 节介绍模块导入。在 3.2-3.3 节的文件写入用来简化 3.1 节的代码。请注意，您可能需要帮助学生解决有关 IDLE，sys.path 和其它有关导入的各种设置。
+
+3.5 节讨论 `__main__` 和脚本编写。有大量的 命令行参数。您可能倾向于讨论诸如 argparse 的模块。但是，请注意，请跳过它们，一般而言，最最好是提到它，然后继续。
+
+3.6 节 开放有关 Python 中的一般设计的讨论。编写灵活的代码好？还是编写硬编码文件名的代码好？这是您修改代码和对已存在代码重构的第一个地方。
+
+从这里开始，大部分的练习对已编写代码进行微小修改。
+
 You will probably need to guide
 people through every single step of this code, showing how it works in
 great detail.  The payoff is huge however---you can show people a
@@ -71,8 +85,6 @@ without having a *LOT* of very complicated code.  There are a lot of
 possible design/discussion avenues for this code.  Use your
 imagination.
 
-在整个课程中，3.2 节可能是最高级的一组练习。它让学生编写一个通用的实用函数来解析面向列的数据。但是，这会大量使用列表推导式和函数（例如，作为一等对象的函数）。您可能需要指导学生完成此代码的每一个步骤，展示它是如何工作的。
-
 Section 3.3 adds error handling to the function created in Section 3.2
 This is a good time to talk about exception handling generally.
 Definitely talk about the dangers of catching all exceptions.  This
@@ -80,6 +92,8 @@ might be a good time to talk about the “Errors should never pass
 silently” item on the “Zen of Python.”
 
 *Note: Before Exercise 3.4, make sure students get fully working versions of report.py, pcost.py, and fileparse.py.   Copy from Solutions folder if needed *
+
+
 
 Section 3.4 Introduces module imports.  The file written in Section
 3.2-3.3 is used to simplify code in Section 3.1.  Be aware that you
@@ -89,7 +103,7 @@ assorted settings related to import.
 Section 3.5 talks about `__main__` and script writing.  There's a bit
 about command line arguments.  You might be inclined to discuss a
 module like argparse.  However, be warned that doing so opens up
-a quagmire. It's usually better to just mention it and move on.
+a quagmire. It's usually better to just mention it and move on. 
 
 Section 3.6 opens up a discussion about design more generally in Python.
 Is it better to write code that's more flexible vs code that's
@@ -98,6 +112,8 @@ where you make a code change and have to refactor existing code.
 
 Going forward from here, most of the exercises make small changes
 to code that's already been written.
+
+
 
 ## 4. Classes and Objects
 
