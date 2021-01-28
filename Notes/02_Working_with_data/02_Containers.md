@@ -1,26 +1,25 @@
-[Contents](../Contents.md) \| [Previous (2.1 Datatypes)](01_Datatypes.md) \| [Next (2.3 Formatting)](03_Formatting.md)
+[目录](../Contents.md) \| [上一节 (2.1 数据类型)](01_Datatypes.md) \| [下一节 (2.3 格式化)](03_Formatting.md)
 
-# 2.2 Containers
+# 2.2 容器
 
-This section discusses lists, dictionaries, and sets.
+本节讨论列表（list），字典（dict）和集合（set）。
 
-### Overview
+### 概述
 
-Programs often have to work with many objects.
+通常，程序必须处理许多对象。
 
-* A portfolio of stocks
-* A table of stock prices
+* 股票的投资组合
+* 股票价格表
 
-There are three main choices to use.
+这里有三种主要的选择（译注：数据结构）可以使用：
 
-* Lists. Ordered data.
-* Dictionaries. Unordered data.
-* Sets. Unordered collection of unique items.
+* 列表。有序的数据。
+* 字典。无序的数据。
+* 集合。互异且无序的数据。
 
-### Lists as a Container
+### 把列表当作容器
 
-Use a list when the order of the data matters. Remember that lists can hold any kind of object.
-For example, a list of tuples.
+当数据顺序很重要时，请使用列表。记住，列表可以存储任何类型的对象。例如，包含元组的列表：
 
 ```python
 portfolio = [
@@ -33,9 +32,9 @@ portfolio[0]            # ('GOOG', 100, 490.1)
 portfolio[2]            # ('CAT', 150, 83.44)
 ```
 
-### List construction
+### 列表构建
 
-Building a list from scratch.
+从零开始构建列表。
 
 ```python
 records = []  # Initial empty list
@@ -46,7 +45,7 @@ records.append(('IBM', 50, 91.3))
 ...
 ```
 
-An example when reading records from a file.
+从文件读取记录的示例：
 
 ```python
 records = []  # Initial empty list
@@ -58,10 +57,9 @@ with open('Data/portfolio.csv', 'rt') as f:
         records.append((row[0], int(row[1]), float(row[2])))
 ```
 
-### Dicts as a Container
+### 把字典当作容器
 
-Dictionaries are useful if you want fast random lookups (by key name).  For
-example, a dictionary of stock prices:
+如果要快速随机查找（通过键名），那么字典很有用。例如，股票价格字典：
 
 ```python
 prices = {
@@ -72,7 +70,7 @@ prices = {
 }
 ```
 
-Here are some simple lookups:
+以下是一些简单的查找：
 
 ```python
 >>> prices['IBM']
@@ -82,9 +80,9 @@ Here are some simple lookups:
 >>>
 ```
 
-### Dict Construction
+### 字典构建
 
-Example of building a dict from scratch.
+从零开始构建字典的示例：
 
 ```python
 prices = {} # Initial empty dict
@@ -95,7 +93,7 @@ prices['CAT'] = 87.22
 prices['IBM'] = 93.37
 ```
 
-An example populating the dict from the contents of a file.
+从文件内容填充字典的示例：
 
 ```python
 prices = {} # Initial empty dict
@@ -106,14 +104,11 @@ with open('Data/prices.csv', 'rt') as f:
         prices[row[0]] = float(row[1])
 ```
 
-Note: If you try this on the `Data/prices.csv` file, you'll find that
-it almost works--there's a blank line at the end that causes it to
-crash.  You'll need to figure out some way to modify the code to
-account for that (see Exercise 2.6).
+注意：如果是在 `Data/prices.csv` 文件上尝试此操作，会发现几乎可以正常工作——但是，在末尾有一个空行导致程序崩溃了。需要找出一些方法来修改代码以解决此问题（参见练习 2.6）。
 
-### Dictionary Lookups
+### 字典查找
 
-You can test the existence of a key.
+测试键是否存在：
 
 ```python
 if key in d:
@@ -122,13 +117,13 @@ else:
     # NO
 ```
 
-You can look up a value that might not exist and provide a default value in case it doesn't.
+可以查找可能不存在的值，并在值不存在的情况下提供默认值。
 
 ```python
 name = d.get(key, default)
 ```
 
-An example:
+示例：
 
 ```python
 >>> prices.get('IBM', 0.0)
@@ -138,10 +133,9 @@ An example:
 >>>
 ```
 
-### Composite keys
+### 组合键
 
-Almost any type of value can be used as a dictionary key in Python. A dictionary key must be of a type that is immutable.
-For example, tuples:
+在 Ｐython 中，几乎任何类型的值都可以用作字典的键。字典的键必须是不可变类型。例如，元组：
 
 ```python
 holidays = {
@@ -151,7 +145,7 @@ holidays = {
 }
 ```
 
-Then to access:
+然后访问：
 
 ```python
 >>> holidays[3, 14]
@@ -159,11 +153,11 @@ Then to access:
 >>>
 ```
 
-*Neither a list, a set, nor another dictionary can serve as a dictionary key, because lists and dictionaries are mutable.*
+*列表，集合或者其它字典都不能用作字典的键，因为列表和字典（译注：集合也是使用哈希技术实现的）是可变的。*
 
-### Sets
+### 集合
 
-Sets are collection of unordered unique items.
+集合是互异且无序的数据。
 
 ```python
 tech_stocks = { 'IBM','AAPL','MSFT' }
@@ -171,7 +165,7 @@ tech_stocks = { 'IBM','AAPL','MSFT' }
 tech_stocks = set(['IBM', 'AAPL', 'MSFT'])
 ```
 
-Sets are useful for membership tests.
+集合对于成员关系测试很有用。
 
 ```python
 >>> tech_stocks
@@ -183,7 +177,7 @@ False
 >>>
 ```
 
-Sets are also useful for duplicate elimination.
+集合对于消除重复也很有用。
 
 ```python
 names = ['IBM', 'AAPL', 'GOOG', 'IBM', 'GOOG', 'YHOO']
@@ -192,7 +186,7 @@ unique = set(names)
 # unique = set(['IBM', 'AAPL','GOOG','YHOO'])
 ```
 
-Additional set operations:
+其它集合操作：
 
 ```python
 names.add('CAT')        # Add an item
@@ -203,19 +197,15 @@ s1 & s2                 # Set intersection
 s1 - s2                 # Set difference
 ```
 
-## Exercises
+## 练习
 
-In these exercises, you start building one of the major programs used
-for the rest of this course.  Do your work in the file `Work/report.py`.
+在这些练习中，您开始构建的程序是本课程剩余部分使用的主要程序之一。请在 `Work/report.py` 文件中工作。
 
-### Exercise 2.4: A list of tuples
+### 练习 2.4：包含元组的列表
 
-The file `Data/portfolio.csv` contains a list of stocks in a
-portfolio.  In [Exercise 1.30](../01_Introduction/07_Functions.md), you
-wrote a function `portfolio_cost(filename)` that read this file and
-performed a simple calculation.
+`Data/portfolio.csv`  文件包含投资组合中的股票列表。在[练习 1.30](../01_Introduction/07_Functions.md) 中，您编写了一个读取该文件并执行简单计算的 `portfolio_cost(filename)` 函数。
 
-Your code should have looked something like this:
+代码看起来应该像下面这样：
 
 ```python
 # pcost.py
@@ -236,21 +226,15 @@ def portfolio_cost(filename):
     return total_cost
 ```
 
-Using this code as a rough guide, create a new file `report.py`.  In
-that file, define a function `read_portfolio(filename)` that opens a
-given portfolio file and reads it into a list of tuples.  To do this,
-you’re going to make a few minor modifications to the above code.
+使用这些代码作为简明指南，创建一个新文件 `report.py` 。在 `report.py` 文件中，定义 `read_portfolio(filename)`  函数，该函数打开 `Data/portfolio.csv` 文件并将其读入到包含元组的列表。为此，您需要对上面的代码做一些小修改。
 
-First, instead of defining `total_cost = 0`, you’ll make a variable
-that’s initially set to an empty list. For example:
+首先，创建一个最初设在为空列表的变量，而不是定义 `total_cost = 0`。例如：
 
 ```python
 portfolio = []
 ```
 
-Next, instead of totaling up the cost, you’ll turn each row into a
-tuple exactly as you just did in the last exercise and append it to
-this list. For example:
+接着，把每一行准确地存储到元组中（就像在上次的练习中做的那样），然后把元组追加到列表中，而不是合计总的费用。
 
 ```python
 for row in rows:
@@ -258,13 +242,11 @@ for row in rows:
     portfolio.append(holding)
 ```
 
-Finally, you’ll return the resulting `portfolio` list.
+最后，返回得到的`portfolio` 列表。
 
-Experiment with your function interactively (just a reminder that in
-order to do this, you first have to run the `report.py` program in the
-interpreter):
+请交互式地试验函数（提醒，要执行此操作，首先需要在解释器运行 `report.py` 程序）。
 
-*Hint: Use `-i` when executing the file in the terminal*
+*提示：当在终端执行文件的时候，请使用 `-i` 参数。*
 
 ```python
 >>> portfolio = read_portfolio('Data/portfolio.csv')
@@ -287,12 +269,9 @@ interpreter):
 >>>
 ```
 
-This list of tuples that you have created is very similar to a 2-D
-array.  For example, you can access a specific column and row using a
-lookup such as `portfolio[row][column]` where `row` and `column` are
-integers.
+创建的包含元组的列表非常类似于二维（2-Ｄ）数组。例如，使用诸如 `portfolio[row][column]` （ `row` 和`column` 是整数）的查找来访问特定的列和行。
 
-That said, you can also rewrite the last for-loop using a statement like this:
+也就是说，可以使用像下面这样的语句重写最后的 for 循环：
 
 ```python
 >>> total = 0.0
@@ -304,15 +283,11 @@ That said, you can also rewrite the last for-loop using a statement like this:
 >>>
 ```
 
-### Exercise 2.5: List of Dictionaries
+### 练习 2.5：包含字典的列表
 
-Take the function you wrote in Exercise 2.4 and modify to represent each
-stock in the portfolio with a dictionary instead of a tuple.  In this
-dictionary use the field names of "name", "shares", and "price" to
-represent the different columns in the input file.
+使用字典（而不是元组）修改在练习 2.4 中编写的函数来表示投资组合中的股票。在字典中，使用字段名 "name", "shares", 和 "price" 来表示输入文件中的不同列。
 
-Experiment with this new function in the same manner as you did in
-Exercise 2.4.
+以与练习 2.4 中相同的方式试验这个新的函数。 
 
 ```python
 >>> portfolio = read_portfolio('Data/portfolio.csv')
@@ -336,12 +311,9 @@ Exercise 2.4.
 >>>
 ```
 
-Here, you will notice that the different fields for each entry are
-accessed by key names instead of numeric column numbers.  This is
-often preferred because the resulting code is easier to read later.
+在这里可以看到，每个条目的不同字段是通过键名来访问的，而不是数字类型的列号。这通常是首选方式，因为这样得到的代码在以后易于阅读。
 
-Viewing large dictionaries and lists can be messy. To clean up the
-output for debugging, consider using the `pprint` function.
+查看大型的字典或者列表可能会很混乱。要使调试的输出变得整洁，可以考虑使用 `pprint()`  函数。
 
 ```python
 >>> from pprint import pprint
@@ -356,11 +328,9 @@ output for debugging, consider using the `pprint` function.
 >>>
 ```
 
-### Exercise 2.6: Dictionaries as a container
+### 练习 2.6：把字典当作容器
 
-A dictionary is a useful way to keep track of items where you want to
-look up items using an index other than an integer.  In the Python
-shell, try playing with a dictionary:
+在使用索引而不是数字查找某元素的地方，字典是一种用来跟踪元素的很有用的方式。在 Python shell 中，尝试使用字典：
 
 ```python
 >>> prices = { }
@@ -377,8 +347,7 @@ False
 >>>
 ```
 
-The file `Data/prices.csv` contains a series of lines with stock prices.
-The file looks something like this:
+该 `Data/prices.csv`  文件包含一系列带有股票价格的行，看起来像下面这样：
 
 ```csv
 "AA",9.22
@@ -389,20 +358,13 @@ The file looks something like this:
 ...
 ```
 
-Write a function `read_prices(filename)` that reads a set of prices
-such as this into a dictionary where the keys of the dictionary are
-the stock names and the values in the dictionary are the stock prices.
+编写 `read_prices(filename)`函数将诸如此类的价格集合读取到字典中，字典的键代表股票的名字，字典的值代表股票的价格。
 
-To do this, start with an empty dictionary and start inserting values
-into it just as you did above. However, you are reading the values
-from a file now.
+为此，从空字典开始，并且像上面做的那样开始插入值。但是，现在正在从从文件中读取值。
 
-We’ll use this data structure to quickly lookup the price of a given
-stock name.
+我们将使用该数据结构快速查找给定名称的股票的价格。
 
-A few little tips that you’ll need for this part. First, make sure you
-use the `csv` module just as you did before—there’s no need to
-reinvent the wheel here.
+这部分需要一些小技巧。首先，确保像之前做的那样使用 `csv` 模块——无需在这里重复发明轮子。
 
 ```python
 >>> import csv
@@ -419,17 +381,11 @@ reinvent the wheel here.
 >>>
 ```
 
-The other little complication is that the `Data/prices.csv` file may
-have some blank lines in it. Notice how the last row of data above is
-an empty list—meaning no data was present on that line.
+另外一个小麻烦是 `Data/prices.csv` 文件可能有一些空行在里面。注意上面数据的最后一行是一个空列表——意味在那一行没有数据。
 
-There’s a possibility that this could cause your program to die with
-an exception.  Use the `try` and `except` statements to catch this as
-appropriate.  Thought: would it be better to guard against bad data with
-an `if`-statement instead?
+这有可能导致您的程序因为异常而终止。酌情使用 `try` 和 `except` 语句捕获这些异常。思考：使用 `if` 语句来防范错误的数据是否会更好？
 
-Once you have written your `read_prices()` function, test it
-interactively to make sure it works:
+编写完 `read_prices()` 函数，请交互式地测试它并确保其正常工作：
 
 ```python
 >>> prices = read_prices('Data/prices.csv')
@@ -440,12 +396,8 @@ interactively to make sure it works:
 >>>
 ```
 
-### Exercise 2.7: Finding out if you can retire
+### 练习 2.7：看看您是否可以退休
 
-Tie all of this work together by adding a few additional statements to
-your `report.py` program that computes gain/loss. These statements
-should take the list of stocks in Exercise 2.5 and the dictionary of
-prices in Exercise 2.6 and compute the current value of the portfolio
-along with the gain/loss.
+通过添加一些计算盈亏的语句到 `report.py` 程序，将所有的工作联系到一起。这些语句应该采用在练习 2.5 中存储股票名称的列表，以及在练习 2.6 中存储股票价格的字典，并计算投资组合的当前值以及盈亏，
 
-[Contents](../Contents.md) \| [Previous (2.1 Datatypes)](01_Datatypes.md) \| [Next (2.3 Formatting)](03_Formatting.md)
+[目录](../Contents.md) \| [上一节 (2.1 数据类型)](01_Datatypes.md) \| [下一节 (2.3 格式化)](03_Formatting.md)
