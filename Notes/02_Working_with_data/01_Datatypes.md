@@ -1,74 +1,72 @@
-[Contents](../Contents.md) \| [Previous (1.6 Files)](../01_Introduction/06_Files.md) \| [Next (2.2 Containers)](02_Containers.md)
+[目录](../Contents.md) \| [上一节 (1.6 文件)](../01_Introduction/06_Files.md) \| [下一节 (2.2 容器)](02_Containers.md)
 
-# 2.1 Datatypes and Data structures
+# 2.1 数据类型和数据结构
 
-This section introduces data structures in the form of tuples and dictionaries.
+本节以元组和字典的形式介绍数据结构。
 
-### Primitive Datatypes
+### 原始数据类型
 
-Python has a few primitive types of data:
+Python 有一些原始数据类型：
 
-* Integers
-* Floating point numbers
-* Strings (text)
+* 整数
+* 浮点数
+* 字符串（文本）
 
-We learned about these in the introduction.
-
-### None type
+### 空类型
 
 ```python
 email_address = None
 ```
 
-`None` is often used as a placeholder for optional or missing value.  It
-evaluates as `False` in conditionals.
+`None` 常用作可选值或缺失值的占位符。它在条件语句中计算为 `False`。
 
 ```python
 if email_address:
     send_email(email_address, msg)
 ```
 
-### Data Structures
+### 数据结构
 
-Real programs have more complex data. For example information about a stock holding:
+实际的程序具有更复杂的数据。例如，关于股票的持有信息：
 
 ```code
 100 shares of GOOG at $490.10
 ```
 
-This is an "object" with three parts:
+这是一个包含三个部分的“对象”：
 
-* Name or symbol of the stock ("GOOG", a string)
-* Number of shares (100, an integer)
-* Price (490.10 a float)
+* 股票的名称或符号（"GOOG"，字符串）
+* 股份数目（100，整数）
+* 价格（490.10，浮点数）
 
-### Tuples
+### 元组
 
-A tuple is a collection of values grouped together.
+元组是分组在一起的值的集合。
 
-Example:
+示例：
 
 ```python
 s = ('GOOG', 100, 490.1)
 ```
 
-Sometimes the `()` are omitted in the syntax.
+有时候会在语法上省略 `()` 。
 
 ```python
 s = 'GOOG', 100, 490.1
 ```
 
-Special cases (0-tuple, 1-tuple).
+特殊情况（0 元组，1 元组）。
 
 ```python
 t = ()            # An empty tuple
 w = ('GOOG', )    # A 1-item tuple
 ```
 
-Tuples are often used to represent *simple* records or structures.
-Typically, it is a single *object* of multiple parts. A good analogy: *A tuple is like a single row in a database table.*
+元组一般用来表示简单的记录或结构。
 
-Tuple contents are ordered (like an array).
+通常，它是由多个部分组成的单个对象。这有一个很好的类比：元组就像数据库表中的一行。
+
+元组的内容是有序的（类似于数组）。
 
 ```python
 s = ('GOOG', 100, 490.1)
@@ -77,39 +75,39 @@ shares = s[1]               # 100
 price = s[2]                # 490.1
 ```
 
-However, the contents can't be modified.
+但是，元组的内容无法修改。
 
 ```python
 >>> s[1] = 75
 TypeError: object does not support item assignment
 ```
 
-You can, however, make a new tuple based on a current tuple.
+您可以基于当前元组创建一个新元组。
 
 ```python
 s = (s[0], 75, s[2])
 ```
 
-### Tuple Packing
+### 元组打包
 
-Tuples are more about packing related items together into a single *entity*.
+元组更多的是把相关的项打包到一个实体中（entity）。
 
 ```python
 s = ('GOOG', 100, 490.1)
 ```
 
-The tuple is then easy to pass around to other parts of a program as a single object.
+然后，该元组很容易作为单个对象传递给程序的其它部分。
 
-### Tuple Unpacking
+### 元组拆包
 
-To use the tuple elsewhere, you can unpack its parts into variables.
+要在其它地方使用元组，可以把元组的各部分拆包为变量。
 
 ```python
 name, shares, price = s
 print('Cost', shares * price)
 ```
 
-The number of variables on the left must match the tuple structure.
+左侧变量的数目必须与元组的结构匹配。
 
 ```python
 name, shares = s     # ERROR
@@ -118,11 +116,9 @@ Traceback (most recent call last):
 ValueError: too many values to unpack
 ```
 
-### Tuples vs. Lists
+### 元组与列表
 
-Tuples look like read-only lists. However, tuples are most often used
-for a *single item* consisting of multiple parts.  Lists are usually a
-collection of distinct items, usually all of the same type.
+元组看起来像只读列表。但是，元组最常用于由多个部分组成的单项。列表通常是类型相同的项的集合，
 
 ```python
 record = ('GOOG', 100, 490.1)       # A tuple representing a record in a portfolio
@@ -130,10 +126,9 @@ record = ('GOOG', 100, 490.1)       # A tuple representing a record in a portfol
 symbols = [ 'GOOG', 'AAPL', 'IBM' ]  # A List representing three stock symbols
 ```
 
-### Dictionaries
+### 字典
 
-A dictionary is mapping of keys to values.  It's also sometimes called a hash table or
-associative array.  The keys serve as indices for accessing values.
+字典是键到值的映射。有时，字典也称为哈希表（hash table）或关联数组（associative array）。键用作访问值的索引。
 
 ```python
 s = {
@@ -143,9 +138,9 @@ s = {
 }
 ```
 
-### Common operations
+### 常见操作
 
-To get values from a dictionary use the key names.
+要从字典中获取值，请使用键名。
 
 ```python
 >>> print(s['name'], s['shares'])
@@ -155,7 +150,7 @@ GOOG 100
 >>>
 ```
 
-To add or modify values assign using the key names.
+要添加或修改值，请使用键名进行分配。
 
 ```python
 >>> s['shares'] = 75
@@ -163,17 +158,16 @@ To add or modify values assign using the key names.
 >>>
 ```
 
-To delete a value use the `del` statement.
+要删除值，请使用 `del` 语句。
 
 ```python
 >>> del s['date']
 >>>
 ```
 
-### Why dictionaries?
+### 为什么使用字典？
 
-Dictionaries are useful when there are *many* different values and those values
-might be modified or manipulated.  Dictionaries make your code more readable.
+当存在很多不同的值并且可能会修改或操作这些值时，字典很有用。字典使代码更具可读性。
 
 ```python
 s['price']
@@ -181,11 +175,9 @@ s['price']
 s[2]
 ```
 
-## Exercises
+## 练习
 
-In the last few exercises, you wrote a program that read a datafile
-`Data/portfolio.csv`. Using the `csv` module, it is easy to read the
-file row-by-row.
+在上次的几个练习中，编写了一个取数据文件 [`Data/portfolio.csv`](../../Work/Data/portfolio.csv) 的程序 。使用 `csv` 模块，可以轻松地逐行读取文件。
 
 ```python
 >>> import csv
@@ -199,11 +191,7 @@ file row-by-row.
 >>>
 ```
 
-Although reading the file is easy, you often want to do more with the
-data than read it.  For instance, perhaps you want to store it and
-start performing some calculations on it.  Unfortunately, a raw "row"
-of data doesn’t give you enough to work with. For example, even a
-simple math calculation doesn’t work:
+尽管读取文件很容易，但是与读取数据相比，通常使用数据做更多的事情。例如，也许想存储它并对其执行一些计算。不幸的是，原始的数据“行”并不能这样做，例如，即使是简单的数学计算也不行。
 
 ```python
 >>> row = ['AA', '100', '32.20']
@@ -214,15 +202,11 @@ TypeError: can't multiply sequence by non-int of type 'str'
 >>>
 ```
 
-To do more, you typically want to interpret the raw data in some way
-and turn it into a more useful kind of object so that you can work
-with it later.  Two simple options are tuples or dictionaries.
+要执行更多的操作，通常需要以某种方式解释原始数据，并将其转换为更有用的对象类型，以便以后处理。有两种简单的方式可以选择：元组或者字典。
 
-### Exercise 2.1: Tuples
+### 练习 2.1：元组
 
-At the interactive prompt, create the following tuple that represents
-the above row, but with the numeric columns converted to proper
-numbers:
+在交互式提示符下，创建以下代表上一行的元组，但数字列要转换为恰当的数字。
 
 ```python
 >>> t = (row[0], int(row[1]), float(row[2]))
@@ -231,8 +215,7 @@ numbers:
 >>>
 ```
 
-Using this, you can now calculate the total cost by multiplying the
-shares and the price:
+使用这种方式，现在可以使用股份数目乘以价格来计算总价，
 
 ```python
 >>> cost = t[1] * t[2]
@@ -241,17 +224,11 @@ shares and the price:
 >>>
 ```
 
-Is math broken in Python? What’s the deal with the answer of
-3220.0000000000005?
+在 Python 中数学没用了吗？3220.0000000000005 的结果是什么？
 
-This is an artifact of the floating point hardware on your computer
-only being able to accurately represent decimals in Base-2, not
-Base-10.  For even simple calculations involving base-10 decimals,
-small errors are introduced. This is normal, although perhaps a bit
-surprising if you haven’t seen it before.
+这是计算机上浮点硬件的产物，只能在二进制（而不是十进制）中准确表示小数。即使是涉及十进制小数的简单计算，也会引入小的误差。这很正常，如果您之前没有见过，可能会有点惊讶。
 
-This happens in all programming languages that use floating point
-decimals, but it often gets hidden when printing. For example:
+虽然在所有使用浮点小数的编程语言中都会发生这种情况，但是打印的时候可以把它隐藏，例如：
 
 ```python
 >>> print(f'{cost:0.2f}')
@@ -259,8 +236,7 @@ decimals, but it often gets hidden when printing. For example:
 >>>
 ```
 
-Tuples are read-only. Verify this by trying to change the number of
-shares to 75.
+元组是只读的。通过尝试把股份数目改为 75 来验证这点。
 
 ```python
 >>> t[1] = 75
@@ -270,8 +246,7 @@ TypeError: 'tuple' object does not support item assignment
 >>>
 ```
 
-Although you can’t change tuple contents, you can always create a
-completely new tuple that replaces the old one.
+尽管无法更改元组的内容，但是始终可以创建一个全新的元组来替换旧的元组。
 
 ```python
 >>> t = (t[0], 75, t[2])
@@ -280,13 +255,9 @@ completely new tuple that replaces the old one.
 >>>
 ```
 
-Whenever you reassign an existing variable name like this, the old
-value is discarded.  Although the above assignment might look like you
-are modifying the tuple, you are actually creating a new tuple and
-throwing the old one away.
+每当像这样重新分配现有变量名时，旧值就会被丢弃。虽然上面的赋值可能看起来像在修改元组，但实际上是在创建一个新的元组，并且将旧的元组丢弃。
 
-Tuples are often used to pack and unpack values into variables. Try
-the following:
+元组通常用于将值打包或拆包到变量中。请尝试以下操作：
 
 ```python
 >>> name, shares, price = t
@@ -299,7 +270,7 @@ the following:
 >>>
 ```
 
-Take the above variables and pack them back into a tuple
+取上面的变量并将其打包回元组中：
 
 ```python
 >>> t = (name, 2*shares, price)
@@ -308,9 +279,9 @@ Take the above variables and pack them back into a tuple
 >>>
 ```
 
-### Exercise 2.2: Dictionaries as a data structure
+### 练习 2.2：把字典当作数据结构
 
-An alternative to a tuple is to create a dictionary instead.
+可以创建字典来替代元组。
 
 ```python
 >>> d = {
@@ -323,7 +294,7 @@ An alternative to a tuple is to create a dictionary instead.
 >>>
 ```
 
-Calculate the total cost of this holding:
+计算持有的总价：
 
 ```python
 >>> cost = d['shares'] * d['price']
@@ -332,8 +303,7 @@ Calculate the total cost of this holding:
 >>>
 ```
 
-Compare this example with the same calculation involving tuples
-above. Change the number of shares to 75.
+将此示例与上面涉及元组的相同的计算进行比较，将股份数目修改为 75。
 
 ```python
 >>> d['shares'] = 75
@@ -342,8 +312,7 @@ above. Change the number of shares to 75.
 >>>
 ```
 
-Unlike tuples, dictionaries can be freely modified. Add some
-attributes:
+与元组不同，字典可以自由修改。添加一些属性：
 
 ```python
 >>> d['date'] = (6, 11, 2007)
@@ -353,9 +322,9 @@ attributes:
 >>>
 ```
 
-### Exercise 2.3: Some additional dictionary operations
+### 练习 2.3: 字典的其它操作
 
-If you turn a dictionary into a list, you’ll get all of its keys:
+如果将一个字典转换为列表，则将获得其所有的键：
 
 ```python
 >>> list(d)
@@ -363,8 +332,7 @@ If you turn a dictionary into a list, you’ll get all of its keys:
 >>>
 ```
 
-Similarly, if you use the `for` statement to iterate on a dictionary,
-you will get the keys:
+类似地，如果使用 `for` 语句对字典进行迭代，则将获得其所有的键。 
 
 ```python
 >>> for k in d:
@@ -378,7 +346,7 @@ k = account
 >>>
 ```
 
-Try this variant that performs a lookup at the same time:
+尝试使用这个同时执行查找的变体：
 
 ```python
 >>> for k in d:
@@ -392,7 +360,7 @@ account = 12345
 >>>
 ```
 
-You can also obtain all of the keys using the `keys()` method:
+也可以使用 `keys()` 方法获得所有的键：
 
 ```python
 >>> keys = d.keys()
@@ -401,11 +369,9 @@ dict_keys(['name', 'shares', 'price', 'date', 'account'])
 >>>
 ```
 
-`keys()` is a bit unusual in that it returns a special `dict_keys` object.
+在这里，`keys()` 稍微有点不同，它返回的是一个 `dict_keys` 对象。
 
-This is an overlay on the original dictionary that always gives you
-the current keys—even if the dictionary changes. For example, try
-this:
+这是对原始字典的覆盖，它始终提供当前字典的键——即使字典改变了。例如，试试一下操作：
 
 ```python
 >>> del d['account']
@@ -414,11 +380,9 @@ dict_keys(['name', 'shares', 'price', 'date'])
 >>>
 ```
 
-Carefully notice that the `'account'` disappeared from `keys` even
-though you didn’t call `d.keys()` again.
+请注意，尽管没有再次调用 `d.keys()` ，键`'account'` 消失了。
 
-A more elegant way to work with keys and values together is to use the
-`items()` method. This gives you `(key, value)` tuples:
+一个更优雅地一起使用键和值的方式是使用 `items()` 方法。这可以获得键值组成的元组 `(key, value)`。 
 
 ```python
 >>> items = d.items()
@@ -434,8 +398,7 @@ date = (6, 11, 2007)
 >>>
 ```
 
-If you have tuples such as `items`, you can create a dictionary using
-the `dict()` function. Try it:
+如果有类似于 `items`的元组，那么可以使用 `dict()`  函数创建一个字典。请尝试以下操作：
 
 ```python
 >>> items
@@ -446,4 +409,4 @@ dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 20
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (1.6 Files)](../01_Introduction/06_Files.md) \| [Next (2.2 Containers)](02_Containers.md)
+[目录](../Contents.md) \| [上一节 (1.6 文件)](../01_Introduction/06_Files.md) \| [下一节 (2.2 容器)](02_Containers.md)

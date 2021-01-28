@@ -4,7 +4,7 @@
 
 * [0.课程设置 (请先阅读!)](00_Setup.md)
 * [1.Python简介](01_Introduction/00_Overview.md)
-* [2.数据操作](02_Working_with_data/00_Overview.md)
+* [2.处理数据](02_Working_with_data/00_Overview.md)
 * [3.程序组织](03_Program_organization/00_Overview.md)
 * [4.类和对象](04_Classes_objects/00_Overview.md)
 * [5.Python对象的内部工作](05_Object_model/00_Overview.md)
