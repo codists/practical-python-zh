@@ -1,4 +1,4 @@
-[Contents](../Contents.md) \| [Previous (2.2 Containers)](02_Containers.md) \| [Next (2.4 Sequences)](04_Sequences.md)
+[目录](../Contents.md) \| [上一节 (2.2 容器)](02_Containers.md) \| [下一节 (2.4 序列)](04_Sequences.md)
 
 # 2.3 Formatting
 
@@ -301,4 +301,4 @@ How would you modify your code so that the price includes the currency symbol ($
        IBM        100    $106.28      35.84
 ```
 
-[Contents](../Contents.md) \| [Previous (2.2 Containers)](02_Containers.md) \| [Next (2.4 Sequences)](04_Sequences.md)
+[目录](../Contents.md) \| [上一节 (2.2 容器)](02_Containers.md) \| [下一节 (2.4 序列)](04_Sequences.md)
