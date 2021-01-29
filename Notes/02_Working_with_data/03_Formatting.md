@@ -1,9 +1,8 @@
 [目录](../Contents.md) \| [上一节 (2.2 容器)](02_Containers.md) \| [下一节 (2.4 序列)](04_Sequences.md)
 
-# 2.3 Formatting
+# 2.3 格式化
 
-This section is a slight digression, but when you work with data, you
-often want to produce structured output (tables, etc.). For example:
+虽然本节稍微有点离题，但是当处理数据时，通常想要生成结构化的输出（如表格）。示例：
 
 ```code
       Name      Shares        Price
@@ -17,9 +16,9 @@ often want to produce structured output (tables, etc.). For example:
        IBM         100        70.44
 ```
 
-### String Formatting
+### 字符串格式化
 
-One way to format string in Python 3.6+ is with `f-strings`.
+在 Python 3.6+ 中，格式化字符串的一种方法是使用 `f-strings`。
 
 ```python
 >>> name = 'IBM'
@@ -30,18 +29,17 @@ One way to format string in Python 3.6+ is with `f-strings`.
 >>>
 ```
 
-The part `{expression:format}` is replaced.
+`{expression:format}` 部分会被取代。
 
-It is commonly used with `print`.
+`f-strings` 通常和 `print()` 函数一起使用。
 
 ```python
 print(f'{name:>10s} {shares:>10d} {price:>10.2f}')
 ```
 
-### Format codes
+### 格式码
 
-Format codes (after the `:` inside the `{}`) are similar to C `printf()`.  Common codes
-include:
+格式码（在 `{}` 内 `:` 之后）与 C 语言的 `printf()` 函数类似。常见格式码包括：
 
 ```code
 d       Decimal integer
@@ -54,7 +52,7 @@ s       String
 c       Character (from integer)
 ```
 
-Common modifiers adjust the field width and decimal precision.  This is a partial list:
+常见的修饰符可调整字段宽度和数的精度。这是部分内容：
 
 ```code
 :>10d   Integer right aligned in 10-character field
@@ -63,9 +61,9 @@ Common modifiers adjust the field width and decimal precision.  This is a partia
 :0.2f   Float with 2 digit precision
 ```
 
-### Dictionary Formatting
+### 字典格式化
 
-You can use the `format_map()` method to apply string formatting to a dictionary of values:
+可以使用字符串的 `format_map()` 方法将字符串格式化应用于值的字典。
 
 ```python
 >>> s = {
@@ -78,13 +76,11 @@ You can use the `format_map()` method to apply string formatting to a dictionary
 >>>
 ```
 
-It uses the same codes as `f-strings` but takes the values from the
-supplied dictionary.
+虽然 `format_map()` 和 `f-strings` 使用相同的格式码，但是是从提供的字典中获取值。
 
-### format() method
+### format()方法 
 
-There is a method `format()` that can apply formatting to arguments or
-keyword arguments.
+有一个 `format()` 方法可以将格式化应用于参数或者关键字参数。
 
 ```python
 >>> '{name:>10s} {shares:10d} {price:10.2f}'.format(name='IBM', shares=100, price=91.1)
@@ -94,11 +90,11 @@ keyword arguments.
 >>>
 ```
 
-Frankly, `format()` is a bit verbose. I prefer f-strings.
+坦白说，`format()` 方法稍微有点冗长，我更倾向于使用 f-strings。
 
-### C-Style Formatting
+### C 风格的格式化
 
-You can also use the formatting operator `%`.
+也可以使用格式化操作符 `%` 。
 
 ```python
 >>> 'The value is %d' % 3
@@ -109,10 +105,9 @@ You can also use the formatting operator `%`.
 '3.14'
 ```
 
-This requires a single item or a tuple on the right.  Format codes are
-modeled after the C `printf()` as well.
+这要求右边是一个单项或者元组，格式码也是模仿 C 语言 `printf()` 函数的。
 
-*Note: This is the only formatting available on byte strings.*
+*注意：这是字节字符串上唯一可用的格式化方法。*
 
 ```python
 >>> b'%s has %n messages' % (b'Dave', 37)
@@ -120,13 +115,11 @@ b'Dave has 37 messages'
 >>>
 ```
 
-## Exercises
+## 练习
 
-### Exercise 2.8: How to format numbers
+### 练习 2.8：如何格式化数字
 
-A common problem with printing numbers is specifying the number of
-decimal places. One way to fix this is to use f-strings. Try these
-examples:
+打印数字常见的一个问题就是指定数字的小数位数。其中的一种解决方法就是使用 f-strings。请尝试以下示例：
 
 ```python
 >>> value = 42863.1
@@ -143,9 +136,7 @@ examples:
 >>>
 ```
 
-Full documentation on the formatting codes used f-strings can be found
-[here](https://docs.python.org/3/library/string.html#format-specification-mini-language). Formatting
-is also sometimes performed using the `%` operator of strings.
+有关 f-strings 使用的格式码的完整文档在 [这里](https://docs.python.org/3/library/string.html#format-specification-mini-language) 可以找到。有时，也使用字符串操作符 `%`  执行格式化。
 
 ```python
 >>> print('%0.4f' % value)
@@ -155,11 +146,7 @@ is also sometimes performed using the `%` operator of strings.
 >>>
 ```
 
-Documentation on various codes used with `%` can be found
-[here](https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting).
-
-Although it’s commonly used with `print`, string formatting is not tied to printing.
-If you want to save a formatted string. Just assign it to a variable.
+与操作符 `%` 使用的各种格式码有关的文档可以在 [这里](https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting) 找到。尽管它通常与 `print()` 函数一起使用，但是字符串格式化与打印无关。如果要保存格式化的字符串，把它赋值给变量即可。
 
 ```python
 >>> f = '%0.4f' % value
@@ -168,10 +155,9 @@ If you want to save a formatted string. Just assign it to a variable.
 >>>
 ```
 
-### Exercise 2.9: Collecting Data
+### 练习 2.9：收集数据
 
-In Exercise 2.7, you wrote a program called `report.py` that computed the gain/loss of a
-stock portfolio.  In this exercise, you're going to start modifying it to produce a table like this:
+在练习 2.7 中，编写了一个用于计算股票投资盈亏的程序 [`report.py`](../../Solutions/2_7/report.py)。在本练习中，需要修改这个程序来生成如下表格：
 
 ```
       Name     Shares      Price     Change
@@ -185,18 +171,11 @@ stock portfolio.  In this exercise, you're going to start modifying it to produc
        IBM        100     106.28      35.84
 ```
 
-In this report, "Price" is the current share price of the stock and
-"Change" is the change in the share price from the initial purchase
-price.
+在此表格中，"Price" 是当前股价，"Change" 是当前股价与原始购买股价的差。
 
+为了生成上述表格，首先需要收集表中展示的所有数据。编写 `make_report()` 函数，以股票列表和价格字典作为输入，并返回一个包含上表中所有行的元组列表。
 
-In order to generate the above report, you’ll first want to collect
-all of the data shown in the table.  Write a function `make_report()`
-that takes a list of stocks and dictionary of prices as input and
-returns a list of tuples containing the rows of the above table.
-
-Add this function to your `report.py` file. Here’s how it should work
-if you try it interactively:
+把 `make_report()` 函数添加到 `report.py` 文件中。如果交互式地执行该函数，则应该按以下步骤进行：
 
 ```python
 >>> portfolio = read_portfolio('Data/portfolio.csv')
@@ -214,10 +193,9 @@ if you try it interactively:
 >>>
 ```
 
-### Exercise 2.10: Printing a formatted table
+### 练习 2.10：打印格式化的表格
 
-Redo the for-loop in Exercise 2.9, but change the print statement to
-format the tuples.
+重做练习 2.9 中的 for 循环，但是请更改打印语句以格式化元祖。
 
 ```python
 >>> for r in report:
@@ -231,7 +209,7 @@ format the tuples.
 >>>
 ```
 
-You can also expand the values and use f-strings. For example:
+也可以使用 f-strings 扩展值。例如：
 
 ```python
 >>> for name, shares, price, change in report:
@@ -245,33 +223,29 @@ You can also expand the values and use f-strings. For example:
 >>>
 ```
 
-Take the above statements and add them to your `report.py` program.
-Have your program take the output of the `make_report()` function and print a nicely formatted table as shown.
+把上面的语句添加到  `report.py` 程序中，让程序获取`make_report()` 的输出，并打印如打印如上图所示的格式化的表。
 
-### Exercise 2.11: Adding some headers
+### 练习 2.11：添加标题
 
-Suppose you had a tuple of header names like this:
+假定有一个像下面这样的标题名称元组：
 
 ```python
 headers = ('Name', 'Shares', 'Price', 'Change')
 ```
 
-Add code to your program that takes the above tuple of headers and
-creates a string where each header name is right-aligned in a
-10-character wide field and each field is separated by a single space.
+把上面的标题元组代码添加到程序中，并且创建一个字符串，每个标题向右对齐并且宽度是10，每个字段使用单个空格分隔。
 
 ```python
 '      Name     Shares      Price      Change'
 ```
 
-Write code that takes the headers and creates the separator string between the headers and data to follow.
-This string is just a bunch of "-" characters under each field name. For example:
+编写在标题和数据之间创建分隔字符串的代码。分隔字符串指每个字段名下的一串下划线（"-"）字符。例如：
 
 ```python
 '---------- ---------- ---------- -----------'
 ```
 
-When you’re done, your program should produce the table shown at the top of this exercise.
+当完成后，程序应生成本节顶部所示的表。
 
 ```
       Name     Shares      Price     Change
@@ -285,9 +259,9 @@ When you’re done, your program should produce the table shown at the top of th
        IBM        100     106.28      35.84
 ```
 
-### Exercise 2.12: Formatting Challenge
+### 练习 2.12：格式化挑战
 
-How would you modify your code so that the price includes the currency symbol ($) and the output looks like this:
+如何修改代码使得价格包括货币符号（$），并且像下面这样输出：
 
 ```
       Name     Shares      Price     Change
