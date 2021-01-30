@@ -1,16 +1,16 @@
-[Contents](../Contents.md) \| [Previous (2.3 Formatting)](03_Formatting.md) \| [Next (2.5 Collections)](05_Collections.md)
+[目录](../Contents.md) \| [上一节 (2.3 格式化)](03_Formatting.md) \| [下一节 (2.5 Collections模块)](05_Collections.md)
 
-# 2.4 Sequences
+# 2.4 序列
 
-### Sequence Datatypes
+### 序列数据类型
 
-Python has three *sequence* datatypes.
+Python 有三种序列数据类型。
 
-* String: `'Hello'`. A string is a sequence of characters.
-* List: `[1, 4, 5]`.
-* Tuple: `('GOOG', 100, 490.1)`.
+* 字符串：如 `'Hello'`。字符串是字符序列
+* 列表：如 `[1, 4, 5]`。
+* 元组：如 `('GOOG', 100, 490.1)`。
 
-All sequences are ordered, indexed by integers, and have a length.
+所有的序列都是有序的，由整数进行索引，并且具有长度。
 
 ```python
 a = 'Hello'               # String
@@ -28,7 +28,7 @@ len(b)                    # 3
 len(c)                    # 3
 ```
 
-Sequences can be replicated: `s * n`.
+序列可以通过重复操作符（*）进行重复：`s * n` 。
 
 ```python
 >>> a = 'Hello'
@@ -40,7 +40,7 @@ Sequences can be replicated: `s * n`.
 >>>
 ```
 
-Sequences of the same type can be concatenated: `s + t`.
+相同类型的序列可以通过加号（+）进行拼接：`s + t`。
 
 ```python
 >>> a = (1, 2, 3)
@@ -55,10 +55,9 @@ Traceback (most recent call last):
 TypeError: can only concatenate tuple (not "list") to tuple
 ```
 
-### Slicing
+### 切片
 
-Slicing means to take a subsequence from a sequence.
-The syntax is `s[start:end]`. Where `start` and `end` are the indexes of the subsequence you want.
+切片是指着从序列中提取子序列。切片的语法为 `s[start:end]` 。 `start` 和 `end`  是想要的子序列的索引。
 
 ```python
 a = [0,1,2,3,4,5,6,7,8]
@@ -68,13 +67,13 @@ a[-5:]    # [4,5,6,7,8]
 a[:3]     # [0,1,2]
 ```
 
-* Indices `start` and `end` must be integers.
-* Slices do *not* include the end value. It is like a half-open interval from math.
-* If indices are omitted, they default to the beginning or end of the list.
+* 索引 `start` 和 `end` 必须是整数。
+* 切片不包括结尾值。这就像数学上的半开区间。
+* 如果省略索引，则它们默认为序列的开头或结尾。
 
-### Slice re-assignment
+### 切片与重新赋值
 
-On lists, slices can be reassigned and deleted.
+在列表上，切片可以被重新赋值和删除。
 
 ```python
 # Reassignment
@@ -82,7 +81,7 @@ a = [0,1,2,3,4,5,6,7,8]
 a[2:4] = [10,11,12]       # [0,1,10,11,12,4,5,6,7,8]
 ```
 
-*Note: The reassigned slice doesn't need to have the same length.*
+*注意：重新赋值的切片不需要具有相同的长度。*
 
 ```python
 # Deletion
@@ -90,9 +89,9 @@ a = [0,1,2,3,4,5,6,7,8]
 del a[2:4]                # [0,1,4,5,6,7,8]
 ```
 
-### Sequence Reductions
+### 序列的缩减
 
-There are some common functions to reduce a sequence to a single value.
+有一常见的函数用于把序列缩减为单个值。
 
 ```python
 >>> s = [1, 2, 3, 4]
@@ -108,9 +107,9 @@ There are some common functions to reduce a sequence to a single value.
 >>>
 ```
 
-### Iteration over a sequence
+### 迭代序列
 
-The for-loop iterates over the elements in a sequence.
+可以使用for 循环对序列中的元素进行迭代。
 
 ```python
 >>> s = [1, 4, 9, 16]
@@ -124,21 +123,18 @@ The for-loop iterates over the elements in a sequence.
 >>>
 ```
 
-On each iteration of the loop, you get a new item to work with.
-This new value is placed into the iteration variable. In this example, the
-iteration variable is `x`:
+在循环的每次迭代中，会获取一个新的项来处理。这个新的值会被放到迭代变量中。在此示例中，迭代变量为 x： 
 
 ```python
 for x in s:         # `x` is an iteration variable
     ...statements
 ```
 
-On each iteration, the previous value of the iteration variable is overwritten (if any).
-After the loop finishes, the variable retains the last value.
+在每次迭代中，迭代变量的先前值会被覆盖（如果有）。循环结束后，迭代变量保留最后一个值。
 
-### break statement
+### break 语句 
 
-You can use the `break` statement to break out of a loop early.
+可以使用 `break` 语句提前跳出循环。
 
 ```python
 for name in namelist:
@@ -149,14 +145,11 @@ for name in namelist:
 statements
 ```
 
-When the `break` statement executes, it exits the loop and moves
-on the next `statements`.  The `break` statement only applies to the
-inner-most loop. If this loop is within another loop, it will not
-break the outer loop.
+当 `break` 语句执行时，它退出循环并且进入下一个语句。`break` 语句仅应用于最内部的循环。如果此循环在另一个循环的内部，那么 `break` 不会中断外部循环。
 
-### continue statement
+### continue 语句
 
-To skip one element and move to the next one, use the `continue` statement.
+要跳过一个元素并且进入到下一个，请使用 `continue` 语句。
 
 ```python
 for line in lines:
@@ -166,18 +159,18 @@ for line in lines:
     ...
 ```
 
-This is useful when the current item is not of interest or needs to be ignored in the processing.
+如果当前项不重要或者是在处理时需要忽略，那么使用 `continue` 语句很有用。
 
-### Looping over integers
+### 遍历整数
 
-If you need to count, use `range()`.
+如果需要计数，请使用 `range()` 函数。
 
 ```python
 for i in range(100):
     # i = 0,1,...,99
 ```
 
-The syntax is `range([start,] end [,step])`
+range() 函数的语法是`range([start,] end [,step])`。
 
 ```python
 for i in range(100):
@@ -189,14 +182,14 @@ for k in range(10,50,2):
     # Notice how it counts in steps of 2, not 1.
 ```
 
-* The ending value is never included. It mirrors the behavior of slices.
-* `start` is optional. Default `0`.
-* `step` is optional. Default `1`.
-* `range()` computes values as needed. It does not actually store a large range of numbers.
+* 不包括结尾值。这与切片类似。
+* `start` 是可选的 ， 默认值是 `0`。
+* `step` 是可选的，默认值是 `1`。
+* 当需要的值时候`range()`才计算值，实际上，它不存储大范围的数。
 
-### enumerate() function
+### enumerate() 函数
 
-The `enumerate` function adds an extra counter value to iteration.
+`enumerate`函数为迭代添加一个额外的计数值。
 
 ```python
 names = ['Elwood', 'Jake', 'Curtis']
@@ -206,8 +199,7 @@ for i, name in enumerate(names):
     # i = 2, name = 'Curtis'
 ```
 
-The general form is `enumerate(sequence [, start = 0])`. `start` is optional.
-A good example of using `enumerate()` is tracking line numbers while reading a file:
+一般格式为`enumerate(sequence [, start = 0])`，`start`是可选的，一个很好的使用示例：读取文件时跟踪行数。
 
 ```python
 with open(filename) as f:
@@ -215,7 +207,7 @@ with open(filename) as f:
         ...
 ```
 
-In the end, `enumerate` is just a nice shortcut for:
+`enumerate`可以看成以下语句的简写：
 
 ```python
 i = 0
@@ -224,11 +216,11 @@ for x in s:
     i += 1
 ```
 
-Using `enumerate` is less typing and runs slightly faster.
+使用`enumerate`函数可以减少输入，运行速度也稍快一些。
 
-### For and tuples
+### For 与元组
 
-You can iterate with multiple iteration variables.
+可以迭代多个变量：
 
 ```python
 points = [
@@ -241,12 +233,11 @@ for x, y in points:
     #            ...
 ```
 
-When using multiple variables, each tuple is *unpacked* into a set of iteration variables.
-The number of variables must match the number of items in each tuple.
+当使用多个变量时，每个元组被拆包为一组迭代变量。变量的数目必须与每个元组中的项数匹配。
 
-### zip() function
+### zip() 函数
 
-The `zip` function takes multiple sequences and makes an iterator that combines them.
+`zip` 函数采用多个序列，并且生成将它们组合在一起的迭代器。
 
 ```python
 columns = ['name', 'shares', 'price']
@@ -255,24 +246,24 @@ pairs = zip(columns, values)
 # ('name','GOOG'), ('shares',100), ('price',490.1)
 ```
 
-To get the result you must iterate. You can use multiple variables to unpack the tuples as shown earlier.
+要获得结果，必须进行迭代。可以如先前所示的那样使用多个变量对元组进行拆包。
 
 ```python
 for column, value in pairs:
     ...
 ```
 
-A common use of `zip` is to create key/value pairs for constructing dictionaries.
+`zip`函数的常见用法是创建用于构造字典的键值对。
 
 ```python
 d = dict(zip(columns, values))
 ```
 
-## Exercises
+## 练习
 
-### Exercise 2.13: Counting
+### 练习 2.13：计数
 
-Try some basic counting examples:
+尝试一些基本的计数示例：
 
 ```python
 >>> for n in range(10):            # Count 0 ... 9
@@ -290,9 +281,9 @@ Try some basic counting examples:
 >>>
 ```
 
-### Exercise 2.14: More sequence operations
+### 练习 2.14：更多序列操作
 
-Interactively experiment with some of the sequence reduction operations.
+交互地试验一些序列缩减操作。
 
 ```python
 >>> data = [4, 9, 1, 25, 16, 100, 49]
@@ -305,7 +296,7 @@ Interactively experiment with some of the sequence reduction operations.
 >>>
 ```
 
-Try looping over the data.
+尝试遍历数据。
 
 ```python
 >>> for x in data:
@@ -324,9 +315,7 @@ Try looping over the data.
 >>>
 ```
 
-Sometimes the `for` statement, `len()`, and `range()` get used by
-novices in some kind of horrible code fragment that looks like it
-emerged from the depths of a rusty C program.
+有时候，`for`语句，`len() `和 `range()` 函数被初学者用于一些可怕的代码片段中，这些代码看起来像来自于古老的 C 程序。
 
 ```python
 >>> for n in range(len(data)):
@@ -339,17 +328,11 @@ emerged from the depths of a rusty C program.
 >>>
 ```
 
-Don’t do that! Not only does reading it make everyone’s eyes bleed,
-it’s inefficient with memory and it runs a lot slower.  Just use a
-normal `for` loop if you want to iterate over data.  Use `enumerate()`
-if you happen to need the index for some reason.
+不要那样做。阅读这些代码不仅辣眼睛，而且内存效率低，运行慢。如果想要迭代数据，使用普通的`for` 循环即可。如果碰巧因为某些原因需要使用索引，请使用 `enumerate()`函数。
 
-### Exercise 2.15: A practical enumerate() example
+### 练习 2.15：enumerate() 函数实用示例
 
-Recall that the file `Data/missing.csv` contains data for a stock
-portfolio, but has some rows with missing data.  Using `enumerate()`,
-modify your `pcost.py` program so that it prints a line number with
-the warning message when it encounters bad input.
+回想一下，`Data/missing.csv` 文件包含一个股票投资组合的数据，但是有一些行缺少值。请使用  `enumerate()` 函数修改 `pcost.py` 程序，以便在遇到错误的输入时，打印带有警告信息的行号。
 
 ```python
 >>> cost = portfolio_cost('Data/missing.csv')
@@ -358,7 +341,7 @@ Row 7: Couldn't convert: ['IBM', '', '70.44']
 >>>
 ```
 
-To do this, you’ll need to change a few parts of your code.
+为此，需要修改部分代码。
 
 ```python
 ...
@@ -369,10 +352,9 @@ for rowno, row in enumerate(rows, start=1):
         print(f'Row {rowno}: Bad row: {row}')
 ```
 
-### Exercise 2.16: Using the zip() function
+### 练习 2.16：使用 zip() 函数
 
-In the file `Data/portfolio.csv`, the first line contains column
-headers. In all previous code, we’ve been discarding them.
+在`Data/portfolio.csv`文件中，第一行包含列标题。在之前所有代码中，我们把它丢弃了。
 
 ```python
 >>> f = open('Data/portfolio.csv')
@@ -383,9 +365,7 @@ headers. In all previous code, we’ve been discarding them.
 >>>
 ```
 
-However, what if you could use the headers for something useful? This
-is where the `zip()` function enters the picture.  First try this to
-pair the file headers with a row of data:
+但是，如果标题要用于其它有用的事情呢？这就涉及到`zip()`函数了。首先，尝试把文件标题和数据行配对。
 
 ```python
 >>> row = next(rows)
@@ -396,13 +376,9 @@ pair the file headers with a row of data:
 >>>
 ```
 
-Notice how `zip()` paired the column headers with the column values.
-We’ve used `list()` here to turn the result into a list so that you
-can see it. Normally, `zip()` creates an iterator that must be
-consumed by a for-loop.
+请注意`zip()` 函数是如何把列标题与列值配对。在这里，我们使用`list()` 函数把结果转换为列表，以便查看。通常，`zip()` 函数创建一个必须由 for 循环使用的迭代器。
 
-This pairing is an intermediate step to building a
-dictionary. Now try this:
+这种配对是构建字典的中间步骤。现在尝试：
 
 ```python
 >>> record = dict(zip(headers, row))
@@ -411,13 +387,9 @@ dictionary. Now try this:
 >>>
 ```
 
-This transformation is one of the most useful tricks to know about
-when processing a lot of data files.  For example, suppose you wanted
-to make the `pcost.py` program work with various input files, but
-without regard for the actual column number where the name, shares,
-and price appear.
+在处理大量数据文件时，这种转换是最有用的技巧之一。例如，假设需要使`pcost.py` 程序处理各种输入文件，但是不考虑名称，份额，价格所在列的编号。
 
-Modify the `portfolio_cost()` function in `pcost.py` so that it looks like this:
+修改 `pcost.py` 程序中的 `portfolio_cost()`，使其看起来像这样：
 
 ```python
 # pcost.py
@@ -436,8 +408,7 @@ def portfolio_cost(filename):
         ...
 ```
 
-Now, try your function on a completely different data file
-`Data/portfoliodate.csv` which looks like this:
+现在，在一个完全不同的数据文件`Data/portfoliodate.csv`（如下所示）上尝试 portfolio_cost() 函数。
 
 ```csv
 name,date,time,shares,price
@@ -456,24 +427,17 @@ name,date,time,shares,price
 >>>
 ```
 
-If you did it right, you’ll find that your program still works even
-though the data file has a completely different column format than
-before. That’s cool!
+如果操作正确，会发现程序仍然能够正常运行，即使数据文件的列格式与之前的完全不同，这很酷！
 
-The change made here is subtle, but significant.  Instead of
-`portfolio_cost()` being hardcoded to read a single fixed file format,
-the new version reads any CSV file and picks the values of interest
-out of it.  As long as the file has the required columns, the code will work.
+此处所做的更改是微妙的，但是却意义重大。新版的 `portfolio_cost()`可以读取任何 CSV 文件，并从中选择需要的值，而不是硬编码去读取单个固定文件格式。只要文件有必要的列，代码就能正常运行。
 
-Modify the `report.py` program you wrote in Section 2.3 so that it uses
-the same technique to pick out column headers.
+修改在 2.3 节编写的 `report.py` 程序，以便能够使用相同的技术挑选出列标题。
 
-Try running the `report.py` program on the `Data/portfoliodate.csv`
-file and see that it produces the same answer as before.
+尝试以 `Data/portfoliodate.csv` 文件作为输入，运行`report.py` 程序，并观察是否生成和之前一样的答案。
 
-### Exercise 2.17: Inverting a dictionary
+### 练习 2.17：翻转字典
 
-A dictionary maps keys to values. For example, a dictionary of stock prices.
+字典将键映射到值。例如，股票价格字典。
 
 ```python
 >>> prices = {
@@ -485,7 +449,7 @@ A dictionary maps keys to values. For example, a dictionary of stock prices.
 >>>
 ```
 
-If you use the `items()` method, you can get `(key,value)` pairs:
+如果使用字典的 `items()`  方法，那么可以获取到键值对 `(key,value)`：
 
 ```python
 >>> prices.items()
@@ -493,8 +457,9 @@ dict_items([('GOOG', 490.1), ('AA', 23.45), ('IBM', 91.1), ('MSFT', 34.23)])
 >>>
 ```
 
-However, what if you wanted to get a list of `(value, key)` pairs instead?
-*Hint: use `zip()`.*
+但是，如果想要获取`(value, key)`键值对列表呢？
+
+*提示：使用 `zip()`函数。*
 
 ```python
 >>> pricelist = list(zip(prices.values(),prices.keys()))
@@ -503,8 +468,7 @@ However, what if you wanted to get a list of `(value, key)` pairs instead?
 >>>
 ```
 
-Why would you do this? For one, it allows you to perform certain kinds
-of data processing on the dictionary data.
+为什么这样操作？首先，这允许对字典数据执行确切类型的数据处理。
 
 ```python
 >>> min(pricelist)
@@ -516,18 +480,11 @@ of data processing on the dictionary data.
 >>>
 ```
 
-This also illustrates an important feature of tuples. When used in
-comparisons, tuples are compared element-by-element starting with the
-first item. Similar to how strings are compared
-character-by-character.
+其次，这也说明了元组的一个重要特征，当在比较中使用元组时，从第一项开始，逐元素进行比较，类似于字符串中字符与字符逐个比较。
 
-`zip()` is often used in situations like this where you need to pair
-up data from different places.  For example, pairing up the column
-names with column values in order to make a dictionary of named
-values.
+`zip()` 函数经常应用于需要从不同的地方把数据进行配对。例如，为了使用已命名的值构建字典，将列名和列值进行配对。
 
-Note that `zip()` is not limited to pairs. For example, you can use it
-with any number of input lists:
+请注意，`zip()` 函数不限于一对。例如，可以使用任意数量的列表作为输入。
 
 ```python
 >>> a = [1, 2, 3, 4]
@@ -538,7 +495,7 @@ with any number of input lists:
 >>>
 ```
 
-Also, be aware that `zip()` stops once the shortest input sequence is exhausted.
+另外，请注意，一旦最短的输入序列耗尽，`zip()` 函数将会停止。
 
 ```python
 >>> a = [1, 2, 3, 4, 5, 6]
@@ -548,4 +505,4 @@ Also, be aware that `zip()` stops once the shortest input sequence is exhausted.
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (2.3 Formatting)](03_Formatting.md) \| [Next (2.5 Collections)](05_Collections.md)
+[目录](../Contents.md) \| [上一节 (2.3 格式化)](03_Formatting.md) \| [下一节 (2.5 Collections模块)](05_Collections.md)
