@@ -1,13 +1,12 @@
-[Contents](../Contents.md) \| [Previous (2.4 Sequences)](04_Sequences.md) \| [Next (2.6 List Comprehensions)](06_List_comprehension.md)
+[目录](../Contents.md) \| [上一节 (2.4 序列)](04_Sequences.md) \| [下一节 (2.6 列表推导式)](06_List_comprehension.md)
 
-# 2.5 collections module
+# 2.5 collections 模块
 
-The `collections` module provides a number of useful objects for data handling.
-This part briefly introduces some of these features.
+`collections` 模块为数据处理提供了许多有用的对象。本部分简要介绍其中的一些特性。
 
-### Example: Counting Things
+### 示例：事物计数
 
-Let's say you want to tabulate the total shares of each stock.
+假设要把每只股票的总份额表格化。
 
 ```python
 portfolio = [
@@ -20,11 +19,11 @@ portfolio = [
 ]
 ```
 
-There are two `IBM` entries and two `GOOG` entries in this list. The shares need to be combined together somehow.
+此表中有两个 `IBM` 条目，两个 `GOOG` 条目，它们应该以某种方式合并到一起。
 
-### Counters
+### 计数
 
-Solution: Use a `Counter`.
+解决方案：使用 `Counter` 模块。
 
 ```python
 from collections import Counter
@@ -35,9 +34,9 @@ for name, shares, price in portfolio:
 total_shares['IBM']     # 150
 ```
 
-### Example: One-Many Mappings
+### 示例：一对多映射
 
-Problem: You want to map a key to multiple values.
+问题：把一个键映射到多个值。
 
 ```python
 portfolio = [
@@ -50,9 +49,9 @@ portfolio = [
 ]
 ```
 
-Like in the previous example, the key `IBM` should have two different tuples instead.
+像之前的示例那样，键 `IBM` 应具有两个不同的元组。
 
-Solution: Use a `defaultdict`.
+解决方案：使用 `defaultdict` 模块。
 
 ```python
 from collections import defaultdict
@@ -62,12 +61,13 @@ for name, shares, price in portfolio:
 holdings['IBM'] # [ (50, 91.1), (100, 45.23) ]
 ```
 
-The `defaultdict` ensures that every time you access a key you get a default value.
+`defaultdict`模块确保每次访问键的时候获取到一个默认值。
 
-### Example: Keeping a History
+### 示例：保留历史记录
 
-Problem: We want a history of the last N things.
-Solution: Use a `deque`.
+问题：我们需要最近 N 件事的历史。
+
+解决方案：使用 `deque` 模块。
 
 ```python
 from collections import deque
@@ -79,24 +79,19 @@ with open(filename) as f:
         ...
 ```
 
-## Exercises
+## 练习
 
-The `collections` module might be one of the most useful library
-modules for dealing with special purpose kinds of data handling
-problems such as tabulating and indexing.
+`collections` 可能是最有用的库模块之一，用于解决特殊用途的数据处理问题，例如表格化或者索引化。
 
-In this exercise, we’ll look at a few simple examples.  Start by
-running your `report.py` program so that you have the portfolio of
-stocks loaded in the interactive mode.
+在本练习中，我们来看几个简单的例子。首先运行`report.py` ，以便在交互模式下能够加载股票投资组合。
 
 ```bash
 bash % python3 -i report.py
 ```
 
-### Exercise 2.18: Tabulating with Counters
+### 练习 2.18：使用 Counter 模块表格化
 
-Suppose you wanted to tabulate the total number of shares of each stock.
-This is easy using `Counter` objects. Try it:
+假设需要将每支股票的份额总数表格化，那么使用 `Counter` 对象会很容易。试试看：
 
 ```python
 >>> portfolio = read_portfolio('Data/portfolio.csv')
@@ -110,9 +105,9 @@ Counter({'MSFT': 250, 'IBM': 150, 'CAT': 150, 'AA': 100, 'GE': 95})
 >>>
 ```
 
-Carefully observe how the multiple entries for `MSFT` and `IBM` in `portfolio` get combined into a single entry here.
+仔细观察`portfolio` 中的 `MSFT` 和 `IBM` 的多个条目是如何合并的。
 
-You can use a Counter just like a dictionary to retrieve individual values:
+可以像字典一样使用 Counter 模块检索单个值。
 
 ```python
 >>> holdings['IBM']
@@ -122,7 +117,7 @@ You can use a Counter just like a dictionary to retrieve individual values:
 >>>
 ```
 
-If you want to rank the values, do this:
+如果想要对值排名，这样做：
 
 ```python
 >>> # Get three most held stocks
@@ -131,7 +126,7 @@ If you want to rank the values, do this:
 >>>
 ```
 
-Let’s grab another portfolio of stocks and make a new Counter:
+让我们获取另一个股票投资组合并生成一个新的 Counter 对象：
 
 ```python
 >>> portfolio2 = read_portfolio('Data/portfolio2.csv')
@@ -144,7 +139,7 @@ Counter({'HPQ': 250, 'GE': 125, 'AA': 50, 'MSFT': 25})
 >>>
 ```
 
-Finally, let’s combine all of the holdings doing one simple operation:
+最后，通过一个简单的操作把所有的 holdings 变量合并。
 
 ```python
 >>> holdings
@@ -157,15 +152,10 @@ Counter({'MSFT': 275, 'HPQ': 250, 'GE': 220, 'AA': 150, 'IBM': 150, 'CAT': 150})
 >>>
 ```
 
-This is only a small taste of what counters provide. However, if you
-ever find yourself needing to tabulate values, you should consider
-using one.
+这只是对 Counter 功能的一个小尝试，如果发现需要对值进行表格化，那么就应该考虑使用它。
 
-### Commentary: collections module
+### 说明: collections 模块
 
-The `collections` module is one of the most useful library modules
-in all of Python.  In fact, we could do an extended tutorial on just
-that.  However, doing so now would also be a distraction.  For now,
-put `collections` on your list of bedtime reading for later.
+`collections` 模块是 Python 所有库中最有用的库模块之一。实际上，我们可以为此做一个拓展教程，但是，现在这样做会分散注意力。从现在开始，把`collections`列为您的睡前读物，以备后用。
 
-[Contents](../Contents.md) \| [Previous (2.4 Sequences)](04_Sequences.md) \| [Next (2.6 List Comprehensions)](06_List_comprehension.md)
+[目录](../Contents.md) \| [上一节 (2.4 序列)](04_Sequences.md) \| [下一节 (2.6 列表推导式)](06_List_comprehension.md)
