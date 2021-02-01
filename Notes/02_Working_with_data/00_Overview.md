@@ -8,7 +8,7 @@
 * [2.2 容器](02_Containers.md)
 * [2.3 格式化输出](03_Formatting.md)
 * [2.4 序列](04_Sequences.md)
-* [2.5 集合模型](05_Collections.md)
+* [2.5 collections模块](05_Collections.md)
 * [2.6 列表推导式](06_List_comprehension.md)
 * [2.7 对象模型](07_Objects.md)
 
