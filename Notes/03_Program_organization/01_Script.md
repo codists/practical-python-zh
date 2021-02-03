@@ -246,6 +246,8 @@ In section 2, you wrote a program called `report.py` that printed out
 a report showing the performance of a stock portfolio.  This program
 consisted of some functions. For example:
 
+在第二节中，
+
 ```python
 # report.py
 import csv
