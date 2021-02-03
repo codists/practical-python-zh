@@ -1,13 +1,17 @@
-[Contents](../Contents.md) \| [Previous (2.7 Object Model)](../02_Working_with_data/07_Objects.md) \| [Next (3.2 More on Functions)](02_More_functions.md)
+[目录](../Contents.md) \| [上一节 (2.7 对象模型)](../02_Working_with_data/07_Objects.md) \| [下一节 (3.2 深入函数)](02_More_functions.md)
 
-# 3.1 Scripting
+# 3.1 脚本
 
 In this part we look more closely at the practice of writing Python
 scripts.
 
-### What is a Script?
+在该部分，我们将进一步编写 Python 脚本实践。
+
+### What is a Script?什么是脚本？
 
 A *script* is a program that runs a series of statements and stops.
+
+脚本就是运行和终止一系列语句的程序。
 
 ```python
 # program.py
@@ -20,7 +24,9 @@ statement3
 
 We have mostly been writing scripts to this point.
 
-### A Problem
+对于这点，我们主要编写脚本。
+
+### A Problem问题
 
 If you write a useful script, it will grow in features and
 functionality.  You may want to apply it to other related problems.
@@ -28,9 +34,13 @@ Over time, it might become a critical application.  And if you don't
 take care, it might turn into a huge tangled mess.  So, let's get
 organized.
 
-### Defining Things
+如果您编写了一个有用的脚本，它将不断增加特性和功能。您可能想要把它应用于其它问题。一段时间后，它可能编程一个非常重要的应用。如果您不注意，它可能变为一团乱麻。所以，让我们有条理的组织程序吧。
+
+### Defining Things定义变量
 
 Names must always be defined before they get used later.
+
+名称必须在使用之前定义。
 
 ```python
 def square(x):
@@ -45,10 +55,16 @@ z = square(b) # Requires `square` and `b` to be defined
 **The order is important.**
 You almost always put the definitions of variables and functions near the top.
 
-### Defining Functions
+**顺序是重要的。**
+
+您几乎总是把变量和函数的定义放到顶部附近。
+
+### Defining Functions定义函数
 
 It is a good idea to put all of the code related to a single *task* all in one place.
 Use a function.
+
+把与单个任务相关的所有代码放到一个地方是个非常不错的主意。可以使用函数实现：
 
 ```python
 def read_prices(filename):
@@ -62,14 +78,18 @@ def read_prices(filename):
 
 A function also simplifies repeated operations.
 
+函数也可以简化重复的操作。
+
 ```python
 oldprices = read_prices('oldprices.csv')
 newprices = read_prices('newprices.csv')
 ```
 
-### What is a Function?
+### What is a Function?什么是函数？
 
 A function is a named sequence of statements.
+
+函数是命名的语句序列。
 
 ```python
 def funcname(args):
@@ -81,6 +101,8 @@ def funcname(args):
 
 *Any* Python statement can be used inside.
 
+*任何* Python 语句都可以在函数内部使用。
+
 ```python
 def foo():
     import math
@@ -90,9 +112,13 @@ def foo():
 
 There are no *special* statements in Python (which makes it easy to remember).
 
-### Function Definition
+在 Python 中没有*特殊*语句（这使其很容易记住）。
+
+### Function Definition函数定义
 
 Functions can be *defined* in any order.
+
+函数可以以任意顺序定义。
 
 ```python
 def foo(x):
@@ -111,6 +137,8 @@ def foo(x):
 
 Functions must only be defined prior to actually being *used* (or called) during program execution.
 
+在程序执行期间，函数必须在实际使用之前（调用）定义。
+
 ```python
 foo(3)        # foo must be defined already
 ```
@@ -118,10 +146,14 @@ foo(3)        # foo must be defined already
 Stylistically, it is probably more common to see functions defined in
 a *bottom-up* fashion.
 
-### Bottom-up Style
+在文体上，函数以自底向上的样式定义很常见。
+
+### Bottom-up Style自底向上风格
 
 Functions are treated as building blocks.
 The smaller/simpler blocks go first.
+
+函数被当做构建块。更小的/更简单的块优先。
 
 ```python
 # myprogram.py
@@ -145,17 +177,23 @@ Later functions build upon earlier functions.  Again, this is only
 a point of style.  The only thing that matters in the above program
 is that the call to `spam(42)` go last.
 
-### Function Design
+后面的函数基于前面的函数构建。再次说明，这仅仅是一种风格问题。在上面程序中唯一重要的事情是 `spam(42)`  的调用是在最后一步。
+
+### Function Design函数设计
 
 Ideally, functions should be a *black box*.
 They should only operate on passed inputs and avoid global variables
 and mysterious side-effects.  Your main goals: *Modularity* and *Predictability*.
 
-### Doc Strings
+理想情况下，函数应该是一个*黑盒*。它们应该在传递的输入上操作，并避免全局变量和奇怪的副作用。首要目标：模块化和可预测性。
+
+### Doc Strings文档字符串
 
 It's good practice to include documentation in the form of a
 doc-string.  Doc-strings are strings written immediately after the
 name of the function. They feed `help()`, IDEs and other tools.
+
+以文档字符串（doc-string）的形式包含文档是良好的实践。文档字符串是紧接着函数名的字符串。它们用于 `help()` 函数，集成开发环境和其它的工具。
 
 ```python
 def read_prices(filename):
@@ -175,9 +213,13 @@ summary of what the function does.  If more information is needed,
 include a short example of usage along with a more detailed
 description of the arguments.
 
-### Type Annotations
+一个好的文档字符串实践是编写一句简短有关函数做什么的摘要。如果需要更多的信息，包含一个简短的带有更详细的参数描述的使用示例，
+
+### Type Annotations类型注解
 
 You can also add optional type hints to function definitions.
+
+也可以增加可选的类型提示到函数定义中。
 
 ```python
 def read_prices(filename: str) -> dict:
@@ -196,7 +238,9 @@ The hints do nothing operationally. They are purely informational.
 However, they may be used by IDEs, code checkers, and other tools
 to do more.
 
-## Exercises
+提示在操作上什么也不做。它们只是信息。但是，它们可能被集成开发环境，代码检查以及其它工具使用做更多 的事。
+
+## 练习
 
 In section 2, you wrote a program called `report.py` that printed out
 a report showing the performance of a stock portfolio.  This program
