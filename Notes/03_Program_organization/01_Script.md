@@ -234,29 +234,15 @@ for row in report:
 
 ### 练习 3.2：为程序执行创建一个顶层函数
 
-Take the last part of your program and package it into a single
-function `portfolio_report(portfolio_filename, prices_filename)`.
-Have the function work so that the following function call creates the
-report as before:
-
-把程序的最后一部分大宝到单个函数 `portfolio_report(portfolio_filename, prices_filename)` 中。让程序运行以便后面的函数调用像之前一样创建报告。
+把程序的最后一部分打包到单个函数 `portfolio_report(portfolio_filename, prices_filename)` 中。让程序运行，以便下面的函数调用像之前一样创建报告。
 
 ```python
 portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
 ```
 
-In this final version, your program will be nothing more than a series
-of function definitions followed by a single function call to
-`portfolio_report()` at the very end (which executes all of the steps
-involved in the program).
+在最终版本中，程序只不过是一系列函数定义，最后是对单个函数`portfolio_report()` 的调用（它执行程序中涉及的所有步骤）。
 
-在最后的版本中，您的程序是一系列的函数，在最后面跟着单个调用 `portfolio_report()` 的函数（在程序中这会执行所有相关的步骤）。
-
-By turning your program into a single function, it becomes easy to run
-it on different inputs.  For example, try these statements
-interactively after running your program:
-
-通过把程序转换为单个函数，不同的输入中运行它变得很轻松。例如，在运行程序后，请交互式地尝试这些语句：
+通过将程序转换为单个函数，在不同的输入后可以很轻松地运行它。例如，在运行程序后以交互方式尝试这些语句：
 
 ```python
 >>> portfolio_report('Data/portfolio2.csv', 'Data/prices.csv')
@@ -271,15 +257,8 @@ interactively after running your program:
 >>>
 ```
 
-### Commentary说明
+### 说明
 
-Python makes it very easy to write relatively unstructured scripting code
-where you just have a file with a sequence of statements in it. In the
-big picture, it's almost always better to utilize functions whenever
-you can.  At some point, that script is going to grow and you'll wish
-you had a bit more organization.  Also, a little known fact is that Python
-runs a bit faster if you use functions.
-
-Python 使在有一系列语句的文件中编写相关无结构的脚本变得很轻松。从全局来看，无论何时，只要您可以利用函数总是更好。在某些时候，脚本会增长，并且我们希望它更有组织。另外，人尽皆知的是如果使用函数，Python 运行更快一些。
+Python 使在有一系列语句的文件中编写相对无结构的脚本变得很轻松。总体来说，无论何时，尽可能地利用函数通常总是更好的选择。在某些时候，脚本会不断增加，并且我们希望它更有组织。另外，一个鲜为人知的事实是，如果使用函数，Python 的运行会更快一些。
 
 [目录](../Contents.md) \| [上一节 (2.7 对象模型)](../02_Working_with_data/07_Objects.md) \| [下一节 (3.2 深入函数)](02_More_functions.md)
