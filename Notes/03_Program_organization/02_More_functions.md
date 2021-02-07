@@ -1,6 +1,6 @@
 [目录](../Contents.md) \| [上一节 (3.1 脚本)](01_Script.md) \| [下一节 (3.3 错误检查)](03_Error_checking.md)
 
-# 3.2 深入函数More on Functions
+# 3.2 深入函数
 
 尽管函数在早先时候介绍了，但有关函数在更深层次上是如何工作的细节却很少提供。本节旨在填补这些空白，并讨论函数调用约定，作用域规则等问题。
 
@@ -67,7 +67,7 @@ parse_data(data, debug=True, ignore_errors=True)
 d = read_prices('prices.csv', debug=True)
 ```
 
-Python 开发工具将会在帮助特性或者文档中显示这些名称。
+Python 开发工具将会在帮助功能或者帮助文档中显示这些名称。
 
 ### 返回值
 
@@ -78,7 +78,7 @@ def square(x):
     return x * x
 ```
 
-如果给出返回值或者 `return` 语句缺失，那么返回 `None`：
+如果没有给出返回值或者 `return` 语句缺失，那么返回 `None`：
 
 ```python
 def bar(x):
@@ -190,7 +190,7 @@ def spam():
     name = 'Guido' # Changes the global name above
 ```
 
-全局声明必须在使用之前出现，并且相应的变量必须与该函数存在于同一文件中。看上面这个函数，要知道这是一种糟糕的形式。事实上，如果可以的话，尽量避免使用 `global` 。如果需要一个函数来修改函数外部的某种状态，最好是使用类来代替（详细详细介绍）。
+全局声明必须在使用之前出现，并且相应的变量必须与该函数处在同一文件中。看上面这个函数，要知道这是一种糟糕的形式。事实上，如果可以的话，尽量避免使用 `global` 。如果需要一个函数来修改函数外部的某种状态，最好是使用类来代替（稍后详细介绍）。
 
 ### 参数传递
 
@@ -232,9 +232,9 @@ print(b)                # [1, 2, 3]
 
 ## 练习
 
-本组练习实现的内容可能是本课程最强大的和最难的。有很多步骤，并且过去练习中的许多概念被一次性整合在一起。虽然最后的题解只有大约 25 行的代码，但是要花点时间，确保您理解每一个部分。
+本组练习实现的内容可能是本课程最强大的和最难的。有很多步骤，并且过去练习中的许多概念被一次性整合在一起。虽然最后的题解只有大约 25 行的代码，但要花点时间，确保您理解每一个部分。
 
-`report.py`的中心部分主要用于读取 CSV 文件。例如，`read_portfolio()` 函数读取包含投资组合数据的文件，`read_prices()` 函数读取包含价格数据的文件。在这两个函数中，有很多底层的“精细的”事以及相似的特性。例如，它们都打开一个文件并使用 `csv` 模块来处理，并且将各种字段转换为新的类型。
+`report.py` 的中心部分主要用于读取 CSV 文件。例如，`read_portfolio()` 函数读取包含投资组合数据的文件，`read_prices()` 函数读取包含价格数据的文件。在这两个函数中，有很多底层的“精细的”事以及相似的特性。例如，它们都打开一个文件并使用 `csv` 模块来处理，并且将各种字段转换为新的类型。
 
 如果真的需要对大量的文件进行解析，可能需要清理其中的一些内容使其更通用。这是我们的目标。
 
@@ -390,10 +390,7 @@ def parse_csv(filename, select=None):
 >>>
 ```
 
-You already explored this in [Exercise 2.24](../02_Working_with_data/07_Objects).
-You'll need to insert the following fragment of code into your solution:
-
-已经在 [练习 2.24](../02_Working_with_data/07_Objects) 中对此进行了探索。需要将下列断码片段插入到题解中：
+在 [练习 2.24](../02_Working_with_data/07_Objects) 中已经对此进行了探索。需要将下列代码片段插入到题解中：
 
 ```python
 ...
@@ -402,12 +399,9 @@ if types:
 ...
 ```
 
-### 练习 3.6：处理无标题的数据Working without Headers
+### 练习 3.6：处理无标题的数据
 
-Some CSV files don’t include any header information.
-For example, the file `prices.csv` looks like this:
-
-一些 CSV 文件不包含任何的标题信息。例如，`prices.csv` 文件看起来像下面这样：
+某些 CSV 文件不包含任何的标题信息。例如，`prices.csv` 文件看起来像下面这样：
 
 ```csv
 "AA",9.22
@@ -417,10 +411,7 @@ For example, the file `prices.csv` looks like this:
 ...
 ```
 
-Modify the `parse_csv()` function so that it can work with such files
-by creating a list of tuples instead.  For example:
-
-修改 `parse_csv()` 文件以便可以处理这类文件，而不是通过创建元组列表。例如：
+修改 `parse_csv()` 文件以便通过创建元组列表来处理此类文件。例如：
 
 ```python
 >>> prices = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
@@ -429,21 +420,11 @@ by creating a list of tuples instead.  For example:
 >>>
 ```
 
-To make this change, you’ll need to modify the code so that the first
-line of data isn’t interpreted as a header line.  Also, you’ll need to
-make sure you don’t create dictionaries as there are no longer any
-column names to use for keys.
+要执行此更改，需要修改代码以便数据的第一行不被解释为标题行。另外，需要确保不创建字典，因为不再有可用于列名的键。
 
-要想变更，需要修改代码以便数据的第一行不是数据行。另外，需要确保当没有用于键的列名时不要创建字典。
+### 练习 3.7：选择其它的列分隔符
 
-### 练习 3.7：选择不同的列分隔符Picking a different column delimitier
-
-Although CSV files are pretty common, it’s also possible that you
-could encounter a file that uses a different column separator such as
-a tab or space.  For example, the file `Data/portfolio.dat` looks like
-this:
-
-尽管 CSV 文件非常常见，但您也有可能会遇到一个使用不同列分隔符（如 tab 或者 space）的文件。例如，`Data/portfolio.dat` 文件看起来像下面这样：
+尽管 CSV 文件非常普遍，但还可能会遇到使用其它列分隔符（如 制表符（tab） 或空格符（space））的文件。例如，如下所示的 `Data/portfolio.dat` 文件：
 
 ```csv
 name shares price
@@ -456,20 +437,13 @@ name shares price
 "IBM" 100 70.44
 ```
 
-The `csv.reader()` function allows a different column delimiter to be given as follows:
-
-`csv.reader()` 函数允许像下面这样给定不同的分隔符：
+`csv.reader()` 函数允许像下面这样指定不同的分隔符：
 
 ```python
 rows = csv.reader(f, delimiter=' ')
 ```
 
-Modify your `parse_csv()` function so that it also allows the
-delimiter to be changed.
-
-修改 `parse_csv()` 函数以便允许修改分隔符。
-
-For example:
+修改 `parse_csv()` 函数以便也允许修改分隔符。
 
 例如：
 
@@ -482,12 +456,6 @@ For example:
 
 ### 说明
 
-If you’ve made it this far, you’ve created a nice library function
-that’s genuinely useful.  You can use it to parse arbitrary CSV files,
-select out columns of interest, perform type conversions, without
-having to worry too much about the inner workings of files or the
-`csv` module.
-
-到目前为止，如果您已经完成，那么您创建了一个非常好的真的有用的库函数。您可以使用它去解析任意的 CSV 文件，选择感兴趣的列，执行类型转换，而不用对文件的内部工作或者 `csv` 模块有太多的担心。
+到目前为止，如果您已经完成，那么您创建了一个非常有用的库函数。您可以使用它去解析任意的 CSV 文件，选择感兴趣的列，执行类型转换，而不用对文件或者 `csv` 模块的内部工作有太多的担心。
 
 [目录](../Contents.md) \| [上一节 (3.1 脚本)](01_Script.md) \| [下一节 (3.3 错误检查)](03_Error_checking.md)
