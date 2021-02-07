@@ -1,54 +1,51 @@
-[Contents](../Contents.md) \| [Previous (3.1 Scripting)](01_Script.md) \| [Next (3.3 Error Checking)](03_Error_checking.md)
+[目录](../Contents.md) \| [上一节 (3.1 脚本)](01_Script.md) \| [下一节 (3.3 错误检查)](03_Error_checking.md)
 
-# 3.2 More on Functions
+# 3.2 深入函数More on Functions
 
-Although functions were introduced earlier, very few details were provided on how
-they actually work at a deeper level.  This section aims to fill in some gaps
-and discuss matters such as calling conventions, scoping rules, and more.
+尽管函数在早先时候介绍了，但有关函数在更深层次上是如何工作的细节却很少提供。本节旨在填补这些空白，并讨论函数调用约定，作用域规则等问题。
 
-### Calling a Function
+### 调用函数
 
-Consider this function:
+考虑以下函数：
 
 ```python
 def read_prices(filename, debug):
     ...
 ```
 
-You can call the function with positional arguments:
+可以使用位置参数调用该函数：
 
 ```
 prices = read_prices('prices.csv', True)
 ```
 
-Or you can call the function with keyword arguments:
+或者，可以使用关键字参数调用该函数：
 
 ```python
 prices = read_prices(filename='prices.csv', debug=True)
 ```
 
-### Default Arguments
+### 默认参数
 
-Sometimes you want an argument to be optional.  If so, assign a default value
-in the function definition.
+有时候，您希望参数是可选的，如果是这样，请在函数定义中分配一个默认值。
 
 ```python
 def read_prices(filename, debug=False):
     ...
 ```
 
-If a default value is assigned, the argument is optional in function calls.
+如果分配了默认值，则参数在函数调用中是可选的。
 
 ```python
 d = read_prices('prices.csv')
 e = read_prices('prices.dat', True)
 ```
 
-*Note: Arguments with defaults must appear at the end of the arguments list (all non-optional arguments go first).*
+*注意：带有默认值的参数（译注：即关键字参数）必须出现在参数列表的末尾（所有非可选参数都放在最前面）*
 
-### Prefer keyword arguments for optional arguments
+### 首选关键字参数作为可选参数
 
-Compare and contrast these two different calling styles:
+比较以下两种不同的调用风格：
 
 ```python
 parse_data(data, False, True) # ?????
@@ -58,31 +55,30 @@ parse_data(data, debug=True)
 parse_data(data, debug=True, ignore_errors=True)
 ```
 
-In most cases, keyword arguments improve code clarity--especially for arguments that
-serve as flags or which are related to optional features.
+在大部分情况下，关键字参数提高了代码的简洁性——特别是对于用作标志的参数，或者与可选特性相关的参数。
 
-### Design Best Practices
+### 设计最佳实践
 
-Always give short, but meaningful names to functions arguments.
+始终为函数参数指定简短但有意义的名称。
 
-Someone using a function may want to use the keyword calling style.
+使用函数的人可能想要使用关键字调用风格。
 
 ```python
 d = read_prices('prices.csv', debug=True)
 ```
 
-Python development tools will show the names in help features and documentation.
+Python 开发工具将会在帮助特性或者文档中显示这些名称。
 
-### Returning Values
+### 返回值
 
-The `return` statement returns a value
+`return` 语句返回一个值：
 
 ```python
 def square(x):
     return x * x
 ```
 
-If no return value is given or `return` is missing, `None` is returned.
+如果给出返回值或者 `return` 语句缺失，那么返回 `None`：
 
 ```python
 def bar(x):
@@ -98,10 +94,9 @@ def foo(x):
 b = foo(4)      # b = None
 ```
 
-### Multiple Return Values
+### 多个返回值
 
-Functions can only return one value.  However, a function may return
-multiple values by returning them in a tuple.
+函数只能返回一个值。但是，通过将返回值放到元组中，函数可以返回多个值：
 
 ```python
 def divide(a,b):
@@ -110,7 +105,7 @@ def divide(a,b):
     return q, r     # Return a tuple
 ```
 
-Usage example:
+用例：
 
 ```python
 x, y = divide(37,5) # x = 7, y = 2
@@ -118,9 +113,9 @@ x, y = divide(37,5) # x = 7, y = 2
 x = divide(37, 5)   # x = (7, 2)
 ```
 
-### Variable Scope
+### 变量作用域
 
-Programs assign values to variables.
+程序给变量赋值：
 
 ```python
 x = value # Global variable
@@ -129,13 +124,11 @@ def foo():
     y = value # Local variable
 ```
 
-Variables assignments occur outside and inside function definitions.
-Variables defined outside are "global". Variables inside a function
-are "local".
+变量赋值发生在函数的内部和外部。定义在函数外部的变量是“全局的”。定义在函数内部的变量是“局部的”。
 
-### Local Variables
+### 局部变量
 
-Variables assigned inside functions are private.
+在函数内部赋值的变量是私有的。
 
 ```python
 def read_portfolio(filename):
@@ -147,8 +140,7 @@ def read_portfolio(filename):
     return portfolio
 ```
 
-In this example, `filename`, `portfolio`, `line`, `fields` and `s` are local variables.
-Those variables are not retained or accessible after the function call.
+在此示例中，`filename`, `portfolio`, `line`, `fields` 和 `s` 是局部变量。在函数调用之后，这些变量将不会保留或者不可访问。
 
 ```python
 >>> stocks = read_portfolio('portfolio.csv')
@@ -159,12 +151,11 @@ NameError: name 'fields' is not defined
 >>>
 ```
 
-Locals also can't conflict with variables found elsewhere.
+局部变量也不能与其它地方的变量冲突。
 
-### Global Variables
+### 全局变量
 
-Functions can freely access the values of globals defined in the same
-file.
+函数可以自由地访问定义在同一文件中的全局变量值。
 
 ```python
 name = 'Dave'
@@ -173,7 +164,7 @@ def greeting():
     print('Hello', name)  # Using `name` global variable
 ```
 
-However, functions can't modify globals:
+但是，函数不能修改全局变量：
 
 ```python
 name = 'Dave'
@@ -185,11 +176,11 @@ spam()
 print(name) # prints 'Dave'
 ```
 
-**Remember: All assignments in functions are local.**
+**切记：函数中的所有赋值都是局部的**
 
-### Modifying Globals
+### 修改全局变量
 
-If you must modify a global variable you must declare it as such.
+如果必须修改全局变量，请像下面这样声明它：
 
 ```python
 name = 'Dave'
@@ -199,18 +190,11 @@ def spam():
     name = 'Guido' # Changes the global name above
 ```
 
-The global declaration must appear before its use and the corresponding
-variable must exist in the same file as the function.   Having seen this,
-know that it is considered poor form.  In fact, try to avoid `global` entirely
-if you can.  If you need a function to modify some kind of state outside
-of the function, it's better to use a class instead (more on this later).
+全局声明必须在使用之前出现，并且相应的变量必须与该函数存在于同一文件中。看上面这个函数，要知道这是一种糟糕的形式。事实上，如果可以的话，尽量避免使用 `global` 。如果需要一个函数来修改函数外部的某种状态，最好是使用类来代替（详细详细介绍）。
 
-### Argument Passing
+### 参数传递
 
-When you call a function, the argument variables are names that refer
-to the passed values. These values are NOT copies (see [section
-2.7](../02_Working_with_data/07_Objects)). If mutable data types are
-passed (e.g. lists, dicts), they can be modified *in-place*.
+当调用一个函数的时候，参数变量的传递是引用传递。不拷贝值（参见[2.7 节](../02_Working_with_data/07_Objects)）。如果传递了可变数据类型（如列表，字典），它们可以被原地修改。
 
 ```python
 def foo(items):
@@ -221,12 +205,11 @@ foo(a)
 print(a)                # [1, 2, 3, 42]
 ```
 
-**Key point: Functions don't receive a copy of the input arguments.**
+**关键点：函数不接收输入参数的拷贝。**
 
-### Reassignment vs Modifying
+### 重新赋值与修改
 
-Make sure you understand the subtle difference between modifying a
-value and reassigning a variable name.
+确保了解修改值与给变量名重新赋值的细微差别。
 
 ```python
 def foo(items):
@@ -245,36 +228,21 @@ bar(b)
 print(b)                # [1, 2, 3]
 ```
 
-*Reminder: Variable assignment never overwrites memory. The name is merely bound to a new value.*
+*提醒：变量赋值永远不会重写内存。名称只是被绑定到了新的值上面*
 
-## Exercises
+## 练习
 
-This set of exercises have you implement what is, perhaps, the most
-powerful and difficult part of the course.  There are a lot of steps
-and many concepts from past exercises are put together all at once.
-The final solution is only about 25 lines of code, but take your time
-and make sure you understand each part.
+本组练习实现的内容可能是本课程最强大的和最难的。有很多步骤，并且过去练习中的许多概念被一次性整合在一起。虽然最后的题解只有大约 25 行的代码，但是要花点时间，确保您理解每一个部分。
 
-A central part of your `report.py` program focuses on the reading of
-CSV files.  For example, the function `read_portfolio()` reads a file
-containing rows of portfolio data and the function `read_prices()`
-reads a file containing rows of price data. In both of those
-functions, there are a lot of low-level "fiddly" bits and similar
-features.  For example, they both open a file and wrap it with the
-`csv` module and they both convert various fields into new types.
+`report.py`的中心部分主要用于读取 CSV 文件。例如，`read_portfolio()` 函数读取包含投资组合数据的文件，`read_prices()` 函数读取包含价格数据的文件。在这两个函数中，有很多底层的“精细的”事以及相似的特性。例如，它们都打开一个文件并使用 `csv` 模块来处理，并且将各种字段转换为新的类型。
 
-If you were doing a lot of file parsing for real, you’d probably want
-to clean some of this up and make it more general purpose.  That's
-our goal.
+如果真的需要对大量的文件进行解析，可能需要清理其中的一些内容使其更通用。这是我们的目标。
 
-Start this exercise by opening the file called
-`Work/fileparse.py`. This is where we will be doing our work.
+通过打开 `Work/fileparse.py` 文件开始本练习，该文件是我们将要写代码的地方。
 
-### Exercise 3.3: Reading CSV Files
+### 练习 3.3：读取 CSV 文件
 
-To start, let’s just focus on the problem of reading a CSV file into a
-list of dictionaries.  In the file `fileparse.py`, define a
-function that looks like this:
+首先，让我们仅关注将 CSV 文件读入字典列表的问题。在 `fileparse.py` 中，定义一个如下所示的函数：
 
 ```python
 # fileparse.py
@@ -299,13 +267,11 @@ def parse_csv(filename):
     return records
 ```
 
-This function reads a CSV file into a list of dictionaries while
-hiding the details of opening the file, wrapping it with the `csv`
-module, ignoring blank lines, and so forth.
+该函数将 CSV 文件读入字典列表中，但是隐藏了打开文件，使用 `csv` 模块处理，忽略空行等详细信息。
 
-Try it out:
+试试看：
 
-Hint: `python3 -i fileparse.py`.
+提示： `python3 -i fileparse.py`.
 
 ```python
 >>> portfolio = parse_csv('Data/portfolio.csv')
@@ -314,16 +280,11 @@ Hint: `python3 -i fileparse.py`.
 >>>
 ```
 
-This is good except that you can’t do any kind of useful calculation
-with the data because everything is represented as a string.  We’ll
-fix this shortly, but let’s keep building on it.
+这很好，除了不能使用数据做任何有用的计算之外。因为所有的内容都是用字符串表示。我们将马上解决此问题，先让我们继续在此基础上进行构建。
 
-### Exercise 3.4: Building a Column Selector
+### 练习 3.4：构建列选择器
 
-In many cases, you’re only interested in selected columns from a CSV
-file, not all of the data.  Modify the `parse_csv()` function so that
-it optionally allows user-specified columns to be picked out as
-follows:
+在大部分情况下，您只对 CSV 文件中选定的列感兴趣，而不是所有数据。修改 `parse_csv()` 函数，以便让用户指定任意的列，如下所示：
 
 ```python
 >>> # Read all of the data
@@ -338,8 +299,9 @@ follows:
 >>>
 ```
 
-An example of a column selector was given in [Exercise 2.23](../02_Working_with_data/06_List_comprehension).
-However, here’s one way to do it:
+[练习 2.23](../02_Working_with_data/06_List_comprehension) 中给出了列选择器的示例。
+
+然而，这里有一个方法可以做到这一点：
 
 ```python
 # fileparse.py
@@ -378,24 +340,21 @@ def parse_csv(filename, select=None):
     return records
 ```
 
-There are a number of tricky bits to this part. Probably the most
-important one is the mapping of the column selections to row indices.
-For example, suppose the input file had the following headers:
+这部分有一些棘手的问题，最重要的一个可能是列选择到行索引的映射。例如，假设输入文件具有以下标题：
 
 ```python
 >>> headers = ['name', 'date', 'time', 'shares', 'price']
 >>>
 ```
 
-Now, suppose the selected columns were as follows:
+现在，假设选定的列如下：
 
 ```python
 >>> select = ['name', 'shares']
 >>>
 ```
 
-To perform the proper selection, you have to map the selected column names to column indices in the file.
-That’s what this step is doing:
+为了执行正确的选择，必须将选择的列名映射到文件中的列索引。这就是该步骤正在执行的操作：
 
 ```python
 >>> indices = [headers.index(colname) for colname in select ]
@@ -404,8 +363,9 @@ That’s what this step is doing:
 >>>
 ```
 
-In other words, "name" is column 0 and "shares" is column 3.
-When you read a row of data from the file, the indices are used to filter it:
+换句话说，名称（"name" ）是第 0 列，股份数目（"shares" ）是第 3 列。
+
+当从文件读取数据行的时候，使用索引对其进行过滤：
 
 ```python
 >>> row = ['AA', '6/11/2007', '9:50am', '100', '32.20' ]
@@ -415,10 +375,9 @@ When you read a row of data from the file, the indices are used to filter it:
 >>>
 ```
 
-### Exercise 3.5: Performing Type Conversion
+### 练习 3.5：执行类型转换
 
-Modify the `parse_csv()` function so that it optionally allows
-type-conversions to be applied to the returned data.  For example:
+修改 `parse_csv()` 函数，以便可以选择将类型转换应用到返回数据上。例如：
 
 ```python
 >>> portfolio = parse_csv('Data/portfolio.csv', types=[str, int, float])
@@ -434,6 +393,8 @@ type-conversions to be applied to the returned data.  For example:
 You already explored this in [Exercise 2.24](../02_Working_with_data/07_Objects).
 You'll need to insert the following fragment of code into your solution:
 
+已经在 [练习 2.24](../02_Working_with_data/07_Objects) 中对此进行了探索。需要将下列断码片段插入到题解中：
+
 ```python
 ...
 if types:
@@ -441,10 +402,12 @@ if types:
 ...
 ```
 
-### Exercise 3.6: Working without Headers
+### 练习 3.6：处理无标题的数据Working without Headers
 
 Some CSV files don’t include any header information.
 For example, the file `prices.csv` looks like this:
+
+一些 CSV 文件不包含任何的标题信息。例如，`prices.csv` 文件看起来像下面这样：
 
 ```csv
 "AA",9.22
@@ -456,6 +419,8 @@ For example, the file `prices.csv` looks like this:
 
 Modify the `parse_csv()` function so that it can work with such files
 by creating a list of tuples instead.  For example:
+
+修改 `parse_csv()` 文件以便可以处理这类文件，而不是通过创建元组列表。例如：
 
 ```python
 >>> prices = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
@@ -469,12 +434,16 @@ line of data isn’t interpreted as a header line.  Also, you’ll need to
 make sure you don’t create dictionaries as there are no longer any
 column names to use for keys.
 
-### Exercise 3.7: Picking a different column delimitier
+要想变更，需要修改代码以便数据的第一行不是数据行。另外，需要确保当没有用于键的列名时不要创建字典。
+
+### 练习 3.7：选择不同的列分隔符Picking a different column delimitier
 
 Although CSV files are pretty common, it’s also possible that you
 could encounter a file that uses a different column separator such as
 a tab or space.  For example, the file `Data/portfolio.dat` looks like
 this:
+
+尽管 CSV 文件非常常见，但您也有可能会遇到一个使用不同列分隔符（如 tab 或者 space）的文件。例如，`Data/portfolio.dat` 文件看起来像下面这样：
 
 ```csv
 name shares price
@@ -489,6 +458,8 @@ name shares price
 
 The `csv.reader()` function allows a different column delimiter to be given as follows:
 
+`csv.reader()` 函数允许像下面这样给定不同的分隔符：
+
 ```python
 rows = csv.reader(f, delimiter=' ')
 ```
@@ -496,7 +467,11 @@ rows = csv.reader(f, delimiter=' ')
 Modify your `parse_csv()` function so that it also allows the
 delimiter to be changed.
 
+修改 `parse_csv()` 函数以便允许修改分隔符。
+
 For example:
+
+例如：
 
 ```python
 >>> portfolio = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
@@ -505,7 +480,7 @@ For example:
 >>>
 ```
 
-### Commentary
+### 说明
 
 If you’ve made it this far, you’ve created a nice library function
 that’s genuinely useful.  You can use it to parse arbitrary CSV files,
@@ -513,4 +488,6 @@ select out columns of interest, perform type conversions, without
 having to worry too much about the inner workings of files or the
 `csv` module.
 
-[Contents](../Contents.md) \| [Previous (3.1 Scripting)](01_Script.md) \| [Next (3.3 Error Checking)](03_Error_checking.md)
+到目前为止，如果您已经完成，那么您创建了一个非常好的真的有用的库函数。您可以使用它去解析任意的 CSV 文件，选择感兴趣的列，执行类型转换，而不用对文件的内部工作或者 `csv` 模块有太多的担心。
+
+[目录](../Contents.md) \| [上一节 (3.1 脚本)](01_Script.md) \| [下一节 (3.3 错误检查)](03_Error_checking.md)
