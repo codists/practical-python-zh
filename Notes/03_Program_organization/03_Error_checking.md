@@ -1,15 +1,12 @@
-[Contents](../Contents.md) \| [Previous (3.2 More on Functions)](02_More_functions.md) \| [Next (3.4 Modules)](04_Modules.md)
+[目录](../Contents.md) \| [上一节 (3.2 深入函数)](02_More_functions.md) \| [下一节 (3.4 模块)](04_Modules.md)
 
-# 3.3 Error Checking
+# 3.3 错误检查
 
-Although exceptions were introduced earlier, this section fills in some additional
-details about error checking and exception handling.
+虽然前面已经介绍了异常，但本节补充一些有关错误检查和异常处理的其它细节。
 
-### How programs fail
+### 程序是如何运行失败的
 
-Python performs no checking or validation of function argument types
-or values.  A function will work on any data that is compatible with
-the statements in the function.
+Python 不对函数参数类型或值进行检查或者校验。函数可以处理与函数内部语句兼容的任何数据，
 
 ```python
 def add(x, y):
@@ -20,7 +17,7 @@ add('Hello', 'World')   # 'HelloWorld'
 add('3', '4')           # '34'
 ```
 
-If there are errors in a function, they appear at run time (as an exception).
+如果函数中有错误，它们将（作为异常）在运行时出现。
 
 ```python
 def add(x, y):
@@ -34,19 +31,20 @@ TypeError: unsupported operand type(s) for +:
 >>>
 ```
 
-To verify code, there is a strong emphasis on testing (covered later).
+为了验证代码，强烈建议进行测试（稍后介绍）。
 
-### Exceptions
+### 异常
 
-Exceptions are used to signal errors.
-To raise an exception yourself, use `raise` statement.
+异常用于发出错误信号。
+
+要自己触发异常，请使用 `raise` 语句。
 
 ```python
 if name not in authorized:
     raise RuntimeError(f'{name} not authorized')
 ```
 
-To catch an exception use `try-except`.
+要捕获异常，请使用 `try-except` 语句。
 
 ```python
 try:
@@ -55,9 +53,9 @@ except RuntimeError as e:
     print(e)
 ```
 
-### Exception Handling
+### 异常处理
 
-Exceptions propagate to the first matching `except`.
+异常传递到第一个匹配的 `except` 。
 
 ```python
 def grok():
@@ -82,8 +80,7 @@ def foo():
 foo()
 ```
 
-To handle the exception, put statements in the `except` block. You can add any
-statements you want to handle the error.
+要处理异常，请将语句放到 `except` 块里面。可以添加要处理该错误的任何语句。
 
 ```python
 def grok(): ...
@@ -100,8 +97,7 @@ def bar():
 bar()
 ```
 
-After handling, execution resumes with the first statement after the
-`try-except`.
+异常处理之后，从 `try-except` 之后的第一个语句继续执行。
 
 ```python
 def grok(): ...
@@ -121,12 +117,9 @@ def bar():
 bar()
 ```
 
-### Built-in Exceptions
+### 内置异常
 
-There are about two-dozen built-in exceptions.  Usually the name of
-the exception is indicative of what's wrong (e.g., a `ValueError` is
-raised because you supplied a bad value). This is not an
-exhaustive list. Check the [documentation](https://docs.python.org/3/library/exceptions.html) for more.
+有非常多的內建异常。通常，异常名称表明出了什么问题（例如，因为提供错误的值而触发 `ValueError`）。这不是一分详尽的清单，请访问 [文档](https://docs.python.org/3/library/exceptions.html) 以获取更多信息。
 
 ```python
 ArithmeticError
@@ -147,16 +140,15 @@ TypeError
 ValueError
 ```
 
-### Exception Values
+### 异常值
 
-Exceptions have an associated value. It contains more specific
-information about what's wrong.
+异常具有一个关联值。它包含有关错误的更明确的信息。
 
 ```python
 raise RuntimeError('Invalid user name')
 ```
 
-This value is part of the exception instance that's placed in the variable supplied to `except`.
+这个值是异常实例的一部分，它被放置在提供给 `except` 的变量中。
 
 ```python
 try:
@@ -165,17 +157,16 @@ except RuntimeError as e:   # `e` holds the exception raised
     ...
 ```
 
-`e` is an instance of the exception type. However, it often looks like a string when
-printed.
+`e` 是异常类型的一个实例。但是，当打印的时候，它通常看起来像一个字符串。
 
 ```python
 except RuntimeError as e:
     print('Failed : Reason', e)
 ```
 
-### Catching Multiple Errors
+### 捕获多个异常
 
-You can catch different kinds of exceptions using multiple `except` blocks.
+可以使用多个 `except` 块捕获不同类型的异常。
 
 ```python
 try:
@@ -190,7 +181,7 @@ except KeyboardInterrupt as e:
   ...
 ```
 
-Alternatively, if the statements to handle them is the same, you can group them:
+或者，如果处理不同异常的语句是相同的，则可以对它们进行分组。
 
 ```python
 try:
@@ -199,9 +190,9 @@ except (IOError,LookupError,RuntimeError) as e:
   ...
 ```
 
-### Catching All Errors
+### 捕获所有的异常
 
-To catch any exception, use `Exception` like this:
+要捕获所有的异常，请使用 `Exception` 。如下所示：
 
 ```python
 try:
@@ -210,12 +201,11 @@ except Exception:       # DANGER. See below
     print('An error occurred')
 ```
 
-In general, writing code like that is a bad idea because you'll have
-no idea why it failed.
+通常，像这样编写代码是个坏主意，因为这说明不知道程序为什么会失败。
 
-### Wrong Way to Catch Errors
+### 捕获异常的错误方式
 
-Here is the wrong way to use exceptions.
+这里是一个使用异常的错误方式。
 
 ```python
 try:
@@ -224,13 +214,11 @@ except Exception:
     print('Computer says no')
 ```
 
-This catches all possible errors and it may make it impossible to debug
-when the code is failing for some reason you didn't expect at all
-(e.g. uninstalled Python module, etc.).
+这将捕获所有可能的错误，并且，当代码因为某些根本没想到的原因（如卸载 Python 模块等）运行失败时，可能无法进行调试。
 
-### Somewhat Better Approach
+### 更好的方式
 
-If you're going to catch all errors, this is a more sane approach.
+如果想要捕获所有的错误，这有一个更明智的方法。
 
 ```python
 try:
@@ -239,17 +227,13 @@ except Exception as e:
     print('Computer says no. Reason :', e)
 ```
 
-It reports a specific reason for failure.  It is almost always a good
-idea to have some mechanism for viewing/reporting errors when you
-write code that catches all possible exceptions.
+它报告了失败的明确原因。当编写捕获所有可能异常的代码时，拥有查看/报告错误的机制几乎总是一个好主意。
 
-In general though, it's better to catch the error as narrowly as is
-reasonable. Only catch the errors you can actually handle. Let
-other errors pass by--maybe some other code can handle them.
+不过，通常来说，最好在合理的范围内尽量窄地捕获异常。仅捕获能处理的异常。让其它错误通过——也许其它代码可以处理。
 
-### Reraising an Exception
+### 重新触发异常
 
-Use `raise` to propagate a caught error.
+使用 `raise` 传递捕获的错误。
 
 ```python
 try:
@@ -259,20 +243,15 @@ except Exception as e:
     raise
 ```
 
-This allows you to take action (e.g. logging) and pass the error on to
-the caller.
+这允许您采取措施（例如:记录日志）并将错误传递给调用者。
 
-### Exception Best Practices
+### 异常最佳实践
 
-Don't catch exceptions. Fail fast and loud. If it's important, someone
-else will take care of the problem.  Only catch an exception if you
-are *that* someone.  That is, only catch errors where you can recover
-and sanely keep going.
+不要捕获异常，而是失败发生时“停止运行，发出预警”（Fail fast and loud）。如果重要的话，别人会处理的。只有您是那个人的时候才捕获异常。即，只捕获可以恢复并正常运行的错误。
 
-### `finally` statement
+### `finally` 语句
 
-It specifies code that must run regardless of whether or not an
-exception occurs.
+`finally` 语句指定无论是否发生异常都必须运行的代码。
 
 ```python
 lock = Lock()
@@ -284,11 +263,11 @@ finally:
     lock.release()  # this will ALWAYS be executed. With and without exception.
 ```
 
-Commonly used to safely manage resources (especially locks, files, etc.).
+通常使用 `finally` 语句安全地管理资源（尤其是锁，文件等）。
 
-### `with` statement
+### `with` 语句
 
-In modern code, `try-finally` is often replaced with the `with` statement.
+在现代代码中，`try-finally` 语句通常被 `with` 语句取代。
 
 ```python
 lock = Lock()
@@ -298,7 +277,7 @@ with lock:
 # lock released
 ```
 
-A more familiar example:
+一个更熟悉的例子：
 
 ```python
 with open(filename) as f:
@@ -307,20 +286,15 @@ with open(filename) as f:
 # File closed
 ```
 
-`with` defines a usage *context* for a resource.  When execution
-leaves that context, resources are released. `with` only works with
-certain objects that have been specifically programmed to support it.
+`with` 语句定义资源的使用*上下文*。当执行离开上下文时，资源被释放。`with` 语句仅适用于经过专门编程以支持它的某些对象。
 
-## Exercises
+## 练习
 
-### Exercise 3.8: Raising exceptions
+### 练习 3.8：触发异常
 
-The `parse_csv()` function you wrote in the last section allows
-user-specified columns to be selected, but that only works if the
-input data file has column headers.
+在上一节中编写的 `parse_csv()` 函数允许选择用户指定的列，但是只有输入数据文件具有列标题时才会生效。
 
-Modify the code so that an exception gets raised if both the `select`
-and `has_headers=False` arguments are passed.  For example:
+请修改代码，以便在同时传递 `select` 和 `has_headers=False` 参数时触发异常。例如：
 
 ```python
 >>> parse_csv('Data/prices.csv', select=['name','price'], has_headers=False)
@@ -332,28 +306,17 @@ RuntimeError: select argument requires column headers
 >>>
 ```
 
-Having added this one check, you might ask if you should be performing
-other kinds of sanity checks in the function.  For example, should you
-check that the filename is a string, that types is a list, or anything
-of that nature?
+添加此检查后，您可能会问是否应该在函数中执行其它类型的完整性检查。例如，检查文件名是字符串，列表还是其它类型？
 
-As a general rule, it’s usually best to skip such tests and to just
-let the program fail on bad inputs.  The traceback message will point
-at the source of the problem and can assist in debugging.
+一般来说，最好是跳过此类测试，输入错误的时候让程序运行失败。回溯信息会指出问题的根源，并且帮助调试。
 
-The main reason for adding the above check is to avoid running the code
-in a non-sensical mode (e.g., using a feature that requires column
-headers, but simultaneously specifying that there are no headers).
+添加上述检查的主要原因是为了避免在无意义的模式下运行代码（例如，使用要求列标题的特性，但是同时指定没有标题）。
 
-This indicates a programming error on the part of the calling code.
-Checking for cases that "aren't supposed to happen" is often a good idea.
+这表明调用代码部分出现一个编程错误。检查“不应发生”的情况通常是个好主意。
 
-### Exercise 3.9: Catching exceptions
+### 练习 3.9：捕获异常
 
-The `parse_csv()` function you wrote is used to process the entire
-contents of a file.  However, in the real-world, it’s possible that
-input files might have corrupted, missing, or dirty data.  Try this
-experiment:
+您编写的 `parse_csv()` 函数用于处理文件的全部内容。但是，在现实世界中，输入文件可能包含损坏的，丢失的或者脏数据。尝试下面这个实验：
 
 ```python
 >>> portfolio = parse_csv('Data/missing.csv', types=[str, int, float])
@@ -365,13 +328,9 @@ ValueError: invalid literal for int() with base 10: ''
 >>>
 ```
 
-Modify the `parse_csv()` function to catch all `ValueError` exceptions
-generated during record creation and print a warning message for rows
-that can’t be converted.
+请修改  `parse_csv()`  函数以便捕获所有在记录创建期间生成的 `ValueError` 异常，并为无法转换的行打印警告消息。
 
-The message should include the row number and information about the
-reason why it failed.  To test your function, try reading the file
-`Data/missing.csv` above.  For example:
+错误消息应该包括行号以及有关失败原因的信息。要测试函数，尝试读取上面的 `Data/missing.csv` 文件，例如：
 
 ```python
 >>> portfolio = parse_csv('Data/missing.csv', types=[str, int, float])
@@ -385,10 +344,9 @@ Row 7: Reason invalid literal for int() with base 10: ''
 >>>
 ```
 
-### Exercise 3.10: Silencing Errors
+### 练习 3.10：隐藏错误 
 
-Modify the `parse_csv()` function so that parsing error messages can
-be silenced if explicitly desired by the user.  For example:
+请修改 `parse_csv()`函数，以便用户明确需要时可以隐藏解析的错误消息，例如：
 
 ```python
 >>> portfolio = parse_csv('Data/missing.csv', types=[str,int,float], silence_errors=True)
@@ -397,9 +355,6 @@ be silenced if explicitly desired by the user.  For example:
 >>>
 ```
 
-Error handling is one of the most difficult things to get right in
-most programs.  As a general rule, you shouldn’t silently ignore
-errors.  Instead, it’s better to report problems and to give the user
-an option to the silence the error message if they choose to do so.
+在大部分的程序中，错误处理是最难做好的事情之一。一般来说，不应该默默地忽略错误。相反，最好是报告问题，并且让用户选择是否隐藏错误信息（如果它们选择这样做）。
 
-[Contents](../Contents.md) \| [Previous (3.2 More on Functions)](02_More_functions.md) \| [Next (3.4 Modules)](04_Modules.md)
+[目录](../Contents.md) \| [上一节 (3.2 深入函数)](02_More_functions.md) \| [下一节 (3.4 模块)](04_Modules.md)
