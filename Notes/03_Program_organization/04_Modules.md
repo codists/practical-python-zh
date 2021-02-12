@@ -1,13 +1,12 @@
-[Contents](../Contents.md) \| [Previous (3.3 Error Checking)](03_Error_checking.md) \| [Next (3.5 Main Module)](05_Main_module.md)
+[目录](../Contents.md) \| [上一节 (3.3 错误检查)](03_Error_checking.md) \| [下一节 (3.5 主模块)](05_Main_module.md)
 
-# 3.4 Modules
+# 3.4 模块
 
-This section introduces the concept of modules and working with functions that span
-multiple files.
+本节介绍模块的概念以及如何使用跨多个文件的函数。
 
-### Modules and import
+### 模块和导入
 
-Any Python source file is a module.
+任何一个 Python 源文件都是一个模块。
 
 ```python
 # foo.py
@@ -17,7 +16,7 @@ def spam(b):
     ...
 ```
 
-The `import` statement loads and *executes* a module.
+`import` 语句加载并执行一个模块。
 
 ```python
 # program.py
@@ -28,12 +27,9 @@ b = foo.spam('Hello')
 ...
 ```
 
-### Namespaces
+### 命名空间
 
-A module is a collection of named values and is sometimes said to be a
-*namespace*.  The names are all of the global variables and functions
-defined in the source file.  After importing, the module name is used
-as a prefix. Hence the *namespace*.
+模块是命名值的集合，有时也称为 *命名空间*。名称是源文件中定义的所有全局变量和函数。导入之后，模块名称用作前缀。因此，称为命名空间。
 
 ```python
 import foo
@@ -43,13 +39,11 @@ b = foo.spam('Hello')
 ...
 ```
 
-The module name is directly tied to the file name (foo -> foo.py).
+模块名直接绑定到文件名（foo -> foo.py）。
 
-### Global Definitions
+### 全局定义
 
-Everything defined in the *global* scope is what populates the module
-namespace. Consider two modules
-that define the same variable `x`.
+填充模块命名空间的内容是定义在*全局（global）*作用域中任何内容。考虑定义了相同变量 x 的两个模块。
 
 ```python
 # foo.py
@@ -65,15 +59,13 @@ def spam(a):
     ...
 ```
 
-In this case, the `x` definitions refer to different variables.  One
-is `foo.x` and the other is `bar.x`.  Different modules can use the
-same names and those names won't conflict with each other.
+在本例中，`x` 指向不同的变量。一个是 `foo.x`，另一个是 `bar.x`。不同的模块可以使用相同的名称并且这些名称不会相互冲突。
 
-**Modules are isolated.**
+**模块是隔离的。**
 
-### Modules as Environments
+### 把模块当做环境
 
-Modules form an enclosing environment for all of the code defined inside.
+对于所有定义在模块里面的代码而言，模块构成一个封闭的环境。
 
 ```python
 # foo.py
@@ -83,21 +75,15 @@ def grok(a):
     print(x)
 ```
 
-*Global* variables are always bound to the enclosing module (same file).
-Each source file is its own little universe.
+*全局*变量始终绑定到封闭模块（相同文件），每个源文件都是它自己的小宇宙。
 
-### Module Execution
+### 模块执行
 
-When a module is imported, *all of the statements in the module
-execute* one after another until the end of the file is reached.  The
-contents of the module namespace are all of the *global* names that
-are still defined at the end of the execution process.  If there are
-scripting statements that carry out tasks in the global scope
-(printing, creating files, etc.) you will see them run on import.
+导入模块时，模块中的所有语句依次*执行（execute）*，直到到达文件末尾。模块命名空间的内容是所有的*全局名称*，这些名称在执行过程结束时仍然被定义。如果有脚本语句在全局作用域中执行任务（如打印，创建文件等），您将看到它们在导入模块时运行。
 
-### `import as` statement
+### `import as` 语句
 
-You can change the name of a module as you import it:
+可以在导入模块时更改其名称：
 
 ```python
 import math as m
@@ -107,11 +93,11 @@ def rectangular(r, theta):
     return x, y
 ```
 
-It works the same as a normal import. It just renames the module in that one file.
+它的作用与普通导入相同，仅仅是重命名模块而已。
 
-### `from` module import
+### `from import`语句
 
-This picks selected symbols out of a module and makes them available locally.
+`from import`语句从模块中选出符号并使它们在局部可访问。
 
 ```python
 from math import sin, cos
@@ -122,12 +108,11 @@ def rectangular(r, theta):
     return x, y
 ```
 
-This allows parts of a module to be used without having to type the module prefix.
-It's useful for frequently used names.
+这允许使用模块的某些部分，而不必输入模块前缀。对于经常使用的名称，这非常有用。
 
-### Comments on importing
+### 导入说明
 
-Variations on import do *not* change the way that modules work.
+有关导入的各种变化不改变模块的工作方式。
 
 ```python
 import math
@@ -138,20 +123,15 @@ from math import cos, sin
 ...
 ```
 
-Specifically, `import` always executes the *entire* file and modules
-are still isolated environments.
+具体来说，`import` 始终执行整个文件并且模块仍然是隔离的环境。
 
-The `import module as` statement is only changing the name locally.
-The `from math import cos, sin` statement still loads the entire
-math module behind the scenes. It's merely copying the `cos` and `sin`
-names from the module into the local space after it's done.
+`import module as` 语句只局部地更改名称。在后台，`from math import cos, sin` 语句仍加载全部的数学模块。当导入完成后，它仅仅将模块中的 `cos` 和 `sin` 名称复制到局部命名空间中。
 
-### Module Loading
+### 模块加载
 
-Each module loads and executes only *once*.
-*Note: Repeated imports just return a reference to the previously loaded module.*
+每个模块仅加载和执行一次。*注意：重复导入仅返回先前所加载模块的引用*
 
-`sys.modules` is a dict of all loaded modules.
+`sys.modules`  是所有已加载模块的字典。
 
 ```python
 >>> import sys
@@ -160,15 +140,11 @@ Each module loads and executes only *once*.
 >>>
 ```
 
-**Caution:** A common confusion arises if you repeat an `import` statement after
-changing the source code for a module.  Because of the module cache `sys.modules`,
-repeated imports always return the previously loaded module--even if a change
-was made.  The safest way to load modified code into Python is to quit and restart
-the interpreter.
+**注意**：当修改模块的源代码后，如果重复`import`语句会产生一个常见的困惑。由于模块缓存 `sys.modules`，重复导入总是返回之前加载的模块——即使更改已经发生。将修改后的代码加载到 Python 中最安全的方式是退出然后重启解释器。
 
-### Locating Modules
+### 定位模块
 
-Python consults a path list (sys.path) when looking for modules.
+搜索模块时，Python 从路径列表（sys.path）中查询。
 
 ```python
 >>> import sys
@@ -181,19 +157,18 @@ Python consults a path list (sys.path) when looking for modules.
 ]
 ```
 
-The current working directory is usually first.
+当前工作目录通常是第一个。
 
-### Module Search Path
+### 模块搜索路径
 
-As noted, `sys.path` contains the search paths.
-You can manually adjust if you need to.
+如前所述，`sys.path` 包含搜索路径。可以根据需要手动调整 。
 
 ```python
 import sys
 sys.path.append('/project/foo/pyfiles')
 ```
 
-Paths can also be added via environment variables.
+也可以通过环境变量添加搜索路径。
 
 ```python
 % env PYTHONPATH=/project/foo/pyfiles python3
@@ -204,32 +179,19 @@ Python 3.6.0 (default, Feb 3 2017, 05:53:21)
 ['','/project/foo/pyfiles', ...]
 ```
 
-As a general rule, it should not be necessary to manually adjust
-the module search path.  However, it sometimes arises if you're
-trying to import Python code that's in an unusual location or
-not readily accessible from the current working directory.
+在大部分情况下，没必要手动调整模块搜索路径。但是，如果尝试导入的 Python 代码位于特殊位置，或者无法从当前工作目录轻松访问，那么就需要手动调整搜索路径了。
 
-## Exercises
+## 练习
 
-For this exercise involving modules, it is critically important to
-make sure you are running Python in a proper environment.  Modules 
-often present new programmers with problems related to the current working
-directory or with Python's path settings.  For this course, it is
-assumed that you're writing all of your code in the `Work/` directory.
-For best results, you should make sure you're also in that directory
-when you launch the interpreter.  If not, you need to make sure
-`practical-python/Work` is added to `sys.path`.
+因为本练习涉及模块，所以确保在适当的环境中运行 Python 至关重要。模块经常给编程新手带来问题，这些问题与当前工作目录相关或者与 Python 路径设置相关。对于本课程，假定您是在 `Work/` 目录下编写所有的代码。为了获得最佳结果，应该确保也是在 `Work/`  目录下运行解释器。否则，需要确保 `practical-python/Work` 已添加到 `sys.path`。
 
-### Exercise 3.11: Module imports
+### 练习 3.11：模块导入
 
-In section 3, we created a general purpose function `parse_csv()` for
-parsing the contents of CSV datafiles.
+在第 3 节中，我们创建了一个通用目标函数 `parse_csv()` 用于解析 CSV 数据文件的内容。
 
-Now, we’re going to see how to use that function in other programs.
-First, start in a new shell window.  Navigate to the folder where you
-have all your files. We are going to import them.
+现在，我们来看看如何在其它程序中使用该函数。首先，启动一个新的 shell 窗口，进入到放置所有文件的目录中。我们将要导入它们。
 
-Start Python interactive mode.
+启动 Python 交互模式。
 
 ```shell
 bash % python3
@@ -239,9 +201,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-Once you’ve done that, try importing some of the programs you
-previously wrote.  You should see their output exactly as before.
-Just to emphasize, importing a module runs its code.
+当Python 交互模式启动后，尝试导入某些之前编写的程序。应该能看到输出和以前一样。强调一下，导入模块会运行模块中的代码。
 
 ```python
 >>> import bounce
@@ -253,8 +213,7 @@ Just to emphasize, importing a module runs its code.
 >>>
 ```
 
-If none of this works, you’re probably running Python in the wrong directory.
-Now, try importing your `fileparse` module and getting some help on it.
+如果没有代码运行，可能是因为在错误的目录下运行了 Python。现在，尝试导入 `fileparse` 模块并获取有关该模块的帮助。
 
 ```python
 >>> import fileparse
@@ -265,7 +224,7 @@ Now, try importing your `fileparse` module and getting some help on it.
 >>>
 ```
 
-Try using the module to read some data:
+尝试使用 `fileparse` 模块来读取一些数据：
 
 ```python
 >>> portfolio = fileparse.parse_csv('Data/portfolio.csv',select=['name','shares','price'], types=[str,int,float])
@@ -282,7 +241,7 @@ Try using the module to read some data:
 >>>
 ```
 
-Try importing a function so that you don’t need to include the module name:
+尝试导入一个函数，以便不用再包含模块名：
 
 ```python
 >>> from fileparse import parse_csv
@@ -292,9 +251,9 @@ Try importing a function so that you don’t need to include the module name:
 >>>
 ```
 
-### Exercise 3.12: Using your library module
+### 练习 3.12：使用库模块
 
-In section 2, you wrote a program `report.py` that produced a stock report like this:
+在第 2 节中，编写了 `report.py` 程序用来生成像下面这样的股票报告：
 
 ```
       Name     Shares      Price     Change
@@ -308,17 +267,13 @@ In section 2, you wrote a program `report.py` that produced a stock report like 
        IBM        100     106.28      35.84
 ```
 
-Take that program and modify it so that all of the input file
-processing is done using functions in your `fileparse` module.  To do
-that, import `fileparse` as a module and change the `read_portfolio()`
-and `read_prices()` functions to use the `parse_csv()` function.
+使用该程序并对其进行修改，以便使用 `fileparse` 模块中的函数完成所有输入文件的处理。为此，将 `fileparse` 作为模块导入，并修改  `read_portfolio()` 和 `read_prices()` 函数以便使用 `parse_csv()` 函数。
 
-Use the interactive example at the start of this exercise as a guide.
-Afterwards, you should get exactly the same output as before.
+在本练习开始时，请使用交互示例作为指南。之后，应该能够获得与之前完全相同的输出。
 
-### Exercise 3.14: Using more library imports
+### 练习 3.14：使用更多的的库导入
 
-In section 1, you wrote a program `pcost.py` that read a portfolio and computed its cost.
+在第 1 节中，编写了一个读取股票投资组合和计算费用的程序 `pcost.py`。
 
 ```python
 >>> import pcost
@@ -327,15 +282,10 @@ In section 1, you wrote a program `pcost.py` that read a portfolio and computed 
 >>>
 ```
 
-Modify the `pcost.py` file so that it uses the `report.read_portfolio()` function.
+请修改 `pcost.py` 文件，以便它能够使用 `report.read_portfolio()` 函数。
 
-### Commentary
+### 说明
 
-When you are done with this exercise, you should have three
-programs. `fileparse.py` which contains a general purpose
-`parse_csv()` function.  `report.py` which produces a nice report, but
-also contains `read_portfolio()` and `read_prices()` functions.  And
-finally, `pcost.py` which computes the portfolio cost, but makes use
-of the `read_portfolio()` function written for the `report.py` program.
+当完成练习后，您应该拥有三个程序。包含通用目的函数 `parse_csv()` 的`fileparse.py` 程序。用于生成报告，且包含`read_portfolio()` 和 `read_prices()` 函数的 `report.py` 程序。最后，利用 `report.py` 程序中编写的`read_portfolio()` 函数去计算股票投资组合费用的`pcost.py` 程序，
 
-[Contents](../Contents.md) \| [Previous (3.3 Error Checking)](03_Error_checking.md) \| [Next (3.5 Main Module)](05_Main_module.md)
+[目录](../Contents.md) \| [上一节 (3.3 错误检查)](03_Error_checking.md) \| [下一节 (3.5 主模块)](05_Main_module.md)
