@@ -1,4 +1,4 @@
-[目录](../目录.md) \| [上一节 (1.1 Python)](01_Python.md) \| [下一节 (1.3 数字)](03_数字.md)
+[目录](../Contents.md) \| [上一节 (1.1 Python)](01_Python.md) \| [下一节 (1.3 数字)](03_Numbers.md)
 
 # 1.2 第一个程序
 
@@ -18,7 +18,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-老练的程序员以这种方式使用解释器时通常都没有问题，但对于初学者来说，这种方式并不是那么友好。您可能会使用一个为 Python 提供不同接口的环境，但是学习学会如何运行 Python  终端仍然是一项有必要了解的技能。
+老练的程序员以这种方式使用解释器时通常都没有问题，但对于初学者来说，这种方式并不是那么友好。您可能会使用一个为 Python 提供不同接口的环境，但是学会如何运行 Python  终端仍然是一项有必要了解的技能。
 
 ### 交互模式
 
@@ -440,4 +440,4 @@ NameError: name 'days' is not defined
 * 解决错误。
 * 成功运行程序。Run the program successfully
 
-[目录](../目录.md) \| [上一节 (1.1 Python)](01_Python.md) \| [下一节 (1.3 数字)](03_数字.md)
+[目录](../Contents.md) \| [上一节 (1.1 Python)](01_Python.md) \| [下一节 (1.3 数字)](03_Numbers.md)

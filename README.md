@@ -8,7 +8,7 @@
 
 ## 这是什么?
 
-您在这里看到的这份材料是以讲师为主导的 Python 培训课程的核心内容。该课程用于企业培训和职业发展。自 2007 年以来，这门课程一直在不断地完善，并且在现实课堂中经受了实战的检验。一般来说，这门课程在3至4天内被面授给学习者——大约需要25至35个小时的高强度学习。这包括完成大约 130 道动手编程练习。
+你在这里看到的这份材料是以讲师为主导的 Python 培训课程的核心内容。该课程用于企业培训和职业发展。自 2007 年以来，这门课程一直在不断地完善，并且在现实课堂中经受了实战的检验。一般来说，这门课程在3至4天内被面授给学习者——大约需要25至35个小时的高强度学习。这包括完成大约 130 道动手编程练习。
 
 ## 课程受众
 
@@ -24,11 +24,11 @@
 
 ## 本课程不包含的内容
 
-这不是一门为计算机编程初学者开设的课程。本课程假设您已经有 Python 语言或者其它语言的编程经验。
+这不是一门为计算机编程初学者开设的课程。本课程假设你已经有 Python 语言或者其它语言的编程经验。
 
-这不是一门关于 web 开发的课程。那是另一个“马戏团”，然而，如果您留在这个“马戏团”，您仍会看到一些有趣的表演——只是没有动物。（译者注：原文这里使用的是 circus，可以理解为：本课程不涉及 web 开发， web 开发是另一个主题，但是如果您仍留下来学习本课程，您也会有所收获。）
+这不是一门关于 web 开发的课程。那是另一个“马戏团”，然而，如果你留在这个“马戏团”，你仍会看到一些有趣的表演——只是没有动物。（译者注：原文这里使用的是 circus，可以理解为：本课程不涉及 web 开发， web 开发是另一个主题，但是如果你仍留下来学习本课程，你也会有所收获。）
 
-这不是一门为软件工程师开设的关于如何编写和维护一个百万行 Python 应用程序的课程。我不写那样的程序，大多数使用 Python 的公司也不这样做，同样，您也不需要。这样的内容已经删除了。
+这不是一门为软件工程师开设的关于如何编写和维护一个百万行 Python 应用程序的课程。我不写那样的程序，大多数使用 Python 的公司也不这样做，同样，你也不需要。这样的内容已经删除了。
 
 ## 马上带我访问课程
 
@@ -36,11 +36,11 @@
 
 ## 社区讨论
 
-想要讨论课程吗？您可以在 [Gitter](https://gitter.im/dabeaz-course/practical-python) 上加入会话。我不一定能够回复每个人，但其他人也许可以帮上忙。
+想要讨论课程吗？你可以在 [Gitter](https://gitter.im/dabeaz-course/practical-python) 上加入会话。我不一定能够回复每个人，但其他人也许可以帮上忙。
 
 ## 致谢
 
-Llorenç Muntaner 在将课程内容从 Apple Keynote 转换为您在这里看到的在线版本方面发挥了重要作用。
+Llorenç Muntaner 在将课程内容从 Apple Keynote 转换为你在这里看到的在线版本方面发挥了重要作用。
 
 在过去的 12 年里，不同的讲师曾在不同的时间讲过这门课程。这其中包括（按字母顺序）：Ned
 Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymond Hettinger, Daniel Klein, Travis Oliphant, James Powell, Michael Selik, Hugo Shi, Ian Stokes-Rees, Yarko Tymciurak,Bryan Van de ven, Peter Wang, and Mark Wiebe。
@@ -51,7 +51,7 @@ Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymon
 
 ### 问题：有课程视频可以观看吗？
 
-没有，这门课程是让您写代码的，而不是看别人写代码。
+没有，这门课程是让你写代码的，而不是看别人写代码。
 
 ### 问题: 这门课程是如何授权的?
 
@@ -71,15 +71,15 @@ Batchelder, Juan Pablo Claude, Mark Fenner, Michael Foord, Matt Harrison, Raymon
 
 ### 问题: 我可以直播课程或者制作视频吗?
 
-可以，去做吧。如果您这样做，您将会学到很多 Python 知识。
+可以，去做吧。如果你这样做，你将会学到很多 Python 知识。
 
 ### 问题: 为什么没有包含某个内容?
 
 在 3 -4 天的时间里，只能安排这么多内容了。如果没有讲某个内容，很可能是因为曾经讲了这个内容，但是大家头都炸了，或者一开始就没有足够到时间去讲。另外，这是一门课程，而不是 Python 参考手册。
 
-### 问题: 您接受 pull 请求吗?
+### 问题: 你接受拉取请求（pull requests）吗?
 
-如果您能为本课程报告 Bug，我们将不胜感激，可以通过 [issue tracker](https://github.com/dabeaz-course/practical-python/issues) 进行提交。
+如果你能为本课程报告 Bug，我们将不胜感激，可以通过 [issue tracker](https://github.com/dabeaz-course/practical-python/issues) 进行提交。
 
 除非是被邀请，否则不接受拉取请求，请先提交 issue。
 
