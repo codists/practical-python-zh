@@ -424,7 +424,7 @@ print('Number of bills', num_bills)
 print('Final height', num_bills * bill_thickness)
 ```
 
-将上面显示的代码复制并粘贴到一个名为 `sears.py`的新程序中。当执行 `sears.py` 里的代码时，将会收到一条显示程序为什么奔溃的错误信息。错误信息如下所示：
+将上面显示的代码复制并粘贴到一个名为 `sears.py`的新程序中。当执行 `sears.py` 里的代码时，将会收到一条显示程序为什么崩溃的错误信息。错误信息如下所示：
 
 ```code
 Traceback (most recent call last):
@@ -433,7 +433,7 @@ Traceback (most recent call last):
 NameError: name 'days' is not defined
 ```
 
-读取错误信息是 Python 代码的重要组成部分。如果程序奔溃，则回溯消息的最后一行是程序为什么奔溃的实际原因。在此（`NameError: name 'days' is not defined`）之上，你应该可以看到源代码片段（ `day = days + 1`）、可识别的文件名（ `sears.py`）和错误代码的行号（ `line 10`）。
+读取错误信息是 Python 代码的重要组成部分。如果程序崩溃，则回溯消息的最后一行是程序为什么崩溃的实际原因。在此（`NameError: name 'days' is not defined`）之上，你应该可以看到源代码片段（ `day = days + 1`）、可识别的文件名（ `sears.py`）和错误代码的行号（ `line 10`）。
 
 * 哪行是错误的？
 * 错误是什么？
