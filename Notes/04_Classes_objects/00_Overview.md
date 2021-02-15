@@ -1,18 +1,12 @@
-[Contents](../Contents.md) \| [Prev (3 Program Organization)](../03_Program_organization/00_Overview.md) \| [Next (5 Inner Workings of Python Objects)](../05_Object_model/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (3 程序组织)](../03_Program_organization/00_Overview.md) \| [下一节 (5 Python对象的内部工作机制)](../05_Object_model/00_Overview.md)
 
-# 4. Classes and Objects
+# 4. 类和对象
 
-So far, our programs have only used built-in Python datatypes.  In
-this section, we introduce the concept of classes and objects.  You'll
-learn about the `class` statement that allows you to make new objects.
-We'll also introduce the concept of inheritance, a tool that is commonly
-use to build extensible programs.  Finally, we'll look at a few other
-features of classes including special methods, dynamic attribute lookup,
-and defining new exceptions.
+到目前为止，我们的程序仅使用了内置的 Python 数据类型。本节，我们介绍类（class）和对象（object）的概念。你将学习 `class` 语句，该语句允许你创建新的对象。我们还将介绍继承（inheritance）的概念，继承通常用于构建可扩展的程序。最后，我们将研究类的一些其它特性，包括特殊方法，动态属性查找以及自定义异常。
 
-* [4.1 Introducing Classes](01_Class.md)
-* [4.2 Inheritance](02_Inheritance.md)
-* [4.3 Special Methods](03_Special_methods.md)
-* [4.4 Defining new Exception](04_Defining_exceptions.md)
+* [4.1 类简介](01_Class.md)
+* [4.2 继承](02_Inheritance.md)
+* [4.3 特殊方法](03_Special_methods.md)
+* [4.4 自定义异常](04_Defining_exceptions.md)
 
-[Contents](../Contents.md) \| [Prev (3 Program Organization)](../03_Program_organization/00_Overview.md) \| [Next (5 Inner Workings of Python Objects)](../05_Object_model/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (3 程序组织)](../03_Program_organization/00_Overview.md) \| [下一节 (5 Python对象的内部工作机制)](../05_Object_model/00_Overview.md)

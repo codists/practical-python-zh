@@ -166,7 +166,7 @@ b = float(x)  # Convert x to float
 
 ## 习题
 
-提醒：这些习题假定你正在 [`practical-python/Work`](../../Work) 目录中操作，具体在 [`mortgage.py`](../../Work/mortgage.py)文件。
+提醒：这些习题假定你正在 [`practical-python/Work`](../../Work) 目录中操作，具体在 [`mortgage.py`](../../Work/mortgage.py) 文件。
 
 ### 习题 1.7：戴夫的抵押贷款
 
@@ -201,7 +201,7 @@ print('Total paid', total_paid)
 
 ### 习题 1.9：制作一个额外的付款计算器
 
-修改程序，以便可以更一般的处理额外的付款信息。做到这一点，以便用户可以设置下面这些变量：
+修改程序，以便可以更一般地处理额外的付款信息。做到这一点，以便用户可以设置下面这些变量：
 
 ```python
 extra_payment_start_month = 61
