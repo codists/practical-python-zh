@@ -1,12 +1,12 @@
-[Contents](../Contents.md) \| [Previous (3.5 Main module)](05_Main_module.md) \| [Next (4 Classes)](../04_Classes_objects/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (3.5 主模块)](05_Main_module.md) \| [下一节 (4 类)](../04_Classes_objects/00_Overview.md)
 
-# 3.6 Design Discussion
+# 3.6 设计讨论
 
-In this section we reconsider a design decision made earlier.
+本节，我们重新考虑之前所做的设计决策。
 
-### Filenames versus Iterables
+### 文件名与可迭代对象
 
-Compare these two programs that return the same output.
+考虑以下两个返回相同输出的程序。
 
 ```python
 # Provide a filename
@@ -34,20 +34,16 @@ with open('file.csv') as f:
     d = read_data(f)
 ```
 
-* Which of these functions do you prefer? Why?
-* Which of these functions is more flexible?
+* 你更倾向于使用哪个函数？为什么？
+* 哪个函数更灵活？
 
-### Deep Idea: "Duck Typing"
+### 鸭子类型（Duck Typing）
 
-[Duck Typing](https://en.wikipedia.org/wiki/Duck_typing) is a computer
-programming concept to determine whether an object can be used for a
-particular purpose.  It is an application of the [duck
-test](https://en.wikipedia.org/wiki/Duck_test).
+在计算机程序设计中，[鸭子类型](https://en.wikipedia.org/wiki/Duck_typing) 用于确定一个对象是否可用于特定目的。这是 [鸭子测试](https://en.wikipedia.org/wiki/Duck_test) 的一种应用。
 
-> If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.
+> 如果它看起来像鸭子、游泳像鸭子、叫声像鸭子，那么它可能就是只鸭子。
 
-In the second version of `read_data()` above, the function expects any
-iterable object. Not just the lines of a file.
+上述第二个 `read_data()`  函数接受任何可迭代对象，而不仅是文件行。
 
 ```python
 def read_data(lines):
@@ -58,7 +54,7 @@ def read_data(lines):
     return records
 ```
 
-This means that we can use it with other *lines*.
+这意味这我们可以使用它处理其它的*行（lines）*。
 
 ```python
 # A CSV file
@@ -78,21 +74,19 @@ lines = ['ACME,50,91.1','IBM,75,123.45', ... ]
 data = read_data(lines)
 ```
 
-There is considerable flexibility with this design.
+这种设计具有很大的灵活性。
 
-*Question: Should we embrace or fight this flexibility?*
+*问题：我们应该拥抱还是反对这种灵活性？*
 
-### Library Design Best Practices
+### 库设计最佳实践
 
-Code libraries are often better served by embracing flexibility.
-Don't restrict your options.  With great flexibility comes great power.
+通常，拥抱灵活性可以更好的服务于代码库。不要限制你的选择，灵活性大，带来的威力也大。
 
-## Exercise
+## 练习
 
-### Exercise 3.17: From filenames to file-like objects
+### 练习 3.17：从文件名到类文件对象
 
-You've now created a file `fileparse.py` that contained a
-function `parse_csv()`.  The function worked like this:
+现在，你已经创建了一个包含 `parse_csv()` 函数的 `fileparse.py` 文件。`parse_csv()` 函数像下面这样工作：
 
 ```python
 >>> import fileparse
@@ -100,9 +94,7 @@ function `parse_csv()`.  The function worked like this:
 >>>
 ```
 
-Right now, the function expects to be passed a filename.  However, you
-can make the code more flexible.  Modify the function so that it works
-with any file-like/iterable object.  For example:
+虽然函数接受的是一个文件名，但是，你可以使代码更具灵活性。请求修改函数，以便它可以接受任何类文件或者可迭代对象。例如：
 
 ```
 >>> import fileparse
@@ -115,7 +107,7 @@ with any file-like/iterable object.  For example:
 >>>
 ```
 
-In this new code, what happens if you pass a filename as before?
+在新的代码中，如果像以前一样传递一个文件名会发生什么？
 
 ```
 >>> port = fileparse.parse_csv('Data/portfolio.csv', types=[str,int,float])
@@ -124,14 +116,10 @@ In this new code, what happens if you pass a filename as before?
 >>>
 ```
 
-Yes, you'll need to be careful.   Could you add a safety check to avoid this?
+正如上面代码显示的那样，这可能带来意想不到的结果，所以，修改的时候需要小心一些。你可以添加安全检查来避免这种情况吗？
 
-### Exercise 3.18: Fixing existing functions
+### 练习 3.18：修复（fix）现有函数
 
-Fix the `read_portfolio()` and `read_prices()` functions in the
-`report.py` file so that they work with the modified version of
-`parse_csv()`.  This should only involve a minor modification.
-Afterwards, your `report.py` and `pcost.py` programs should work
-the same way they always did.
+请修复 `report.py` 文件中的  `read_portfolio()` 和 `read_prices()` 函数。以便它们可以使用修改后的 `parse_csv()` 函数。这应该只涉及较小的修改。之后，`report.py` 和 `pcost.py` 程序应能够像以往一样工作。
 
-[Contents](../Contents.md) \| [Previous (3.5 Main module)](05_Main_module.md) \| [Next (4 Classes)](../04_Classes_objects/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (3.5 主模块)](05_Main_module.md) \| [下一节 (4 类)](../04_Classes_objects/00_Overview.md)
