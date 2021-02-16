@@ -1,22 +1,21 @@
-[Contents](../Contents.md) \| [Previous (3.6 Design discussion)](../03_Program_organization/06_Design_discussion.md) \| [Next (4.2 Inheritance)](02_Inheritance.md)
+[目录](../Contents.md) \| [上一节 (3.6 设计讨论)](../03_Program_organization/06_Design_discussion.md) \| [下一节 (4.2 继承)](02_Inheritance.md)
 
-# 4.1 Classes
+# 4.1 类
 
-This section introduces the class statement and the idea of creating new objects.
+本节介绍 class 语句以及创建新对象的方式。
 
-### Object Oriented (OO) programming
+### 面向对象编程（OOP）
 
-A Programming technique where code is organized as a collection of
-*objects*.
+面向对象编程是一种将代码组织成对象集合的编程技术。
 
-An *object* consists of:
+一个对象包括：
 
-* Data. Attributes
-* Behavior. Methods which are functions applied to the object.
+* 数据。属性
+* 行为。方法——应用于对象的函数。
 
-You have already been using some OO during this course.
+在本课程中，你已经使用了面向对象编程技术。
 
-For example, manipulating a list.
+例如，操作列表。
 
 ```python
 >>> nums = [1, 2, 3]
@@ -27,13 +26,13 @@ For example, manipulating a list.
 >>>
 ```
 
-`nums` is an *instance* of a list.
+`nums` 是列表的实例（*instance*）。
 
-Methods (`append()` and `insert()`) are attached to the instance (`nums`).
+方法（`append()` 和 `insert()`）被绑定到实例（`nums`）上。
 
-### The `class` statement
+### `class` 语句
 
-Use the `class` statement to define a new object.
+使用 `class` 语句定义一个新的对象。
 
 ```python
 class Player:
@@ -50,13 +49,13 @@ class Player:
         self.health -= pts
 ```
 
-In a nutshell, a class is a set of functions that carry out various operations on so-called *instances*.
+简而言之，类是一组函数，对所谓的 *实例（instance）* 执行各种操作。
 
-### Instances
+### 实例
 
-Instances are the actual *objects* that you manipulate in your program.
+实例是你在程序中操作的实际对象。
 
-They are created by calling the class as a function.
+通过像调用函数一样调用类来创建实例。
 
 ```python
 >>> a = Player(2, 3)
@@ -64,14 +63,13 @@ They are created by calling the class as a function.
 >>>
 ```
 
-`a` and `b` are instances of `Player`.
+`a` 和 `b` 都是 `Player` 类的实例。
 
-*Emphasize: The class statement is just the definition (it does
- nothing by itself). Similar to a function definition.*
+*强调：class 语句仅仅是一个定义（它本身不执行任何操作）。类似于函数定义。*
 
-### Instance Data
+### 实例数据
 
-Each instance has its own local data.
+每个实例都拥有自己的局部数据。
 
 ```python
 >>> a.x
@@ -80,7 +78,7 @@ Each instance has its own local data.
 10
 ```
 
-This data is initialized by the `__init__()`.
+数据通过 `_init__()` 方法进行初始化。
 
 ```python
 class Player:
@@ -91,11 +89,11 @@ class Player:
         self.health = 100
 ```
 
-There are no restrictions on the total number or type of attributes stored.
+对属性的总数或者类型没有限制。
 
-### Instance Methods
+### 实例方法
 
-Instance methods are functions applied to instances of an object.
+应用于对象实例的函数称为实例方法。
 
 ```python
 class Player:
@@ -106,7 +104,7 @@ class Player:
         self.y += dy
 ```
 
-The object itself is always passed as first argument.
+对象本身始终作为第一个参数传递。
 
 ```python
 >>> a.move(1, 2)
@@ -117,14 +115,11 @@ The object itself is always passed as first argument.
 def move(self, dx, dy):
 ```
 
-By convention, the instance is called `self`. However, the actual name
-used is unimportant. The object is always passed as the first
-argument. It is merely Python programming style to call this argument
-`self`.
+按照惯例，实例称为 `self`。但是，使用的实际名字不重要。对象始终作为第一个参数传递。将这个参数称为 `self` 只是 Python 的编程风格。
 
-### Class Scoping
+### 类作用域
 
-Classes do not define a scope of names.
+类未定义名称的作用域。
 
 ```python
 class Player:
@@ -138,27 +133,21 @@ class Player:
         self.move(-amt, 0)  # YES. Calls method `move` from above.
 ```
 
-If you want to operate on an instance, you always refer to it explicitly (e.g., `self`).
+如果想要对实例进行操作，那么你始终需要显式地引用它（如： `self`）。
 
-## Exercises
+## 练习
 
-Starting with this set of exercises, we start to make a series of
-changes to existing code from previous sections.  It is critical that
-you have a working version of Exercise 3.18 to start.  If you don't
-have that, please work from the solution code found in the
-`Solutions/3_18` directory.  It's fine to copy it.
+从本组练习开始，我们将对前面章节的现有代码进行一系列更改。从练习 3.18 版本的代码开始非常重要。如果你还没有这些代码，请到 `Solutions/3_18`  目录下查看，然后复制它。
 
-### Exercise 4.1: Objects as Data Structures
+### 练习 4.1：把对象当做数据结构
 
-In section 2 and 3, we worked with data represented as tuples and
-dictionaries.  For example, a holding of stock could be represented as
-a tuple like this:
+在第 2 和第 3 节中，我们使用了了以元组和字典表示的数据。例如，持有的股票可以用像下面这样的元组表示：
 
 ```python
 s = ('GOOG',100,490.10)
 ```
 
-or as a dictionary like this:
+或者使用像下面这样的字典表示：
 
 ```python
 s = { 'name'   : 'GOOG',
@@ -167,19 +156,14 @@ s = { 'name'   : 'GOOG',
 }
 ```
 
-You can even write functions for manipulating such data.  For example:
+你甚至可以编写用于操作此类数据的函数。例如：
 
 ```python
 def cost(s):
     return s['shares'] * s['price']
 ```
 
-However, as your program gets large, you might want to create a better
-sense of organization.  Thus, another approach for representing data
-would be to define a class.  Create a file called `stock.py` and
-define a class `Stock` that represents a single holding of stock.
-Have the instances of `Stock` have `name`, `shares`, and `price`
-attributes.  For example:
+但是，随着程序规模的不断扩大，你可能希望创建更好的代码组织意识（sense）。因此，可以定义一个类表示数据。请创建一个名为 `stock.py` 的文件，并定义一个名为 `Stock` 的类，用以表示持有的单支股票。`Stock`  类具有 `name`, `shares`，和 `price` 属性。示例：
 
 ```python
 >>> import stock
@@ -193,7 +177,7 @@ attributes.  For example:
 >>>
 ```
 
-Create a few more `Stock` objects and manipulate them.  For example:
+创建更多的  `Stock`  对象并对其进行操作。示例：
 
 ```python
 >>> b = stock.Stock('AAPL', 50, 122.34)
@@ -212,22 +196,13 @@ Create a few more `Stock` objects and manipulate them.  For example:
 >>>
 ```
 
-One thing to emphasize here is that the class `Stock` acts like a
-factory for creating instances of objects.  Basically, you call
-it as a function and it creates a new object for you.  Also, it must
-be emphasized that each object is distinct---they each have their
-own data that is separate from other objects that have been created.
+需要强调的一点是，在这里， `Stock` 类充当创建实例对象的工厂。基本上，你可以像调用函数一样调用类为你创建新对象。另外，必须强调的是，每一个对象都是不同的——它们拥有各自的数据，这些数据与以创建的其它对象是分开的。
 
-An object defined by a class is somewhat similar to a dictionary--just
-with somewhat different syntax.  For example, instead of writing
-`s['name']` or `s['price']`, you now write `s.name` and `s.price`.
+某种程度上，通过类定义的对象与字典类似——只是使用颇为不同的语法。例如，使用的是 `s.name` 和 `s.price`，而不是 `s['name']` 和 `s['price']`。
 
-### Exercise 4.2: Adding some Methods
+### 练习 4.2：添加方法
 
-With classes, you can attach functions to your objects.  These are
-known as methods and are functions that operate on the data
-stored inside an object.  Add a `cost()` and `sell()` method to your
-`Stock` object.  They should work like this:
+拥有对象后，你可以添加方法到对象上。众所皆知，方法就是对存储在对象内部的数据进行操作的函数。请给 `Stock` 对象添加 `cost()` 和 `sell()` 方法。它们应该像下面这样工作：
 
 ```python
 >>> import stock
@@ -244,10 +219,9 @@ stored inside an object.  Add a `cost()` and `sell()` method to your
 >>>
 ```
 
-### Exercise 4.3: Creating a list of instances
+### 练习 4.3：创建实例列表
 
-Try these steps to make a list of Stock instances from a list of
-dictionaries. Then compute the total cost:
+尝试执行以下步骤，从列表字典中创建  Stock 的实例列表。然后计算总费用：
 
 ```python
 >>> import fileparse
@@ -264,18 +238,13 @@ dictionaries. Then compute the total cost:
 >>>
 ```
 
-### Exercise 4.4: Using your class
+### 练习 4.4：使用类
 
-Modify the `read_portfolio()` function in the `report.py` program so
-that it reads a portfolio into a list of `Stock` instances as just
-shown in Exercise 4.3.  Once you have done that, fix all of the code
-in `report.py` and `pcost.py` so that it works with `Stock` instances
-instead of dictionaries.
+请修改  `report.py` 程序里面的 `read_portfolio()` 函数，以便如练习 4.3 所示那样，读取股票投资组合到 `Stock` 的实例列表里面。修改完后，修复（fix）`report.py` 和 `pcost.py` 里面所有的代码，以便使用 `Stock`  的实例进行工作，而不是使用字典。
 
-Hint: You should not have to make major changes to the code.  You will mainly
-be changing dictionary access such as `s['shares']` into `s.shares`.
+提示：你不必对代码进行大量更改，主要是将字典访问，如 `s['shares']` 更改为 `s.shares`。
 
-You should be able to run your functions the same as before:
+修改完后应该能够像之前一样运行函数：
 
 ```python
 >>> import pcost
@@ -295,4 +264,4 @@ You should be able to run your functions the same as before:
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (3.6 Design discussion)](../03_Program_organization/06_Design_discussion.md) \| [Next (4.2 Inheritance)](02_Inheritance.md)
+[目录](../Contents.md) \| [上一节 (3.6 设计讨论)](../03_Program_organization/06_Design_discussion.md) \| [下一节 (4.2 继承)](02_Inheritance.md)
