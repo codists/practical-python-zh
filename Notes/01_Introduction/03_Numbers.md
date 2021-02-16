@@ -40,28 +40,28 @@ if d == 0:
 ```python
 a = 37
 b = -299392993727716627377128481812241231
-c = 0x7fa8      # Hexadecimal
-d = 0o253       # Octal
-e = 0b10001111  # Binary
+c = 0x7fa8      # 十六进制（Hexadecimal）
+d = 0o253       # 八进制（Octal）
+e = 0b10001111  # 二进制（Binary）
 ```
 
 常用操作：
 
 ```
-x + y      Add
-x - y      Subtract
-x * y      Multiply
-x / y      Divide (produces a float)
-x // y     Floor Divide (produces an integer)
-x % y      Modulo (remainder)
-x ** y     Power
-x << n     Bit shift left
-x >> n     Bit shift right
-x & y      Bit-wise AND
-x | y      Bit-wise OR
-x ^ y      Bit-wise XOR
-~x         Bit-wise NOT
-abs(x)     Absolute value
+x + y      加（Add）
+x - y      减（Subtract）
+x * y      乘（Multiply）
+x / y      除（Divide，生成一个浮点数） 
+x // y     地板除（Floor Divide，生成一个整数）
+x % y      取模（Modulo，余数(remainder)） 
+x ** y     幂运算（Power）
+x << n     左移位（Bit shift left）
+x >> n     右移位（Bit shift right）
+x & y      按位与（Bit-wise AND）
+x | y      按位或（Bit-wise OR）
+x ^ y      按位异或（Bit-wise XOR）
+~x         取反（Bit-wise NOT）
+abs(x)     绝对值（Absolute value）
 ```
 
 ### 浮点型（float）
@@ -95,14 +95,14 @@ False
 常用操作：
 
 ```
-x + y      Add
-x - y      Subtract
-x * y      Multiply
-x / y      Divide
-x // y     Floor Divide
-x % y      Modulo
-x ** y     Power
-abs(x)     Absolute Value
+x + y      加（Add）
+x - y      减（Subtract）
+x * y      乘（Multiply）
+x / y      除（Divide）
+x // y     地板除（Floor Divide）
+x % y      取模（Modulo）
+x ** y     幂运算（Power）
+abs(x)     绝对值（Absolute Value）
 ```
 
 除了按位运算符之外，浮点数的运算符与整数的运算符是一样的。
@@ -123,12 +123,12 @@ e = math.log(x)
 下面的比较/关系运算符可以应用于数字：
 
 ```
-x < y      Less than
-x <= y     Less than or equal
-x > y      Greater than
-x >= y     Greater than or equal
-x == y     Equal to
-x != y     Not equal to
+x < y      小于（Less than）
+x <= y     小于等于（Less than or equal）
+x > y      大于（Greater than）
+x >= y     大于等于（Greater than or equal）
+x == y     等于（Equal to）
+x != y     不等于（Not equal to）
 ```
 
 可以使用 `and`， `or`，`not` 组成更复杂的布尔表达式。
