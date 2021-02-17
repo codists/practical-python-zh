@@ -1,13 +1,19 @@
-[Contents](../Contents.md) \| [Previous (4.1 Classes)](01_Class.md) \| [Next (4.3 Special methods)](03_Special_methods.md)
+[目录](../Contents.md) \| [上一节 (4.1 类)](01_Class.md) \| [下一节 (4.3 特殊方法)](03_Special_methods.md)
 
-# 4.2 Inheritance
+# 4.2 继承
 
 Inheritance is a commonly used tool for writing extensible programs.
 This section explores that idea.
 
-### Introduction
+继承（inheritance）是编写可扩展程序程序的常用工具。
+
+本节对继承的思想（idea）进行探讨。
+
+### Introduction简介
 
 Inheritance is used to specialize existing objects:
+
+继承用于将已有对象进行特殊化。
 
 ```python
 class Parent:
@@ -20,6 +26,8 @@ class Child(Parent):
 The new class `Child` is called a derived class or subclass.  The
 `Parent` class is known as base class or superclass.  `Parent` is
 specified in `()` after the class name, `class Child(Parent):`.
+
+新类 `Child` 称为派生类（derived class）或者子类（subclass）。
 
 ### Extending
 
@@ -624,4 +632,4 @@ on the topic of design patterns (although understanding what happened
 in this exercise will take you pretty far in terms of using objects in
 a practically useful way).
 
-[Contents](../Contents.md) \| [Previous (4.1 Classes)](01_Class.md) \| [Next (4.3 Special methods)](03_Special_methods.md)
+[目录](../Contents.md) \| [上一节 (4.1 类)](01_Class.md) \| [下一节 (4.3 特殊方法)](03_Special_methods.md)
