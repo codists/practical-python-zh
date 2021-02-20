@@ -1,4 +1,4 @@
-[目录](../Contents.md) \| [上一节 (1.6 文件)](../01_Introduction/06_Files.md) \| [下一节 (2.2 容器)](02_Containers.md)
+[目录](../Contents.md) \| [上一节 (1.7 函数)](../01_Introduction/07_Functions.md) \| [下一节 (2.2 容器)](02_Containers.md)
 
 # 2.1 数据类型和数据结构
 
@@ -409,4 +409,4 @@ dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 20
 >>>
 ```
 
-[目录](../Contents.md) \| [上一节 (1.6 文件)](../01_Introduction/06_Files.md) \| [下一节 (2.2 容器)](02_Containers.md)
+[目录](../Contents.md) \| [上一节 (1.7 函数)](../01_Introduction/07_Functions.md) \| [下一节 (2.2 容器)](02_Containers.md)
