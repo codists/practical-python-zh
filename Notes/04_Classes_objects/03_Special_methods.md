@@ -1,16 +1,12 @@
-[Contents](../Contents.md) \| [Previous (4.2 Inheritance)](02_Inheritance.md) \| [Next (4.4 Exceptions)](04_Defining_exceptions.md)
+[目录](../Contents.md) \| [上一节 (4.2 继承)](02_Inheritance.md) \| [下一节 (4.4 异常)](04_Defining_exceptions.md)
 
-# 4.3 Special Methods
+# 4.3 特殊方法
 
-Various parts of Python's behavior can be customized via special or so-called "magic" methods.
-This section introduces that idea.  In addition dynamic attribute access and bound methods
-are discussed.
+可以通过特殊方法（或者称为"魔术"方法（magic method））自定义 Python 行为的各部分。本节介绍特殊方法的思想。此外，还将讨论动态属性访问和绑定方法。
 
-### Introduction
+### 简介
 
-Classes may define special methods. These have special meaning to the
-Python interpreter.  They are always preceded and followed by
-`__`. For example `__init__`.
+类可以定义特殊方法。特殊方法对于 Python 解释器而言具有特殊的意义。特殊方法总是以双下划线  `__`  开头和结尾，例如 `__init__`。
 
 ```python
 class Stock(object):
@@ -20,11 +16,11 @@ class Stock(object):
         ...
 ```
 
-There are dozens of special methods, but we will only look at a few specific examples.
+虽然有很多特殊方法，但是我们只研究几个具体的例子。
 
-### Special methods for String Conversions
+### 字符串转换的特殊方法
 
-Objects have two string representations.
+对象有两种字符串表示形式。
 
 ```python
 >>> from datetime import date
@@ -36,7 +32,7 @@ datetime.date(2012, 12, 21)
 >>>
 ```
 
-The `str()` function is used to create a nice printable output:
+`str()` 函数用于创建格式良好的、可打印的输出：
 
 ```python
 >>> str(d)
@@ -44,8 +40,7 @@ The `str()` function is used to create a nice printable output:
 >>>
 ```
 
-The `repr()` function is used to create a more detailed representation
-for programmers.
+`repr()` 函数用于创建详细的、面向程序员的输出。
 
 ```python
 >>> repr(d)
@@ -53,8 +48,7 @@ for programmers.
 >>>
 ```
 
-Those functions, `str()` and `repr()`, use a pair of special methods
-in the class to produce the string to be displayed.
+`str()` 和 `repr()` 函数都是使用类中定义的特殊方法生成要显示的字符串。
 
 ```python
 class Date(object):
@@ -72,14 +66,11 @@ class Date(object):
         return f'Date({self.year},{self.month},{self.day})'
 ```
 
-*Note: The convention for `__repr__()` is to return a string that,
- when fed to `eval()`, will recreate the underlying object. If this
- is not possible, some kind of easily readable representation is used
- instead.*
+*注意：按照惯例，`__repr__()` 返回一个字符串，当该字符串被传递给 `eval()` 函数，将会重新创建底层对象（译注：`eval(repr(obj)) == obj`）。如果不行，则使用某种易于阅读的表现形式。* 
 
-### Special Methods for Mathematics
+### 数学操作的特殊方法
 
-Mathematical operators involve calls to the following methods.
+数学运算符涉及的特殊方法如下：
 
 ```python
 a + b       a.__add__(b)
@@ -99,9 +90,9 @@ a ** b      a.__pow__(b)
 abs(a)      a.__abs__()
 ```
 
-### Special Methods for Item Access
+### 元素访问的特殊方法
 
-These are the methods to implement containers.
+这些是实现容器的特殊方法：
 
 ```python
 len(x)      x.__len__()
@@ -110,7 +101,7 @@ x[a] = v    x.__setitem__(a,v)
 del x[a]    x.__delitem__(a)
 ```
 
-You can use them in your classes.
+你可以在类中使用这些特殊方法。
 
 ```python
 class Sequence:
@@ -124,12 +115,13 @@ class Sequence:
         ...
 ```
 
-### Method Invocation
+### 方法调用
 
-Invoking a method is a two-step process.
+调用方法有两个步骤。
 
-1. Lookup: The `.` operator
-2. Method call: The `()` operator
+​	1、查找：`.` 运算符
+
+​	2、方法调用： `()` 运算符
 
 ```python
 >>> s = Stock('GOOG',100,490.10)
@@ -141,10 +133,9 @@ Invoking a method is a two-step process.
 >>>
 ```
 
-### Bound Methods
+### 绑定方法
 
-A method that has not yet been invoked by the function call operator `()` is known as a *bound method*.
-It operates on the instance where it originated.
+尚未被函数调用运算符 `()`  调用的方法称为绑定方法（ 译注：bound method，如果直译应该译作“绑定的方法”，但是，就像“类方法”一样，可以省略“的”这个字，译为“绑定方法”，绑定在这里不是动词，而应理解为形容词“绑定的”）。它对自己生成的实例进行操作：
 
 ```python
 >>> s = Stock('GOOG', 100, 490.10)
@@ -158,7 +149,7 @@ It operates on the instance where it originated.
 >>>
 ```
 
-Bound methods are often a source of careless non-obvious errors. For example:
+如果使用绑定方法时有些大意，那么容易导致错误。示例：
 
 ```python
 >>> s = Stock('GOOG', 100, 490.10)
@@ -169,7 +160,7 @@ TypeError: float argument required
 >>>
 ```
 
-Or devious behavior that's hard to debug.
+或者：
 
 ```python
 f = open(filename, 'w')
@@ -177,12 +168,11 @@ f = open(filename, 'w')
 f.close     # Oops, Didn't do anything at all. `f` still open.
 ```
 
-In both of these cases, the error is cause by forgetting to include the
-trailing parentheses.  For example, `s.cost()` or `f.close()`.
+在这两种情形中，错误都是由忘记尾部括号引起的。例如：`s.cost()` or `f.close()`。
 
-### Attribute Access
+### 属性访问
 
-There is an alternative way to access, manipulate and manage attributes.
+还有一种访问、操作和管理属性的替代方法。
 
 ```python
 getattr(obj, 'name')          # Same as obj.name
@@ -191,7 +181,7 @@ delattr(obj, 'name')          # Same as del obj.name
 hasattr(obj, 'name')          # Tests if attribute exists
 ```
 
-Example:
+示例：
 
 ```python
 if hasattr(obj, 'x'):
@@ -200,19 +190,17 @@ else:
     x = None
 ```
 
-*Note: `getattr()` also has a useful default value *arg*.
+*注意： `getattr()` 函数的默认参数非常有用。*
 
 ```python
 x = getattr(obj, 'x', None)
 ```
 
-## Exercises
+## 练习
 
-### Exercise 4.9: Better output for printing objects
+### 练习 4.9：更好的输出
 
-Modify the `Stock` object that you defined in `stock.py`
-so that the `__repr__()` method produces more useful output.  For
-example:
+请修改 `stock.py` 文件中定义的  `Stock` 对象，以便 `__repr__()` 方法生成更有用的输出。示例：
 
 ```python
 >>> goog = Stock('GOOG', 100, 490.1)
@@ -221,8 +209,7 @@ Stock('GOOG', 100, 490.1)
 >>>
 ```
 
-See what happens when you read a portfolio of stocks and view the
-resulting list after you have made these changes.  For example:
+修改完成后，请查看读取股票投资组合时会发生什么，以及生成什么样的结果。示例：
 
 ```
 >>> import report
@@ -232,10 +219,9 @@ resulting list after you have made these changes.  For example:
 >>>
 ```
 
-### Exercise 4.10: An example of using getattr()
+### 练习 4.10：使用 getattr() 的例子
 
-`getattr()` is an alternative mechanism for reading attributes.  It can be used to
-write extremely flexible code.  To begin, try this example:
+`getattr()` 是读取属性的另一种机制。可以使用它编写极其灵活的代码。首先，请尝试以下示例：
 
 ```python
 >>> import stock
@@ -249,15 +235,9 @@ shares = 100
 >>>
 ```
 
-Carefully observe that the output data is determined entirely by the attribute
-names listed in the `columns` variable.
+仔细观察会发现输出数据完全由 `columns`  变量中列出的属性名决定。
 
-In the file `tableformat.py`, take this idea and expand it into a generalized
-function `print_table()` that prints a table showing
-user-specified attributes of a list of arbitrary objects.  As with the
-earlier `print_report()` function, `print_table()` should also accept
-a `TableFormatter` instance to control the output format.  Here's how
-it should work:
+在 `tableformat.py` 文件中，使用该思想将其扩展为通用函数  `print_table()`，`print_table()`打印一个表格，显示用户指定的任意对象的属性。与早期的 `print_report()` 函数一样，`print_table()` 方法还应接受一个 `TableFormatter` 实例来控制输出格式。它们的工作方式如下：
 
 ```python
 >>> import report
@@ -288,5 +268,5 @@ it should work:
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (4.2 Inheritance)](02_Inheritance.md) \| [Next (4.4 Exceptions)](04_Defining_exceptions.md)
+[目录](../Contents.md) \| [上一节 (4.2 继承)](02_Inheritance.md) \| [下一节 (4.4 异常)](04_Defining_exceptions.md)
 
