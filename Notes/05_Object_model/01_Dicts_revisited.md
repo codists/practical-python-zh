@@ -1,9 +1,11 @@
-[Contents](../Contents.md) \| [Previous (4.4 Exceptions)](../04_Classes_objects/04_Defining_exceptions.md) \| [Next (5.2 Encapsulation)](02_Classes_encapsulation.md)
+[目录](../Contents.md) \| [上一节 (4.4 异常)](../04_Classes_objects/04_Defining_exceptions.md) \| [下一节 (5.2 封装)](02_Classes_encapsulation.md)
 
-# 5.1 Dictionaries Revisited
+# 5.1 再探字典Dictionaries Revisited
 
 The Python object system is largely based on an implementation
 involving dictionaries.  This section discusses that.
+
+Python 对象系统很大程度上基于包含字典的实现。本节对此进行讨论。
 
 ### Dictionaries, Revisited
 
@@ -656,4 +658,4 @@ Here's how the `cost()` method of instance `n` above would be found:
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (4.4 Exceptions)](../04_Classes_objects/04_Defining_exceptions.md) \| [Next (5.2 Encapsulation)](02_Classes_encapsulation.md)
+[目录](../Contents.md) \| [上一节 (4.4 异常)](../04_Classes_objects/04_Defining_exceptions.md) \| [下一节 (5.2 封装)](02_Classes_encapsulation.md)
