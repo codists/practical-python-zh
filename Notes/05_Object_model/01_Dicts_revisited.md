@@ -5,11 +5,13 @@
 The Python object system is largely based on an implementation
 involving dictionaries.  This section discusses that.
 
-Python 对象系统很大程度上基于包含字典的实现。本节对此进行讨论。
+Python 对象系统很大程度上基于字典实现。本节对此进行讨论。
 
-### Dictionaries, Revisited
+### Dictionaries, Revisited字典
 
 Remember that a dictionary is a collection of named values.
+
+请记住，字典是命名值（named values）的集合。
 
 ```python
 stock = {
@@ -23,10 +25,14 @@ Dictionaries are commonly used for simple data structures.  However,
 they are used for critical parts of the interpreter and may be the
 *most important type of data in Python*.
 
-### Dicts and Modules
+虽然字典常用于简单的数据结构，但是字典对于解释器重要部分是非常有用的，并且是 Python 中最重要的数据类型。
+
+### Dicts and Modules字典和模块
 
 Within a module, a dictionary holds all of the global variables and
 functions.
+
+在模块内，字典存储所有的全局变量和函数。
 
 ```python
 # foo.py
@@ -41,6 +47,8 @@ def spam():
 
 If you inspect `foo.__dict__` or `globals()`, you'll see the dictionary.
 
+可以通过 `foo.__dict__` 或 `globals()`  查看该字典。
+
 ```python
 {
     'x' : 42,
@@ -49,13 +57,17 @@ If you inspect `foo.__dict__` or `globals()`, you'll see the dictionary.
 }
 ```
 
-### Dicts and Objects
+### Dicts and Objects字典和对象
 
 User defined objects also use dictionaries for both instance data and
 classes.  In fact, the entire object system is mostly an extra layer
 that's put on top of dictionaries.
 
+用户也可以使用字典定义对象，为实例数据（译注：属性）或者类。事实上，全部的对象系统几乎是字典顶层上的额外层。
+
 A dictionary holds the instance data, `__dict__`.
+
+字典存储实例数据，如 `__dict__`。
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -64,6 +76,8 @@ A dictionary holds the instance data, `__dict__`.
 ```
 
 You populate this dict (and instance) when assigning to `self`.
+
+当给 `self` 赋值的时候，你操作的是该字典与实例。
 
 ```python
 class Stock:
@@ -75,6 +89,8 @@ class Stock:
 
 The instance data, `self.__dict__`, looks like this:
 
+实例数据 `self.__dict__`  看起来像下面这样：
+
 ```python
 {
     'name': 'GOOG',
@@ -85,6 +101,8 @@ The instance data, `self.__dict__`, looks like this:
 
 **Each instance gets its own private dictionary.**
 
+**每一个实例都拥有自己的私有字典。**
+
 ```python
 s = Stock('GOOG', 100, 490.1)     # {'name' : 'GOOG','shares' : 100, 'price': 490.1 }
 t = Stock('AAPL', 50, 123.45)     # {'name' : 'AAPL','shares' : 50, 'price': 123.45 }
@@ -93,9 +111,13 @@ t = Stock('AAPL', 50, 123.45)     # {'name' : 'AAPL','shares' : 50, 'price': 123
 If you created 100 instances of some class, there are 100 dictionaries
 sitting around holding data.
 
-### Class Members
+如果你创建了某个类的 100 个实例，那么就会有 100 个存储数据的字典。
+
+### Class Members类成员
 
 A separate dictionary also holds the methods.
+
+一个单独的字典也存储方法：
 
 ```python
 class Stock:
@@ -113,6 +135,8 @@ class Stock:
 
 The dictionary is in `Stock.__dict__`.
 
+使用 `Stock.__dict__` 可以查看该字典：
+
 ```python
 {
     'cost': <function>,
@@ -121,10 +145,12 @@ The dictionary is in `Stock.__dict__`.
 }
 ```
 
-### Instances and Classes
+### Instances and Classes实例和类
 
 Instances and classes are linked together.  The `__class__` attribute
 refers back to the class.
+
+实例和类是连在一起的。`__class__` 属性指向类。
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -139,9 +165,13 @@ The instance dictionary holds data unique to each instance, whereas
 the class dictionary holds data collectively shared by *all*
 instances.
 
-### Attribute Access
+实例字典存储的数据对每个实例而言是唯一的。但是，类字典存储的数据被所有的实例共享。
+
+### Attribute Access属性访问
 
 When you work with objects, you access data and methods using the `.` operator.
+
+当使用对象的时候，使用 `.`  操作符访问数据和方法。
 
 ```python
 x = obj.name          # Getting
@@ -151,9 +181,13 @@ del obj.name          # Deleting
 
 These operations are directly tied to the dictionaries sitting underneath the covers.
 
-### Modifying Instances
+这些操作直接与字典绑定到一起。
+
+### Modifying Instances修改实例
 
 Operations that modify an object update the underlying dictionary.
+
+修改对象会更新底层的字典。
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -169,9 +203,11 @@ Operations that modify an object update the underlying dictionary.
 >>>
 ```
 
-### Reading Attributes
+### Reading Attributes读取属性
 
 Suppose you read an attribute on an instance.
+
+假设你读取一个实例的属性：
 
 ```python
 x = obj.name
@@ -179,11 +215,15 @@ x = obj.name
 
 The attribute may exist in two places:
 
-* Local instance dictionary.
-* Class dictionary.
+该属性可能位于两个地方：
+
+* 局部实例字典Local instance dictionary.
+* 类字典Class dictionary.
 
 Both dictionaries must be checked.  First, check in local `__dict__`.
 If not found, look in `__dict__` of class through `__class__`.
+
+两种字典都会被检查到。首先，检查局部的 `__dict__`。如果没有找到，通过 `__class__` 查找类的  `__dict__`。
 
 ```python
 >>> s = Stock(...)
@@ -196,9 +236,13 @@ If not found, look in `__dict__` of class through `__class__`.
 
 This lookup scheme is how the members of a *class* get shared by all instances.
 
-### How inheritance works
+类就是通过这样的查找模式，类成员被所有实例共享。
+
+### How inheritance works继承是如何工作的
 
 Classes may inherit from other classes.
+
+类可以继承自其它的类：
 
 ```python
 class A(B, C):
@@ -206,6 +250,8 @@ class A(B, C):
 ```
 
 The base classes are stored in a tuple in each class.
+
+在每个类中，基类存储在一个元组里面。
 
 ```python
 >>> A.__bases__
@@ -215,17 +261,23 @@ The base classes are stored in a tuple in each class.
 
 This provides a link to parent classes.
 
-### Reading Attributes with Inheritance
+这提供指向父类的链接。
+
+### Reading Attributes with Inheritance使用多继承读取属性
 
 Logically, the process of finding an attribute is as follows. First,
 check in local `__dict__`.  If not found, look in `__dict__` of the
 class.  If not found in class, look in the base classes through
 `__bases__`.   However, there are some subtle aspects of this discussed next.
 
-### Reading Attributes with Single Inheritance
+逻辑上，查找属性的过程如下所示：首先，检查局部的 `__dict__`。如果没有找到，检查类的 `__dict__`。如果在类中还是没有找到，通过 `__bases__` 在基类中查找。这里面有一些小细节，我们接下来再讨论。
+
+### Reading Attributes with Single Inheritance使用单继承读取属性
 
 In inheritance hierarchies, attributes are found by walking up the
 inheritance tree in order.
+
+在继承层级结构中，通过按顺序遍历继承树找到属性。
 
 ```python
 class A: pass
@@ -237,10 +289,14 @@ class E(D): pass
 With single inheritance, there is single path to the top.
 You stop with the first match.
 
-### Method Resolution Order or MRO
+在单继承中，因为到达上层父类只有一条路径，所以当第一个匹配的时候即可停止。
+
+### Method Resolution Order or MRO方法解析顺序（MRO）
 
 Python precomputes an inheritance chain and stores it in the *MRO* attribute on the class.
 You can view it.
+
+Python 预先计算继承链并将其存储到类的 *MRO* 属性中。你可以通过 __mro__ 属性查看：
 
 ```python
 >>> E.__mro__
@@ -253,10 +309,14 @@ You can view it.
 This chain is called the **Method Resolution Order**.  To find an
 attribute, Python walks the MRO in order. The first match wins.
 
-### MRO in Multiple Inheritance
+该继承链称为 **方法解析顺序（Method Resolution Order）**.要查找一个属性，Python 按顺序遍历 MRO，第一个找到既是（译注：关于MRO更多信息，可查看PEP 253）。
+
+### MRO in Multiple Inheritance多继承中的MRO
 
 With multiple inheritance, there is no single path to the top.
 Let's take a look at an example.
+
+使用多继承，到达上层父类的路径有很多条，请看示例：
 
 ```python
 class A: pass
@@ -268,6 +328,8 @@ class E(C, D): pass
 
 What happens when you access an attribute?
 
+当访问属性的时候会发生什么？
+
 ```python
 e = E()
 e.attr
@@ -275,14 +337,23 @@ e.attr
 
 An attribute search process is carried out, but what is the order? That's a problem.
 
+按照什么顺序执行属性查找？这是个问题。
+
 Python uses *cooperative multiple inheritance* which obeys some rules
 about class ordering.
+
+Python 采用*协作多重继承（cooperative multiple inheritance）*，协作多继承遵守的类排序规则如下：
+
+* 总是在检查父类之前检查子类
+* 父类（如果有多个）总是按照列出的顺序检查
 
 * Children are always checked before parents
 * Parents (if multiple) are always checked in the order listed.
 
 The MRO is computed by sorting all of the classes in a hierarchy
 according to those rules.
+
+根据该规则， 通过按层级结构对所有的类进行排序，然后计算出 MRO。
 
 ```python
 >>> E.__mro__
@@ -302,9 +373,13 @@ class hierarchy obeys the same ordering rules you might follow if your
 house was on fire and you had to evacuate--children first, followed by
 parents.
 
-### An Odd Code Reuse (Involving Multiple Inheritance)
+底层算法称为“C3线性化算法（C3 Linearization Algorithm）”，精确的细节不重要，只要记住类层级结构遵守的排序规则如下：如果你家房子着火了，你必须得先撤走孩子，然后才是父母。
+
+### An Odd Code Reuse (Involving Multiple Inheritance)奇怪的代码重用（涉及多继承）
 
 Consider two completely unrelated objects:
+
+考虑以下两个完全不相关的对象：
 
 ```python
 class Dog:

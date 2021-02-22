@@ -18,7 +18,7 @@
 
 ### 字符串格式化
 
-在 Python 3.6+ 中，格式化字符串的一种方法是使用 `f-strings`。
+在 Python 3.6+ 中，格式化字符串的一种方法是使用 `f-strings`：
 
 ```python
 >>> name = 'IBM'
@@ -31,7 +31,7 @@
 
 `{expression:format}` 部分会被取代。
 
-`f-strings` 通常和 `print()` 函数一起使用。
+`f-strings` 通常和 `print()` 函数一起使用：
 
 ```python
 print(f'{name:>10s} {shares:>10d} {price:>10.2f}')
@@ -63,7 +63,7 @@ c       Character (from integer)
 
 ### 字典格式化
 
-可以使用字符串的 `format_map()` 方法将字符串格式化应用于值的字典。
+可以使用字符串的 `format_map()` 方法将字符串格式化应用于值的字典：
 
 ```python
 >>> s = {
@@ -80,7 +80,7 @@ c       Character (from integer)
 
 ### format()方法 
 
-有一个 `format()` 方法可以将格式化应用于参数或者关键字参数。
+有一个 `format()` 方法可以将格式化应用于参数或者关键字参数：
 
 ```python
 >>> '{name:>10s} {shares:10d} {price:10.2f}'.format(name='IBM', shares=100, price=91.1)
@@ -94,7 +94,7 @@ c       Character (from integer)
 
 ### C 风格的格式化
 
-也可以使用格式化操作符 `%` 。
+也可以使用格式化操作符 `%` ：
 
 ```python
 >>> 'The value is %d' % 3
