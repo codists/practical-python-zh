@@ -28,7 +28,7 @@ len(b)                    # 3
 len(c)                    # 3
 ```
 
-序列可以通过重复操作符（*）进行重复：`s * n` 。
+序列可以通过重复操作符 * 进行重复：`s * n` 。
 
 ```python
 >>> a = 'Hello'
@@ -40,7 +40,7 @@ len(c)                    # 3
 >>>
 ```
 
-相同类型的序列可以通过加号（+）进行拼接：`s + t`。
+相同类型的序列可以通过加号 + 进行拼接：`s + t`。
 
 ```python
 >>> a = (1, 2, 3)
@@ -109,7 +109,7 @@ del a[2:4]                # [0,1,4,5,6,7,8]
 
 ### 迭代序列
 
-可以使用for 循环对序列中的元素进行迭代。
+可以使用 for 循环对序列中的元素进行迭代。
 
 ```python
 >>> s = [1, 4, 9, 16]
@@ -185,11 +185,11 @@ for k in range(10,50,2):
 * 不包括结尾值。这与切片类似。
 * `start` 是可选的 ， 默认值是 `0`。
 * `step` 是可选的，默认值是 `1`。
-* 当需要的值时候`range()`才计算值，实际上，它不存储大范围的数。
+* 当需要的值时候 `range()`才计算值，实际上，它不存储大范围的数。
 
 ### enumerate() 函数
 
-`enumerate`函数为迭代添加一个额外的计数值。
+`enumerate` 函数为迭代添加一个额外的计数值。
 
 ```python
 names = ['Elwood', 'Jake', 'Curtis']
@@ -216,7 +216,7 @@ for x in s:
     i += 1
 ```
 
-使用`enumerate`函数可以减少输入，运行速度也稍快一些。
+使用 `enumerate` 函数可以减少输入，运行速度也稍快一些。
 
 ### For 与元组
 
@@ -253,7 +253,7 @@ for column, value in pairs:
     ...
 ```
 
-`zip`函数的常见用法是创建用于构造字典的键值对。
+`zip` 函数的常见用法是创建用于构造字典的键值对。
 
 ```python
 d = dict(zip(columns, values))
@@ -315,7 +315,7 @@ d = dict(zip(columns, values))
 >>>
 ```
 
-有时候，`for`语句，`len() `和 `range()` 函数被初学者用于一些可怕的代码片段中，这些代码看起来像来自于古老的 C 程序。
+有时候，`for` 语句，`len()` 和 `range()` 函数被初学者用于一些可怕的代码片段中，这些代码看起来像来自于古老的 C 程序。
 
 ```python
 >>> for n in range(len(data)):
@@ -330,7 +330,7 @@ d = dict(zip(columns, values))
 
 不要那样做。阅读这些代码不仅辣眼睛，而且内存效率低，运行慢。如果想要迭代数据，使用普通的`for` 循环即可。如果碰巧因为某些原因需要使用索引，请使用 `enumerate()`函数。
 
-### 练习 2.15：enumerate() 函数实用示例
+### 练习 2.15：enumerate() 函数使用示例
 
 回想一下，`Data/missing.csv` 文件包含一个股票投资组合的数据，但是有一些行缺少值。请使用  `enumerate()` 函数修改 `pcost.py` 程序，以便在遇到错误的输入时，打印带有警告信息的行号。
 
@@ -354,7 +354,7 @@ for rowno, row in enumerate(rows, start=1):
 
 ### 练习 2.16：使用 zip() 函数
 
-在`Data/portfolio.csv`文件中，第一行包含列标题。在之前所有代码中，我们把它丢弃了。
+在 `Data/portfolio.csv` 文件中，第一行包含列标题。在之前所有代码中，我们把它丢弃了。
 
 ```python
 >>> f = open('Data/portfolio.csv')
@@ -365,7 +365,7 @@ for rowno, row in enumerate(rows, start=1):
 >>>
 ```
 
-但是，如果标题要用于其它有用的事情呢？这就涉及到`zip()`函数了。首先，尝试把文件标题和数据行配对。
+但是，如果标题要用于其它有用的事情呢？这就涉及到 `zip()` 函数了。首先，尝试把文件标题和数据行配对。
 
 ```python
 >>> row = next(rows)
@@ -376,7 +376,7 @@ for rowno, row in enumerate(rows, start=1):
 >>>
 ```
 
-请注意`zip()` 函数是如何把列标题与列值配对。在这里，我们使用`list()` 函数把结果转换为列表，以便查看。通常，`zip()` 函数创建一个必须由 for 循环使用的迭代器。
+请注意 `zip()` 函数是如何把列标题与列值配对。在这里，我们使用 `list()` 函数把结果转换为列表，以便查看。通常，`zip()` 函数创建一个必须由 for 循环使用的迭代器。
 
 这种配对是构建字典的中间步骤。现在尝试：
 
@@ -387,7 +387,7 @@ for rowno, row in enumerate(rows, start=1):
 >>>
 ```
 
-在处理大量数据文件时，这种转换是最有用的技巧之一。例如，假设需要使`pcost.py` 程序处理各种输入文件，但是不考虑名称，份额，价格所在列的编号。
+在处理大量数据文件时，这种转换是最有用的技巧之一。例如，假设需要使 `pcost.py` 程序处理各种输入文件，但是不考虑名称，份额，价格所在列的编号。
 
 修改 `pcost.py` 程序中的 `portfolio_cost()`，使其看起来像这样：
 
@@ -408,7 +408,7 @@ def portfolio_cost(filename):
         ...
 ```
 
-现在，在一个完全不同的数据文件`Data/portfoliodate.csv`（如下所示）上尝试 portfolio_cost() 函数。
+现在，在一个完全不同的数据文件 `Data/portfoliodate.csv`（如下所示）上尝试 portfolio_cost() 函数。
 
 ```csv
 name,date,time,shares,price
@@ -433,7 +433,7 @@ name,date,time,shares,price
 
 修改在 2.3 节编写的 `report.py` 程序，以便能够使用相同的技术挑选出列标题。
 
-尝试以 `Data/portfoliodate.csv` 文件作为输入，运行`report.py` 程序，并观察是否生成和之前一样的答案。
+尝试以 `Data/portfoliodate.csv` 文件作为输入，运行 `report.py` 程序，并观察是否生成和之前一样的答案。
 
 ### 练习 2.17：翻转字典
 
@@ -457,7 +457,7 @@ dict_items([('GOOG', 490.1), ('AA', 23.45), ('IBM', 91.1), ('MSFT', 34.23)])
 >>>
 ```
 
-但是，如果想要获取`(value, key)`键值对列表呢？
+但是，如果想要获取 `(value, key)` 键值对列表呢？
 
 *提示：使用 `zip()`函数。*
 

@@ -309,7 +309,7 @@ Python 预先计算继承链并将其存储到类的 *MRO* 属性中。你可以
 This chain is called the **Method Resolution Order**.  To find an
 attribute, Python walks the MRO in order. The first match wins.
 
-该继承链称为 **方法解析顺序（Method Resolution Order）**.要查找一个属性，Python 按顺序遍历 MRO，第一个找到既是（译注：关于MRO更多信息，可查看PEP 253）。
+该继承链称为 **方法解析顺序（Method Resolution Order）**.要查找一个属性，Python 按顺序遍历 MRO，第一个找到既是（译注：关于MRO更多信息，可查看PEP 253，或者查看：https://www.python.org/download/releases/2.3/mro/）。
 
 ### MRO in Multiple Inheritance多继承中的MRO
 
@@ -415,9 +415,13 @@ There is a code commonality in the implementation of `LoudDog.noise()` and
 `LoudBike.noise()`.  In fact, the code is exactly the same.  Naturally,
 code like that is bound to attract software engineers.
 
-### The "Mixin" Pattern
+`LoudDog.noise()` 方法和`LoudBike.noise()` 方法中有一些通用的代码。事实上，这些通用的代码是完全一样的。当然，这样的代码一定会吸引工程师。
+
+### The "Mixin" Pattern "Mixin" 模式
 
 The *Mixin* pattern is a class with a fragment of code.
+
+*Mixin* 模式（pattern）是包含一部分代码片段的类。
 
 ```python
 class Loud:
@@ -427,6 +431,8 @@ class Loud:
 
 This class is not usable in isolation.
 It mixes with other classes via inheritance.
+
+该类在单独的环境中不可用。通过继承和其它类混合。
 
 ```python
 class LoudDog(Loud, Dog):
@@ -440,9 +446,13 @@ Miraculously, loudness was now implemented just once and reused
 in two completely unrelated classes.  This sort of trick is one
 of the primary uses of multiple inheritance in Python.
 
-### Why `super()`
+神奇地，loudness 只实现了一次，却在两个完全不相关的类中使用。这种技巧是 Python 多继承的主要用途之一。
+
+### Why `super()`为什么使用 `super()`
 
 Always use `super()` when overriding methods.
+
+当要覆盖一个方法的时候，总是使用 `super()` 函数。
 
 ```python
 class Loud:
@@ -452,21 +462,29 @@ class Loud:
 
 `super()` delegates to the *next class* on the MRO.
 
+`super()` 函数代表 MRO 中的*下一个类*。
+
 The tricky bit is that you don't know what it is.  You especially don't
 know what it is if multiple inheritance is being used.
 
-### Some Cautions
+麻烦的是你不知道它是什么，尤其是使用多继承的时候。
+
+### Some Cautions注意事项
 
 Multiple inheritance is a powerful tool. Remember that with power
 comes responsibility.  Frameworks / libraries sometimes use it for
 advanced features involving composition of components.  Now, forget
 that you saw that.
 
-## Exercises
+多继承是一种强大的机制。使用这种强大的机制时请牢记“权利越大，责任越大”。有时候，框架或者库使用多继承来实现一些高级特性，如组件组合。
+
+## 练习
 
 In Section 4, you defined a class `Stock` that represented a holding of stock.
 In this exercise, we will use that class.  Restart the interpreter and make a
 few instances:
+
+在第 4 节中，定义了一个表示股票持有信息的类 `Stock`。在本节练习中，我们将使用这个类。请重新启动解释器并创建一些  `Stock` 类的实例：
 
 ```python
 >>> ================================ RESTART ================================
@@ -476,10 +494,12 @@ few instances:
 >>>
 ```
 
-### Exercise 5.1: Representation of Instances
+### 练习 5.1：实例表示Representation of Instances
 
 At the interactive shell, inspect the underlying dictionaries of the
 two instances you created:
+
+在交互式 shell 中，检查 `goog` 和 `ibm` 两个实例的底层字典：
 
 ```python
 >>> goog.__dict__
@@ -489,9 +509,11 @@ two instances you created:
 >>>
 ```
 
-### Exercise 5.2: Modification of Instance Data
+### 练习 5.2：修改实例属性 Modification of Instance Data
 
 Try setting a new attribute on one of the above instances:
+
+尝试给实例添加一个新的属性。
 
 ```python
 >>> goog.date = '6/11/2007'
@@ -508,8 +530,12 @@ to note that Python really doesn't place any restrictions on
 attributes.  For example, the attributes of an instance are not
 limited to those set up in the `__init__()` method.
 
+在上述输出中，你会发现  `goog` 实例添加了一个 `date` 属性，但是  `ibm`  实例没有。需要注意的是，实际上 Python 对实例属性没有设置任何限制。例如，实例属性对 `__init__()`  方法中的设置没有任何的限制。
+
 Instead of setting an attribute, try placing a new value directly into
 the `__dict__` object:
+
+尝试直接添加一个新的值到字典中：
 
 ```python
 >>> goog.__dict__['time'] = '9:45am'
@@ -523,11 +549,15 @@ top of a dictionary.  Note: it should be emphasized that direct
 manipulation of the dictionary is uncommon--you should always write
 your code to use the (.) syntax.
 
-### Exercise 5.3: The role of classes
+在这里，你真的发现实例仅仅是字典的顶层。注意：没必要强调对字典直接操作是不常见的——你应该总是使用语法 (.)  编写代码。
+
+### 练习 5.3：类的角色The role of classes
 
 The definitions that make up a class definition are shared by all
 instances of that class.  Notice, that all instances have a link back
 to their associated class:
+
+构成类定义的所有定义被所有类的所有实例所共享。注意，所有的实例都有一个链接，指向它们的关联类：
 
 ```python
 >>> goog.__class__
@@ -538,6 +568,8 @@ to their associated class:
 ```
 
 Try calling a method on the instances:
+
+尝试在实例上调用方法：
 
 ```python
 >>> goog.cost()
@@ -551,6 +583,8 @@ Notice that the name 'cost' is not defined in either `goog.__dict__`
 or `ibm.__dict__`.  Instead, it is being supplied by the class
 dictionary.  Try this:
 
+名字 'cost'  即不在 `goog.__dict__`  中定义，也不在 `ibm.__dict__`中定义。相反，而是又类字典提供的。请尝试以下代码：
+
 ```python
 >>> Stock.__dict__['cost']
 ... look at output ...
@@ -558,6 +592,8 @@ dictionary.  Try this:
 ```
 
 Try calling the `cost()` method directly through the dictionary:
+
+尝试直接通过字典条用  `cost()`  方法：
 
 ```python
 >>> Stock.__dict__['cost'](goog)
@@ -570,7 +606,11 @@ Try calling the `cost()` method directly through the dictionary:
 Notice how you are calling the function defined in the class
 definition and how the `self` argument gets the instance.
 
+你是如何调用类定义中的函数，那么 `self` 就是怎么调用实例的。
+
 Try adding a new attribute to the `Stock` class:
+
+尝试添加一个新的属性到 `Stock` 类：
 
 ```python
 >>> Stock.foo = 42
@@ -578,6 +618,8 @@ Try adding a new attribute to the `Stock` class:
 ```
 
 Notice how this new attribute now shows up on all of the instances:
+
+该新属性会出现在所有实例中：
 
 ```python
 >>> goog.foo
@@ -589,6 +631,8 @@ Notice how this new attribute now shows up on all of the instances:
 
 However, notice that it is not part of the instance dictionary:
 
+但是，这并不是实例字典的一部分。
+
 ```python
 >>> goog.__dict__
 ... look at output and notice there is no 'foo' attribute ...
@@ -599,8 +643,12 @@ The reason you can access the `foo` attribute on instances is that
 Python always checks the class dictionary if it can't find something
 on the instance itself.
 
+你可以访问 `foo`  属性的原因是：当 Python 在实例字典中查找不到某个属性时，那么它就会到类字典中查找。
+
 Note: This part of the exercise illustrates something known as a class
 variable.  Suppose, for instance, you have a class like this:
+
+注意：本部分阐明了什么是类变量。假设你有这样一个类：
 
 ```python
 class Foo(object):
@@ -612,6 +660,8 @@ class Foo(object):
 In this class, the variable `a`, assigned in the body of the
 class itself, is a "class variable."  It is shared by all of the
 instances that get created.  For example:
+
+在 Foo 类中，因为变量 `a` 在类体（body of the class）中被赋值，所以 `a`  是“类变量（class variable）”。变量 `a` 可以被 Foo 类的所有实例所共享。示例：
 
 ```python
 >>> f = Foo(10)
@@ -632,10 +682,12 @@ instances that get created.  For example:
 >>>
 ```
 
-### Exercise 5.4: Bound methods
+### 练习 5.4：绑定方法Bound methods
 
 A subtle feature of Python is that invoking a method actually involves
 two steps and something known as a bound method.   For example:
+
+ Python 的一个小特性是：调用方法实际上涉及两个步骤以及一个称为绑定方法的东西。示例：
 
 ```python
 >>> s = goog.sell
@@ -651,6 +703,8 @@ Bound methods actually contain all of the pieces needed to call a
 method.  For instance, they keep a record of the function implementing
 the method:
 
+实际上，绑定方法包含所有需要调用的方法。例如，它们记录了实现方法的函数：
+
 ```python
 >>> s.__func__
 <function sell at 0x10049af50>
@@ -658,6 +712,8 @@ the method:
 ```
 
 This is the same value as found in the `Stock` dictionary.
+
+这与在  `Stock`  字典中找到的值是一样的：
 
 ```python
 >>> Stock.__dict__['sell']
@@ -668,6 +724,8 @@ This is the same value as found in the `Stock` dictionary.
 Bound methods also record the instance, which is the `self`
 argument.
 
+绑定方法的  `self` 参数用于记录实例：
+
 ```python
 >>> s.__self__
 Stock('GOOG',75,490.1)
@@ -677,6 +735,8 @@ Stock('GOOG',75,490.1)
 When you invoke the function using `()` all of the pieces come
 together.  For example, calling `s(25)` actually does this:
 
+你可以使用 `()` 一起执行所有的函数。例如，调用 `s(25)` 实际是进行如下操作：
+
 ```python
 >>> s.__func__(s.__self__, 25)    # Same as s(25)
 >>> goog.shares
@@ -684,9 +744,11 @@ together.  For example, calling `s(25)` actually does this:
 >>>
 ```
 
-### Exercise 5.5: Inheritance
+### 练习 5.5：继承Inheritance
 
 Make a new class that inherits from `Stock`.
+
+创建一个继承自 `Stock` 的类：
 
 ```
 >>> class NewStock(Stock):
@@ -704,6 +766,8 @@ Yow!
 Inheritance is implemented by extending the search process for attributes.
 The `__bases__` attribute has a tuple of the immediate parents:
 
+继承是通过扩展属性的搜索过程实现的。`__bases__` 属性是一个包含直接父类的元组。
+
 ```python
 >>> NewStock.__bases__
 (<class 'stock.Stock'>,)
@@ -712,6 +776,8 @@ The `__bases__` attribute has a tuple of the immediate parents:
 
 The `__mro__` attribute has a tuple of all parents, in the order that
 they will be searched for attributes.
+
+`__mro__`  属性是一个包含所有父类的元组，父类按搜索顺序排列。
 
 ```python
 >>> NewStock.__mro__
