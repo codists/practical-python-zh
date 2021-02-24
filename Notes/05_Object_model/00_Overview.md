@@ -6,7 +6,7 @@
 
 虽然没有必要担心内部细节会影响效率，但是，大多数 Python 程序员对类的工作原理都有基本了解。这就是为什么要介绍 Python 对象的内部工作原理的原因。
 
-* [5.1 再探字典 (对象实现)](01_Dicts_revisited.md)
+* [5.1 再谈字典 (对象实现)](01_Dicts_revisited.md)
 * [5.2 封装技术](02_Classes_encapsulation.md)
 
 [目录](../Contents.md) \| [上一节 (4 类和对象)](../04_Classes_objects/00_Overview.md) \| [下一节 (6 生成器)](../06_Generators/00_Overview.md)

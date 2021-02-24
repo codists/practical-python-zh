@@ -1,17 +1,12 @@
 [目录](../Contents.md) \| [上一节 (4.4 异常)](../04_Classes_objects/04_Defining_exceptions.md) \| [下一节 (5.2 封装)](02_Classes_encapsulation.md)
 
-# 5.1 再探字典Dictionaries Revisited
+# 5.1 再谈字典
 
-The Python object system is largely based on an implementation
-involving dictionaries.  This section discusses that.
+Python 对象系统主要基于字典实现。本节将对此进行讨论。
 
-Python 对象系统很大程度上基于字典实现。本节对此进行讨论。
+### 字典
 
-### Dictionaries, Revisited字典
-
-Remember that a dictionary is a collection of named values.
-
-请记住，字典是命名值（named values）的集合。
+字典是命名值（named values）的集合。
 
 ```python
 stock = {
@@ -21,16 +16,9 @@ stock = {
 }
 ```
 
-Dictionaries are commonly used for simple data structures.  However,
-they are used for critical parts of the interpreter and may be the
-*most important type of data in Python*.
+虽然字典常用于简单的数据结构，但是字典也用于解释器的关键部分。字典可能是 *Python 中最重要的数据类型*。
 
-虽然字典常用于简单的数据结构，但是字典对于解释器重要部分是非常有用的，并且是 Python 中最重要的数据类型。
-
-### Dicts and Modules字典和模块
-
-Within a module, a dictionary holds all of the global variables and
-functions.
+### 字典和模块
 
 在模块内，字典存储所有的全局变量和函数。
 
@@ -45,8 +33,6 @@ def spam():
     ...
 ```
 
-If you inspect `foo.__dict__` or `globals()`, you'll see the dictionary.
-
 可以通过 `foo.__dict__` 或 `globals()`  查看该字典。
 
 ```python
@@ -57,17 +43,11 @@ If you inspect `foo.__dict__` or `globals()`, you'll see the dictionary.
 }
 ```
 
-### Dicts and Objects字典和对象
+### 字典和对象
 
-User defined objects also use dictionaries for both instance data and
-classes.  In fact, the entire object system is mostly an extra layer
-that's put on top of dictionaries.
+用户定义对象的时候也使用到了实例字典和类字典。事实上，整个对象系统主要是基于字典实现的。
 
-用户也可以使用字典定义对象，为实例数据（译注：属性）或者类。事实上，全部的对象系统几乎是字典顶层上的额外层。
-
-A dictionary holds the instance data, `__dict__`.
-
-字典存储实例数据，如 `__dict__`。
+字典存储实例数据，如 `__dict__`：
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -75,9 +55,7 @@ A dictionary holds the instance data, `__dict__`.
 {'name' : 'GOOG', 'shares' : 100, 'price': 490.1 }
 ```
 
-You populate this dict (and instance) when assigning to `self`.
-
-当给 `self` 赋值的时候，你操作的是该字典与实例。
+当给 `self` 赋值的时候，你将填充该字典（和实例）。
 
 ```python
 class Stock:
@@ -86,8 +64,6 @@ class Stock:
         self.shares = shares
         self.price = price
 ```
-
-The instance data, `self.__dict__`, looks like this:
 
 实例数据 `self.__dict__`  看起来像下面这样：
 
@@ -99,8 +75,6 @@ The instance data, `self.__dict__`, looks like this:
 }
 ```
 
-**Each instance gets its own private dictionary.**
-
 **每一个实例都拥有自己的私有字典。**
 
 ```python
@@ -108,14 +82,9 @@ s = Stock('GOOG', 100, 490.1)     # {'name' : 'GOOG','shares' : 100, 'price': 49
 t = Stock('AAPL', 50, 123.45)     # {'name' : 'AAPL','shares' : 50, 'price': 123.45 }
 ```
 
-If you created 100 instances of some class, there are 100 dictionaries
-sitting around holding data.
-
 如果你创建了某个类的 100 个实例，那么就会有 100 个存储数据的字典。
 
-### Class Members类成员
-
-A separate dictionary also holds the methods.
+### 类成员
 
 一个单独的字典也存储方法：
 
@@ -133,8 +102,6 @@ class Stock:
         self.shares -= nshares
 ```
 
-The dictionary is in `Stock.__dict__`.
-
 使用 `Stock.__dict__` 可以查看该字典：
 
 ```python
@@ -145,12 +112,9 @@ The dictionary is in `Stock.__dict__`.
 }
 ```
 
-### Instances and Classes实例和类
+### 实例和类
 
-Instances and classes are linked together.  The `__class__` attribute
-refers back to the class.
-
-实例和类是连在一起的。`__class__` 属性指向类。
+实例和类是链接在一起的。实例通过 `__class__` 属性指向类。
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -161,17 +125,11 @@ refers back to the class.
 >>>
 ```
 
-The instance dictionary holds data unique to each instance, whereas
-the class dictionary holds data collectively shared by *all*
-instances.
+实例字典存储的数据对每个实例而言是唯一的。但是，类字典存储的数据被该类的所有实例共享。
 
-实例字典存储的数据对每个实例而言是唯一的。但是，类字典存储的数据被所有的实例共享。
+### 属性访问
 
-### Attribute Access属性访问
-
-When you work with objects, you access data and methods using the `.` operator.
-
-当使用对象的时候，使用 `.`  操作符访问数据和方法。
+使用对象时，可以通过 `.`  运算符访问数据和方法。
 
 ```python
 x = obj.name          # Getting
@@ -179,15 +137,11 @@ obj.name = value      # Setting
 del obj.name          # Deleting
 ```
 
-These operations are directly tied to the dictionaries sitting underneath the covers.
-
 这些操作直接与字典绑定到一起。
 
-### Modifying Instances修改实例
+### 修改实例
 
-Operations that modify an object update the underlying dictionary.
-
-修改对象会更新底层的字典。
+修改对象的操作会更新底层字典：
 
 ```python
 >>> s = Stock('GOOG', 100, 490.1)
@@ -203,27 +157,20 @@ Operations that modify an object update the underlying dictionary.
 >>>
 ```
 
-### Reading Attributes读取属性
+### 读取属性
 
-Suppose you read an attribute on an instance.
-
-假设你读取一个实例的属性：
+假设你要读取实例上的属性：
 
 ```python
 x = obj.name
 ```
 
-The attribute may exist in two places:
-
 该属性可能位于两个地方：
 
-* 局部实例字典Local instance dictionary.
-* 类字典Class dictionary.
+* 局部实例字典
+* 类字典
 
-Both dictionaries must be checked.  First, check in local `__dict__`.
-If not found, look in `__dict__` of class through `__class__`.
-
-两种字典都会被检查到。首先，检查局部的 `__dict__`。如果没有找到，通过 `__class__` 查找类的  `__dict__`。
+两种字典都会被检查到。首先，检查局部实例字典 `__dict__`。如果没有找到，通过 `__class__` 查找类字典  `__dict__`。
 
 ```python
 >>> s = Stock(...)
@@ -234,24 +181,18 @@ If not found, look in `__dict__` of class through `__class__`.
 >>>
 ```
 
-This lookup scheme is how the members of a *class* get shared by all instances.
+通过这样的查找模式，类成员被所有实例共享。
 
-类就是通过这样的查找模式，类成员被所有实例共享。
+### 继承的工作原理
 
-### How inheritance works继承是如何工作的
-
-Classes may inherit from other classes.
-
-类可以继承自其它的类：
+一个类可能继承自其它类：
 
 ```python
 class A(B, C):
     ...
 ```
 
-The base classes are stored in a tuple in each class.
-
-在每个类中，基类存储在一个元组里面。
+在每个类中，父类存储在一个元组中：
 
 ```python
 >>> A.__bases__
@@ -259,25 +200,15 @@ The base classes are stored in a tuple in each class.
 >>>
 ```
 
-This provides a link to parent classes.
+子类通过 ` __bases__ ` 属性可以链接到父类。
 
-这提供指向父类的链接。
+### 多继承中的属性查找
 
-### Reading Attributes with Inheritance使用多继承读取属性
+从逻辑上讲，查找属性的过程如下：首先，检查局部字典 `__dict__`。如果没有找到，检查类字典 `__dict__`。如果在类中还是没有找到，通过 `__bases__` 属性在父类中查找。这里面有一些小细节，我们接下来讨论。
 
-Logically, the process of finding an attribute is as follows. First,
-check in local `__dict__`.  If not found, look in `__dict__` of the
-class.  If not found in class, look in the base classes through
-`__bases__`.   However, there are some subtle aspects of this discussed next.
+### 单继承中的属性查找
 
-逻辑上，查找属性的过程如下所示：首先，检查局部的 `__dict__`。如果没有找到，检查类的 `__dict__`。如果在类中还是没有找到，通过 `__bases__` 在基类中查找。这里面有一些小细节，我们接下来再讨论。
-
-### Reading Attributes with Single Inheritance使用单继承读取属性
-
-In inheritance hierarchies, attributes are found by walking up the
-inheritance tree in order.
-
-在继承层级结构中，通过按顺序遍历继承树找到属性。
+在继承层级结构中，通过按顺序遍历继承树来找到属性。
 
 ```python
 class A: pass
@@ -286,17 +217,11 @@ class C(A): pass
 class D(B): pass
 class E(D): pass
 ```
-With single inheritance, there is single path to the top.
-You stop with the first match.
+在单继承中，因为到达上层父类的路径只有一条，所以当找到第一个匹配的属性时即可停止。
 
-在单继承中，因为到达上层父类只有一条路径，所以当第一个匹配的时候即可停止。
+### 方法解析顺序（MRO）
 
-### Method Resolution Order or MRO方法解析顺序（MRO）
-
-Python precomputes an inheritance chain and stores it in the *MRO* attribute on the class.
-You can view it.
-
-Python 预先计算继承链并将其存储到类的 *MRO* 属性中。你可以通过 __mro__ 属性查看：
+Python 会预先计算继承链并将其存储到类的 *MRO* 属性中。你可以像这样查看：
 
 ```python
 >>> E.__mro__
@@ -306,17 +231,11 @@ Python 预先计算继承链并将其存储到类的 *MRO* 属性中。你可以
 >>>
 ```
 
-This chain is called the **Method Resolution Order**.  To find an
-attribute, Python walks the MRO in order. The first match wins.
+该继承链称为 **方法解析顺序（Method Resolution Order）**。为了找到属性，Python 按顺序遍历 MRO，第一个匹配的属性即是要找的属性。（译注：有关 MRO 的更多信息，请查看 https://www.python.org/download/releases/2.3/mro/）。
 
-该继承链称为 **方法解析顺序（Method Resolution Order）**.要查找一个属性，Python 按顺序遍历 MRO，第一个找到既是（译注：关于MRO更多信息，可查看PEP 253，或者查看：https://www.python.org/download/releases/2.3/mro/）。
+### 多继承中的方法解析顺序
 
-### MRO in Multiple Inheritance多继承中的MRO
-
-With multiple inheritance, there is no single path to the top.
-Let's take a look at an example.
-
-使用多继承，到达上层父类的路径有很多条，请看示例：
+使用多继承时，到达上层父类的路径有很多条，请看示例：
 
 ```python
 class A: pass
@@ -326,34 +245,22 @@ class D(B): pass
 class E(C, D): pass
 ```
 
-What happens when you access an attribute?
-
-当访问属性的时候会发生什么？
+访问属性时会发生什么？
 
 ```python
 e = E()
 e.attr
 ```
 
-An attribute search process is carried out, but what is the order? That's a problem.
+会执行属性查找，那么按什么顺序查找呢？这是个问题。
 
-按照什么顺序执行属性查找？这是个问题。
-
-Python uses *cooperative multiple inheritance* which obeys some rules
-about class ordering.
-
-Python 采用*协作多重继承（cooperative multiple inheritance）*，协作多继承遵守的类排序规则如下：
+Python 使用的是 *协作多重继承（cooperative multiple inheritance）*，协作多继承遵守的类排序规则如下：
 
 * 总是在检查父类之前检查子类
 * 父类（如果有多个）总是按照列出的顺序检查
 
-* Children are always checked before parents
-* Parents (if multiple) are always checked in the order listed.
 
-The MRO is computed by sorting all of the classes in a hierarchy
-according to those rules.
-
-根据该规则， 通过按层级结构对所有的类进行排序，然后计算出 MRO。
+根据该规则， 通过按层级结构对所有的类进行排序，然后计算出方法解析顺序。
 
 ```python
 >>> E.__mro__
@@ -367,17 +274,9 @@ according to those rules.
 >>>
 ```
 
-The underlying algorithm is called the "C3 Linearization Algorithm."
-The precise details aren't important as long as you remember that a
-class hierarchy obeys the same ordering rules you might follow if your
-house was on fire and you had to evacuate--children first, followed by
-parents.
+底层算法称为“C3线性化算法（C3 Linearization Algorithm）”，确切的细节不重要，只要记住类层级结构遵守的排序规则与你家房子着火后必须撤离时遵守的规则相同：首先是孩子，其次是父母。
 
-底层算法称为“C3线性化算法（C3 Linearization Algorithm）”，精确的细节不重要，只要记住类层级结构遵守的排序规则如下：如果你家房子着火了，你必须得先撤走孩子，然后才是父母。
-
-### An Odd Code Reuse (Involving Multiple Inheritance)奇怪的代码重用（涉及多继承）
-
-Consider two completely unrelated objects:
+### 奇怪的代码重用（涉及多继承）
 
 考虑以下两个完全不相关的对象：
 
@@ -395,7 +294,7 @@ class LoudDog(Dog):
         return super().noise().upper()
 ```
 
-And
+和
 
 ```python
 class Bike:
@@ -411,15 +310,9 @@ class LoudBike(Bike):
         return super().noise().upper()
 ```
 
-There is a code commonality in the implementation of `LoudDog.noise()` and
-`LoudBike.noise()`.  In fact, the code is exactly the same.  Naturally,
-code like that is bound to attract software engineers.
+`LoudDog.noise()` 方法和`LoudBike.noise()` 方法中有一些通用的代码。事实上，这些通用的代码是完全一样的。自然，这样的代码势必会吸引软件工程师。
 
-`LoudDog.noise()` 方法和`LoudBike.noise()` 方法中有一些通用的代码。事实上，这些通用的代码是完全一样的。当然，这样的代码一定会吸引工程师。
-
-### The "Mixin" Pattern "Mixin" 模式
-
-The *Mixin* pattern is a class with a fragment of code.
+### "Mixin" 模式
 
 *Mixin* 模式（pattern）是包含一部分代码片段的类。
 
@@ -429,10 +322,7 @@ class Loud:
         return super().noise().upper()
 ```
 
-This class is not usable in isolation.
-It mixes with other classes via inheritance.
-
-该类在单独的环境中不可用。通过继承和其它类混合。
+该类不能单独使用。通过继承和其它类混合使用。
 
 ```python
 class LoudDog(Loud, Dog):
@@ -442,15 +332,9 @@ class LoudBike(Loud, Bike):
     pass
 ```
 
-Miraculously, loudness was now implemented just once and reused
-in two completely unrelated classes.  This sort of trick is one
-of the primary uses of multiple inheritance in Python.
+神奇的是，`noise() ` 方法只实现了一次，却在两个完全不相关的类中使用。这种技巧是 Python 多继承的主要用途之一。
 
-神奇地，loudness 只实现了一次，却在两个完全不相关的类中使用。这种技巧是 Python 多继承的主要用途之一。
-
-### Why `super()`为什么使用 `super()`
-
-Always use `super()` when overriding methods.
+### 为什么使用 `super()`
 
 当要覆盖一个方法的时候，总是使用 `super()` 函数。
 
@@ -460,31 +344,17 @@ class Loud:
         return super().noise().upper()
 ```
 
-`super()` delegates to the *next class* on the MRO.
-
-`super()` 函数代表 MRO 中的*下一个类*。
-
-The tricky bit is that you don't know what it is.  You especially don't
-know what it is if multiple inheritance is being used.
+`super()` 函数代表 MRO 中的*下一个类*（译注：LoudDog 的 MRO 是 `LoudDog>Loud>Dog>object`。因为 Loud 的父类 object 没有定义 noise() 方法，所以 LoudDog 的实例在 Loud 中找不到 noise() 方法。然后  LoudDog 的实例就会到 MRO 中 Loud 的下一个类 Dog 中寻找）。
 
 麻烦的是你不知道它是什么，尤其是使用多继承的时候。
 
-### Some Cautions注意事项
-
-Multiple inheritance is a powerful tool. Remember that with power
-comes responsibility.  Frameworks / libraries sometimes use it for
-advanced features involving composition of components.  Now, forget
-that you saw that.
+### 注意事项
 
 多继承是一种强大的机制。使用这种强大的机制时请牢记“权利越大，责任越大”。有时候，框架或者库使用多继承来实现一些高级特性，如组件组合。
 
 ## 练习
 
-In Section 4, you defined a class `Stock` that represented a holding of stock.
-In this exercise, we will use that class.  Restart the interpreter and make a
-few instances:
-
-在第 4 节中，定义了一个表示股票持有信息的类 `Stock`。在本节练习中，我们将使用这个类。请重新启动解释器并创建一些  `Stock` 类的实例：
+在第 4 节中，定义了一个表示股票持有信息的类 `Stock`。在本节练习中，我们将使用该类。请重新启动解释器并创建一些  `Stock` 类的实例：
 
 ```python
 >>> ================================ RESTART ================================
@@ -494,10 +364,7 @@ few instances:
 >>>
 ```
 
-### 练习 5.1：实例表示Representation of Instances
-
-At the interactive shell, inspect the underlying dictionaries of the
-two instances you created:
+### 练习 5.1：实例的表示
 
 在交互式 shell 中，检查 `goog` 和 `ibm` 两个实例的底层字典：
 
@@ -509,11 +376,9 @@ two instances you created:
 >>>
 ```
 
-### 练习 5.2：修改实例属性 Modification of Instance Data
+### 练习 5.2：修改实例属性
 
-Try setting a new attribute on one of the above instances:
-
-尝试给实例添加一个新的属性。
+尝试给上述其中一个实例添加新属性：
 
 ```python
 >>> goog.date = '6/11/2007'
@@ -524,18 +389,9 @@ Try setting a new attribute on one of the above instances:
 >>>
 ```
 
-In the above output, you'll notice that the `goog` instance has a
-attribute `date` whereas the `ibm` instance does not.  It is important
-to note that Python really doesn't place any restrictions on
-attributes.  For example, the attributes of an instance are not
-limited to those set up in the `__init__()` method.
+在上述输出中，你会发现  `goog` 实例具有 `date` 属性，但是  `ibm`  实例没有。重要的是要注意，Python 对实例属性确实没有任何限制。例如，实例属性不限于 `__init__()`  方法中设置的属性。
 
-在上述输出中，你会发现  `goog` 实例添加了一个 `date` 属性，但是  `ibm`  实例没有。需要注意的是，实际上 Python 对实例属性没有设置任何限制。例如，实例属性对 `__init__()`  方法中的设置没有任何的限制。
-
-Instead of setting an attribute, try placing a new value directly into
-the `__dict__` object:
-
-尝试直接添加一个新的值到字典中：
+尝试直接添加一个新的值到 `__dict__` 对象中：
 
 ```python
 >>> goog.__dict__['time'] = '9:45am'
@@ -544,20 +400,11 @@ the `__dict__` object:
 >>>
 ```
 
-Here, you really notice the fact that an instance is just a layer on
-top of a dictionary.  Note: it should be emphasized that direct
-manipulation of the dictionary is uncommon--you should always write
-your code to use the (.) syntax.
+在这里，你会发现一个事实，实例仅仅是字典顶部的一层。注意：应该强调的是，直接操作字典并不常见——你应该始终使用语法 (.)  编写代码。
 
-在这里，你真的发现实例仅仅是字典的顶层。注意：没必要强调对字典直接操作是不常见的——你应该总是使用语法 (.)  编写代码。
+### 练习 5.3：类的角色
 
-### 练习 5.3：类的角色The role of classes
-
-The definitions that make up a class definition are shared by all
-instances of that class.  Notice, that all instances have a link back
-to their associated class:
-
-构成类定义的所有定义被所有类的所有实例所共享。注意，所有的实例都有一个链接，指向它们的关联类：
+类中的定义被类的所有实例所共享。所有的实例都有一个链接，指向它们的关联类：
 
 ```python
 >>> goog.__class__
@@ -566,8 +413,6 @@ to their associated class:
 ... look at output ...
 >>>
 ```
-
-Try calling a method on the instances:
 
 尝试在实例上调用方法：
 
@@ -579,11 +424,7 @@ Try calling a method on the instances:
 >>>
 ```
 
-Notice that the name 'cost' is not defined in either `goog.__dict__`
-or `ibm.__dict__`.  Instead, it is being supplied by the class
-dictionary.  Try this:
-
-名字 'cost'  即不在 `goog.__dict__`  中定义，也不在 `ibm.__dict__`中定义。相反，而是又类字典提供的。请尝试以下代码：
+名字 'cost'  既不在 `goog.__dict__`  中定义，也不在 `ibm.__dict__`中定义。相反，而是由类字典提供的。请尝试以下代码：
 
 ```python
 >>> Stock.__dict__['cost']
@@ -591,9 +432,7 @@ dictionary.  Try this:
 >>>
 ```
 
-Try calling the `cost()` method directly through the dictionary:
-
-尝试直接通过字典条用  `cost()`  方法：
+尝试直接通过字典调用  `cost()`  方法：
 
 ```python
 >>> Stock.__dict__['cost'](goog)
@@ -603,21 +442,14 @@ Try calling the `cost()` method directly through the dictionary:
 >>>
 ```
 
-Notice how you are calling the function defined in the class
-definition and how the `self` argument gets the instance.
+你是如何调用类中定义的函数，那么 `self` 就是怎么调用实例的。
 
-你是如何调用类定义中的函数，那么 `self` 就是怎么调用实例的。
-
-Try adding a new attribute to the `Stock` class:
-
-尝试添加一个新的属性到 `Stock` 类：
+尝试给 `Stock` 类添加新属性：：
 
 ```python
 >>> Stock.foo = 42
 >>>
 ```
-
-Notice how this new attribute now shows up on all of the instances:
 
 该新属性会出现在所有实例中：
 
@@ -629,9 +461,7 @@ Notice how this new attribute now shows up on all of the instances:
 >>>
 ```
 
-However, notice that it is not part of the instance dictionary:
-
-但是，这并不是实例字典的一部分。
+但是，`foo` 并不属于实例字典：
 
 ```python
 >>> goog.__dict__
@@ -639,16 +469,9 @@ However, notice that it is not part of the instance dictionary:
 >>>
 ```
 
-The reason you can access the `foo` attribute on instances is that
-Python always checks the class dictionary if it can't find something
-on the instance itself.
-
 你可以访问 `foo`  属性的原因是：当 Python 在实例字典中查找不到某个属性时，那么它就会到类字典中查找。
 
-Note: This part of the exercise illustrates something known as a class
-variable.  Suppose, for instance, you have a class like this:
-
-注意：本部分阐明了什么是类变量。假设你有这样一个类：
+注意：本部分主要阐明什么是类变量。假设你有这样一个类：
 
 ```python
 class Foo(object):
@@ -656,10 +479,6 @@ class Foo(object):
      def __init__(self,b):
          self.b = b          # Instance variable
 ```
-
-In this class, the variable `a`, assigned in the body of the
-class itself, is a "class variable."  It is shared by all of the
-instances that get created.  For example:
 
 在 Foo 类中，因为变量 `a` 在类体（body of the class）中被赋值，所以 `a`  是“类变量（class variable）”。变量 `a` 可以被 Foo 类的所有实例所共享。示例：
 
@@ -682,12 +501,9 @@ instances that get created.  For example:
 >>>
 ```
 
-### 练习 5.4：绑定方法Bound methods
+### 练习 5.4：绑定方法
 
-A subtle feature of Python is that invoking a method actually involves
-two steps and something known as a bound method.   For example:
-
- Python 的一个小特性是：调用方法实际上涉及两个步骤以及一个称为绑定方法的东西。示例：
+ Python 有一个微妙的特性：调用方法实际上涉及两个步骤以及一个称为绑定方法的东西。示例：
 
 ```python
 >>> s = goog.sell
@@ -699,19 +515,13 @@ two steps and something known as a bound method.   For example:
 >>>
 ```
 
-Bound methods actually contain all of the pieces needed to call a
-method.  For instance, they keep a record of the function implementing
-the method:
-
-实际上，绑定方法包含所有需要调用的方法。例如，它们记录了实现方法的函数：
+实际上，绑定方法包含调用一个方法的所需的所有内容。例如，它们记录了实现方法的函数：
 
 ```python
 >>> s.__func__
 <function sell at 0x10049af50>
 >>>
 ```
-
-This is the same value as found in the `Stock` dictionary.
 
 这与在  `Stock`  字典中找到的值是一样的：
 
@@ -721,10 +531,7 @@ This is the same value as found in the `Stock` dictionary.
 >>>
 ```
 
-Bound methods also record the instance, which is the `self`
-argument.
-
-绑定方法的  `self` 参数用于记录实例：
+绑定方法还记录实例，即 `self`：
 
 ```python
 >>> s.__self__
@@ -732,10 +539,7 @@ Stock('GOOG',75,490.1)
 >>>
 ```
 
-When you invoke the function using `()` all of the pieces come
-together.  For example, calling `s(25)` actually does this:
-
-你可以使用 `()` 一起执行所有的函数。例如，调用 `s(25)` 实际是进行如下操作：
+你可以使用 `()` 一起调用所有的函数。例如，调用 `s(25)` 实际是这样做的：
 
 ```python
 >>> s.__func__(s.__self__, 25)    # Same as s(25)
@@ -744,9 +548,7 @@ together.  For example, calling `s(25)` actually does this:
 >>>
 ```
 
-### 练习 5.5：继承Inheritance
-
-Make a new class that inherits from `Stock`.
+### 练习 5.5：继承
 
 创建一个继承自 `Stock` 的类：
 
@@ -763,10 +565,7 @@ Yow!
 >>>
 ```
 
-Inheritance is implemented by extending the search process for attributes.
-The `__bases__` attribute has a tuple of the immediate parents:
-
-继承是通过扩展属性的搜索过程实现的。`__bases__` 属性是一个包含直接父类的元组。
+通过扩展属性的搜索过程来实现继承。`__bases__` 属性是一个包含直接父类的元组：
 
 ```python
 >>> NewStock.__bases__
@@ -774,10 +573,7 @@ The `__bases__` attribute has a tuple of the immediate parents:
 >>>
 ```
 
-The `__mro__` attribute has a tuple of all parents, in the order that
-they will be searched for attributes.
-
-`__mro__`  属性是一个包含所有父类的元组，父类按搜索顺序排列。
+`__mro__`  属性是一个包含所有父类的元组，父类按查找顺序排列。
 
 ```python
 >>> NewStock.__mro__
@@ -785,7 +581,7 @@ they will be searched for attributes.
 >>>
 ```
 
-Here's how the `cost()` method of instance `n` above would be found:
+实例 `n` 是这找到  `cost()` 方法的： 
 
 ```python
 >>> for cls in n.__class__.__mro__:
