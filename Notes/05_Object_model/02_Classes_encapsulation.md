@@ -1,12 +1,14 @@
-[Contents](../Contents.md) \| [Previous (5.1 Dictionaries Revisited)](01_Dicts_revisited.md) \| [Next (6 Generators)](../06_Generators/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (5.1 再谈字典)](01_Dicts_revisited.md) \| [下一节 (6 生成器)](../06_Generators/00_Overview.md)
 
-# 5.2 Classes and Encapsulation
+# 5.2 类和封装Classes and Encapsulation
 
 When writing classes, it is common to try and encapsulate internal details.
 This section introduces a few Python programming idioms for this including
 private variables and properties.
 
-### Public vs Private.
+创建类时，通常会将类的内部实现进行封装。本节介绍有关封装的习惯用法（包括私有变量和私有属性）。
+
+### Public vs Private
 
 One of the primary roles of a class is to encapsulate data and internal
 implementation details of an object.  However, a class also defines a
@@ -14,7 +16,9 @@ implementation details of an object.  However, a class also defines a
 manipulate the object.  This distinction between implementation
 details and the public interface is important.
 
-### A Problem
+虽然对属性和对象的内部实现细节进行封装是类的主要用途之一，但是，类也定义了一些公共接口（public interface），外界应该使用这个接口来操作对象。实现细节与公共接口之间的区别很重要。
+
+### A Problem问题
 
 In Python, almost everything about classes and objects is *open*.
 
@@ -24,12 +28,22 @@ In Python, almost everything about classes and objects is *open*.
 
 That is an issue when you are trying to isolate details of the *internal implementation*.
 
-### Python Encapsulation
+在 Python 中，几乎一切都是类并且对象是对外开放（open）的。
+
+* 可以轻松地查看对象的内部实现细节。
+* 可以随意地修改。
+* 没有访问控制的概念（例如：私有类成员）。
+
+当尝试对内部实现细节进行隔离的时候，这是一个问题。
+
+### Python 封装Encapsulation
 
 Python relies on programming conventions to indicate the intended use
 of something.  These conventions are based on naming.  There is a
 general attitude that it is up to the programmer to observe the rules
 as opposed to having the language enforce them.
+
+Python 依赖编程约定来指示某些东西的用途。
 
 ### Private Attributes
 

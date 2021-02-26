@@ -1,8 +1,8 @@
-[目录](../Contents.md) \| [上一节 (2.5 collections模块)](05_Collections.md) \| [下一节 (2.7 对象模型)](07_Objects.md)
+[目录](../Contents.md) | [上一节 (2.5 collections模块)](./05_Collections.md) | [下一节 (2.7 对象模型)](./07_Objects.md)
 
 # 2.6 列表推导式
 
-一个常见的任务是处理列表中的项。本节介绍列表推导式，完成此任务的强大工具。
+一个常见的任务是处理列表中的项（译注：元素）。本节介绍列表推导式，完成此任务的强大工具。
 
 ### 创建新列表
 
@@ -54,7 +54,7 @@ stocknames = [s['name'] for s in stocks]
 a = [s for s in stocks if s['price'] > 100 and s['shares'] > 50 ]
 ```
 
-也可以把列表推导式与序列缩减合并在一起。
+也可以把列表推导式与序列缩减合并在一起：
 
 ```python
 cost = sum([s['shares']*s['price'] for s in stocks])
@@ -151,13 +151,13 @@ bash % python3 -i report.py
 >>>
 ```
 
-有了这些知识，您现在就可以准备成立一家大数据创业公司了。
+有了这些知识，你现在就可以准备成立一家大数据创业公司了。
 
 ### 练习 2.21：数据查询
 
 请尝试以下各种数据查询示例。
 
-首选是创建一个列表，存储持有 100 股以上的股票投资组合。
+首先是创建一个列表，存储持有 100 股以上的股票投资组合。
 
 ```python
 >>> more100 = [ s for s in portfolio if s['shares'] > 100 ]
@@ -187,7 +187,7 @@ bash % python3 -i report.py
 
 ### 练习 2.22：数据提取
 
-展示如何构建元组`(name, shares)` 列表，名称（`name` ）和 股数（`shares`）从股票投资组合（`portfolio`）中获取。
+展示如何构建元组 `(name, shares)` 列表，名称（`name` ）和 股数（`shares`）从股票投资组合（`portfolio`）中获取：
 
 ```python
 >>> name_shares =[ (s['name'], s['shares']) for s in portfolio ]
@@ -198,7 +198,7 @@ bash % python3 -i report.py
 
 如果将方括号（`[`,`]`）更改为花括号（`{`, `}`），那么将得到集合推导式。这会得到独一无二的的或无重复的值。
 
-例如，这将确定集合中的股票名称是独一无二的。
+例如，这将确定集合中的股票名称是独一无二的：
 
 ```python
 >>> names = { s['name'] for s in portfolio }
@@ -207,7 +207,7 @@ bash % python3 -i report.py
 >>>
 ```
 
-如果指定键值对（`key:value`），则可以构建一个字典。例如，构建一个将股票名称映射到持有的股票数量的字典。
+如果指定键值对（`key:value`），则可以构建一个字典。例如，构建一个将股票名称映射到持有的股票数量的字典：
 
 ```python
 >>> holdings = { name: 0 for name in names }
@@ -227,7 +227,7 @@ bash % python3 -i report.py
 >>>
 ```
 
-请尝试以下示例，该示例将 `prices` 字典过滤出仅在 portfolio 中出现的名称（name），
+请尝试以下示例，该示例将 `prices` 字典过滤出仅在 portfolio 中出现的名称（name）：
 
 ```python
 >>> portfolio_prices = { name: prices[name] for name in names }
@@ -236,7 +236,7 @@ bash % python3 -i report.py
 >>>
 ```
 
-### 练习 2.23: 从 CSV 文件提取数据
+### 练习 2.23：从 CSV 文件提取数据
 
 在各类数据处理中，知道如何将列表，集合，字典推导式联合使用会非常有用。这里有一个示例，展示如何从 CSV 文件中提取所选择的列。
 
@@ -278,7 +278,7 @@ bash % python3 -i report.py
 >>>
 ```
 
-如果您对前面的操作感到满意，那么请读取文件的剩余部分：
+如果你对前面的操作感到满意，那么请读取文件的剩余部分：
 
 ```python
 >>> portfolio = [ { colname: row[index] for colname, index in zip(select, indices) } for row in rows ]
@@ -297,4 +297,4 @@ bash % python3 -i report.py
 
 也就是说，知道如何快速处理数据是一项非常有用的技能。在很多情况下，可能必须解决某种一次性的问题，包括数据导入，导出，提取等。成为列表推导式的大师可以大大减少设计方案所花费的时间。另外，不要忘记  `collections` 模块。
 
-[目录](../Contents.md) \| [上一节 (2.5 collections模块)](05_Collections.md) \| [下一节 (2.7 对象模型)](07_Objects.md)
+[目录](../Contents.md) | [上一节 (2.5 collections模块)](./05_Collections.md) | [下一节 (2.7 对象模型)](./07_Objects.md)

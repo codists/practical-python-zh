@@ -1,4 +1,4 @@
-[目录](../Contents.md) \| [上一节 (2.6 列表推导式)](06_List_comprehension.md) \| [下一节 (3 从程序组织)](../03_Program_organization/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (2.6 列表推导式)](06_List_comprehension.md) \| [下一节 (3 程序组织)](../03_Program_organization/00_Overview.md)
 
 # 2.7 对象
 
@@ -15,7 +15,7 @@ s.append(value)   # Appending to a list
 d['key'] = value  # Adding to a dictionary
 ```
 
-*警告：赋值操作**永远不是值拷贝**。所有的赋值操作都是引用拷贝（如果您乐意，也可以说是指针拷贝）*
+*警告：赋值操作**永远不是值拷贝**。所有的赋值操作都是引用拷贝（如果你乐意，也可以说是指针拷贝）*
 
 ### 赋值示例
 
@@ -63,7 +63,7 @@ print(b)      # [1, 2, 3]    Holds the original value
 
 ### 风险
 
-如果您不知道这种（数据）共享（的方式），那么在某些时候你会搬起石头砸自己的脚。典型情景，您修改了一些数据，以为它是自己的私有拷贝，但是它却意外地损破坏了程序其它部分的某些数据。
+如果你不知道这种（数据）共享（的方式），那么在某些时候你会搬起石头砸自己的脚。典型情景，你修改了一些数据，以为它是自己的私有拷贝，但是它却意外地损破坏了程序其它部分的某些数据。
 
 *说明：这就是为什么原始数据类型是不可变（只读）的原因之一*
 
@@ -178,7 +178,7 @@ if isinstance(a, (list,tuple)):
     print('a is a list or tuple')
 ```
 
-*注意：不要过度使用类型检查。这会导致过度的代码复杂性。通常，如果这样做能够阻止其他人在使用您的代码时犯常见错误，那么就使用类型检查。*
+*注意：不要过度使用类型检查。这会导致过度的代码复杂性。通常，如果这样做能够阻止其他人在使用你的代码时犯常见错误，那么就使用类型检查。*
 
 ### 一切皆对象
 
@@ -213,7 +213,7 @@ items[1].sqrt(2)    # math
 except items[2]:    # ValueError
 ```
 
-权利越大，责任越大。只是因为你可以做，但并意味这你应该这样做。
+权利越大，责任越大。只是因为你可以做，但并意味着你应该这样做。
 
 ## 练习
 
@@ -332,7 +332,7 @@ TypeError: can't multiply sequence by non-int of type 'str'
 >>>
 ```
 
-确保您理解上述代码中所发生的事情。在循环中，`func` 变量是类型转换函数（如`str`, `int`等 ）之一且 `val` 变量是值（`'AA'`, `'100'`）之一。表达式 `func(val)`转换一个值（类似于类型转换）。
+确保你理解上述代码中所发生的事情。在循环中，`func` 变量是类型转换函数（如`str`, `int`等 ）之一且 `val` 变量是值（`'AA'`, `'100'`）之一。表达式 `func(val)`转换一个值（类似于类型转换）。
 
 上面的代码可以转换为单个列表推导式。
 
@@ -357,7 +357,7 @@ TypeError: can't multiply sequence by non-int of type 'str'
 >>>
 ```
 
-当然，如果您精通列表推导式，则可以使用字典推导式一步完成整个转换。
+当然，如果你精通列表推导式，则可以使用字典推导式一步完成整个转换。
 
 ```python
 >>> { name: func(val) for name, func, val in zip(headers, types, row) }
@@ -369,7 +369,7 @@ TypeError: can't multiply sequence by non-int of type 'str'
 
 使用本练习中的技术，可以编写语句，轻松地将几乎任何面向列的数据文件中的字段转换为 Python 字典。
 
-为了说明，假设您像下面这样从不同的数据文件读取数据，如下所示：
+为了说明，假设你像下面这样从不同的数据文件读取数据，如下所示：
 
 ```python
 >>> f = open('Data/dowstocks.csv')
@@ -402,6 +402,6 @@ TypeError: can't multiply sequence by non-int of type 'str'
 
 附加题：如何修改本示例以进一步解析 `date` 条目到元组中，如`(6, 11, 2007)`？
 
-请花一些时间仔细思考您在练习中所做的事情。我们稍后会再次讨论这些想法。
+请花一些时间仔细思考你在练习中所做的事情。我们稍后会再次讨论这些想法。
 
 [目录](../Contents.md) \| [上一节 (2.6 列表推导式)](06_List_comprehension.md) \| [下一节 (3 从程序组织)](../03_Program_organization/00_Overview.md)
