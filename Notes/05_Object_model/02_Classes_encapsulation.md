@@ -16,7 +16,7 @@ implementation details of an object.  However, a class also defines a
 manipulate the object.  This distinction between implementation
 details and the public interface is important.
 
-虽然对属性和对象的内部实现细节进行封装是类的主要用途之一，但是，类也定义了一些公共接口（public interface），外界应该使用这个接口来操作对象。实现细节与公共接口之间的区别很重要。
+虽然对属性和对象的内部实现细节进行封装是类的主要用途之一，但是，类也定义了一些公有接口（public interface），外界应该使用这个接口来操作对象。实现细节与公有接口之间的区别很重要。
 
 ### A Problem问题
 
@@ -43,11 +43,11 @@ of something.  These conventions are based on naming.  There is a
 general attitude that it is up to the programmer to observe the rules
 as opposed to having the language enforce them.
 
-Python 依赖编程约定来指示某些东西的用途。
+Python 依赖编程约定来指示某些东西的用途。这就是命名约定。有一种普遍的态度是，程序员应该遵守规则，而不是让语言来强制执行这些约定。
 
-### Private Attributes
+### Private Attributes私有属性
 
-Any attribute name with leading `_` is considered to be *private*.
+以下划线  `_` 开头的任何属性被认为是私有属性（private）。
 
 ```python
 class Person(object):
@@ -57,6 +57,8 @@ class Person(object):
 
 As mentioned earlier, this is only a programming style. You can still
 access and change it.
+
+如前所述，这这是一种编程风格。你仍然可以对这些私有属性进行修改。
 
 ```python
 >>> p = Person('Guido')
@@ -70,9 +72,13 @@ As a general rule, any name with a leading `_` is considered internal implementa
 whether it's a variable, a function, or a module name.  If you find yourself using such
 names directly, you're probably doing something wrong. Look for higher level functionality.
 
-### Simple Attributes
+一般来说，一个以下划线  `_`  开头的名字被认为是内部实现，无论该名字是变量名、函数名还是模块名。如果你发现自己使用这些名字，那么你可能在做一些错误的事情。应该寻找更高级的函数。
+
+### Simple Attributes简单属性
 
 Consider the following class.
+
+考虑下面这个类：
 
 ```python
 class Stock:
@@ -85,6 +91,8 @@ class Stock:
 A surprising feature is that you can set the attributes
 to any value at all:
 
+这里有一个让人惊讶的特性：你可以给属性设置任何值：
+
 ```python
 >>> s = Stock('IBM', 50, 91.1)
 >>> s.shares = 100
@@ -95,15 +103,21 @@ to any value at all:
 
 You might look at that and think you want some extra checks.
 
+你可能会想要对此进行检查（译注：例如 `shares ` 表示的是股份数目，值应该是整数。当将一个字符串赋值给 `shares ` 时是不合理的，应该触发一个  `ypeError` 异常）：
+
 ```python
 s.shares = '50'     # Raise a TypeError, this is a string
 ```
 
 How would you do it?
 
-### Managed Attributes
+这时候你会怎么做？
+
+### Managed Attributes托管属性
 
 One approach: introduce accessor methods.
+
+方法一：引进访问方法（accessor methods）。
 
 ```python
 class Stock:
@@ -126,9 +140,13 @@ class Stock:
 Too bad that this breaks all of our existing code. `s.shares = 50`
 becomes `s.set_shares(50)`
 
+糟糕的是，这破坏了我们的已有代码。例如：之前是通过 `s.shares = 50` 给 shares 赋值的，那么现在就要改成`s.set_shares(50)` 给 shares 赋值，这很不好。
+
 ### Properties
 
 There is an alternative approach to the previous pattern.
+
+对于前面的模式，还有一种替代方法：
 
 ```python
 class Stock:
@@ -151,6 +169,8 @@ class Stock:
 Normal attribute access now triggers the getter and setter methods
 under `@property` and `@shares.setter`.
 
+现在，普通属性（normal attribute）的访问在 `@property` 和 `@shares.setter` 下触发了 getter 方法和 setter 方法。
+
 ```python
 >>> s = Stock('IBM', 50, 91.1)
 >>> s.shares         # Triggers @property
@@ -162,6 +182,8 @@ under `@property` and `@shares.setter`.
 With this pattern, there are *no changes* needed to the source code.
 The new *setter* is also called when there is an assignment within the class,
 including inside the `__init__()` method.
+
+使用这种模式，不需要对源代码做任何修改。当在类内（包括在 `__init__()` 方法内）有赋值的时候，直接调用新的 setter：
 
 ```python
 class Stock:
