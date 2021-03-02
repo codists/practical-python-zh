@@ -6,7 +6,7 @@
 
 ### 程序是如何运行失败的
 
-Python 不对函数参数类型或值进行检查或者校验。函数可以处理与函数内部语句兼容的任何数据，
+Python 不对函数参数类型或值进行检查或者校验。函数可以处理与函数内部语句兼容的任何数据。
 
 ```python
 def add(x, y):
@@ -37,14 +37,14 @@ TypeError: unsupported operand type(s) for +:
 
 异常用于发出错误信号。
 
-要自己触发异常，请使用 `raise` 语句。
+要自己触发异常，请使用 `raise` 语句：
 
 ```python
 if name not in authorized:
     raise RuntimeError(f'{name} not authorized')
 ```
 
-要捕获异常，请使用 `try-except` 语句。
+要捕获异常，请使用 `try-except` 语句：
 
 ```python
 try:
@@ -55,7 +55,7 @@ except RuntimeError as e:
 
 ### 异常处理
 
-异常传递到第一个匹配的 `except` 。
+异常传递到第一个匹配的 `except` ：
 
 ```python
 def grok():
@@ -80,7 +80,7 @@ def foo():
 foo()
 ```
 
-要处理异常，请将语句放到 `except` 块里面。可以添加要处理该错误的任何语句。
+要处理异常，请将语句放到 `except` 块里面。 `except` 块里面可以添加要处理该错误的任何语句。
 
 ```python
 def grok(): ...
@@ -119,7 +119,7 @@ bar()
 
 ### 内置异常
 
-有非常多的內建异常。通常，异常名称表明出了什么问题（例如，因为提供错误的值而触发 `ValueError`）。这不是一分详尽的清单，请访问 [文档](https://docs.python.org/3/library/exceptions.html) 以获取更多信息。
+有非常多的內建异常。通常，异常名称表明出了什么问题（例如，因为提供错误的值而触发 `ValueError`）。下述列表不是一份详尽的清单，请访问 [文档](https://docs.python.org/3/library/exceptions.html) 以获取更多信息。
 
 ```python
 ArithmeticError
@@ -166,7 +166,7 @@ except RuntimeError as e:
 
 ### 捕获多个异常
 
-可以使用多个 `except` 块捕获不同类型的异常。
+可以使用多个 `except` 块捕获不同类型的异常：
 
 ```python
 try:
@@ -181,7 +181,7 @@ except KeyboardInterrupt as e:
   ...
 ```
 
-或者，如果处理不同异常的语句是相同的，则可以对它们进行分组。
+或者，如果处理不同异常的语句是相同的，则可以对它们进行分组：
 
 ```python
 try:
@@ -243,11 +243,11 @@ except Exception as e:
     raise
 ```
 
-这允许您采取措施（例如:记录日志）并将错误传递给调用者。
+这允许你采取措施（例如：记录日志）并将错误传递给调用者。
 
-### 异常最佳实践
+### 异常的最佳实践
 
-不要捕获异常，而是失败发生时“停止运行，发出预警”（Fail fast and loud）。如果重要的话，别人会处理的。只有您是那个人的时候才捕获异常。即，只捕获可以恢复并正常运行的错误。
+不要捕获异常，而是失败发生时“停止运行，发出预警”（Fail fast and loud）。如果重要的话，别人会处理的。只有你是那个人的时候才捕获异常。即，只捕获可以恢复并正常运行的错误。
 
 ### `finally` 语句
 
@@ -306,7 +306,7 @@ RuntimeError: select argument requires column headers
 >>>
 ```
 
-添加此检查后，您可能会问是否应该在函数中执行其它类型的完整性检查。例如，检查文件名是字符串，列表还是其它类型？
+添加此检查后，你可能会问是否应该在函数中执行其它类型的完整性检查。例如，检查文件名是字符串，列表还是其它类型？
 
 一般来说，最好是跳过此类测试，输入错误的时候让程序运行失败。回溯信息会指出问题的根源，并且帮助调试。
 
@@ -316,7 +316,7 @@ RuntimeError: select argument requires column headers
 
 ### 练习 3.9：捕获异常
 
-您编写的 `parse_csv()` 函数用于处理文件的全部内容。但是，在现实世界中，输入文件可能包含损坏的，丢失的或者脏数据。尝试下面这个实验：
+你编写的 `parse_csv()` 函数用于处理文件的全部内容。但是，在现实世界中，输入文件可能包含损坏的数据，丢失的数据或者脏数据。尝试下面这个实验：
 
 ```python
 >>> portfolio = parse_csv('Data/missing.csv', types=[str, int, float])
