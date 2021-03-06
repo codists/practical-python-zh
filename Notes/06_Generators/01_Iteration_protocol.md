@@ -1,12 +1,12 @@
-[Contents](../Contents.md) \| [Previous (5.2 Encapsulation)](../05_Object_model/02_Classes_encapsulation.md) \| [Next (6.2 Customizing Iteration)](02_Customizing_iteration.md)
+[目录](../Contents.md) \| [上一节 (5.2 封装)](../05_Object_model/02_Classes_encapsulation.md) \| [下一节 (6.2 自定义迭代)](02_Customizing_iteration.md)
 
-# 6.1 Iteration Protocol
+# 6.1 迭代协议
 
-This section looks at the underlying process of iteration.
+本节将探究迭代的底层过程。
 
-### Iteration Everywhere
+### 迭代无处不在
 
-Many different objects support iteration.
+许多对象都支持迭代：
 
 ```python
 a = 'hello'
@@ -26,16 +26,16 @@ for x in f: # Loop over lines in a file
     ...
 ```
 
-### Iteration: Protocol
+### 迭代：协议
 
-Consider the `for`-statement.
+考虑以下 `for` 语句：
 
 ```python
 for x in obj:
     # statements
 ```
 
-What happens under the hood?
+ `for` 语句的背后发生了什么?
 
 ```python
 _iter = obj.__iter__()        # Get iterator object
@@ -47,10 +47,9 @@ while True:
         break
 ```
 
-All the objects that work with the `for-loop` implement this low-level
-iteration protocol.
+所有可应用于  `for-loop` 的对象都实现了上述底层迭代协议。
 
-Example: Manual iteration over a list.
+示例：手动迭代一个列表。
 
 ```python
 >>> x = [1,2,3]
@@ -69,10 +68,9 @@ File "<stdin>", line 1, in ? StopIteration
 >>>
 ```
 
-### Supporting Iteration
+### 支持迭代
 
-Knowing about iteration is useful if you want to add it to your own objects.
-For example, making a custom container.
+如果想要将迭代添加到自己的对象中，那么了解迭代非常有用。例如：自定义容器。
 
 ```python
 class Portfolio:
@@ -88,18 +86,17 @@ for s in port:
     ...
 ```
 
-## Exercises
+## 练习
 
-### Exercise 6.1: Iteration Illustrated
+### 练习 6.1：迭代演示
 
-Create the following list:
+创建以下列表：
 
 ```python
 a = [1,9,4,25,16]
 ```
 
-Manually iterate over this list.  Call `__iter__()` to get an iterator and
-call the `__next__()` method to obtain successive elements.
+请手动迭代该列表：先调用 `__iter__()` 方法获取一个迭代器，然后调用  `__next__()`  方法获取下一个元素。
 
 ```python
 >>> i = a.__iter__()
@@ -122,8 +119,7 @@ StopIteration
 >>>
 ```
 
-The `next()` built-in function is a shortcut for calling
-the `__next__()` method of an iterator. Try using it on a file:
+内置函数 `next()` 是调用迭代器的 `__next__()` 方法的快捷方式。尝试在一个文件对象上使用 `next()` 方法：
 
 ```python
 >>> f = open('Data/portfolio.csv')
@@ -138,15 +134,16 @@ the `__next__()` method of an iterator. Try using it on a file:
 >>>
 ```
 
-Keep calling `next(f)` until you reach the end of the
-file. Watch what happens.
+持续调用 `next(f)`，直到文件末尾。观察会发生什么。
 
-### Exercise 6.2: Supporting Iteration
+### 练习 6.2：支持迭代
 
 On occasion, you might want to make one of your own objects support
 iteration--especially if your object wraps around an existing
 list or other iterable.  In a new file `portfolio.py`, define the
-following class:
+following class:-
+
+有时候，你可能想要使自己的类对象支持迭代——尤其是你的类对象封装了已有的列表或者其它可迭代对象时。请在新的 `portfolio.py` 文件中定义如下类：
 
 ```python
 # portfolio.py
@@ -171,6 +168,8 @@ class Portfolio:
 This class is meant to be a layer around a list, but with some
 extra methods such as the `total_cost` property.  Modify the `read_portfolio()`
 function in `report.py` so that it creates a `Portfolio` instance like this:
+
+该类是列表上的一层，有一些额外的方法，如： `total_cost` property。请修改 `report.py` 文件中的 `read_portfolio()` 函数，以便 `read_portfolio()` 函数能够像下面这样创建 `Portfolio` 的实例：
 
 ```
 # report.py
@@ -198,6 +197,8 @@ def read_portfolio(filename):
 Try running the `report.py` program. You will find that it fails spectacularly due to the fact
 that `Portfolio` instances aren't iterable.
 
+请尝试运行 `report.py` 程序。你会发现程序因为  `Portfolio`  实例是不可迭代的运行失败。
+
 ```python
 >>> import report
 >>> report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
@@ -205,6 +206,8 @@ that `Portfolio` instances aren't iterable.
 ```
 
 Fix this by modifying the `Portfolio` class to support iteration:
+
+请修改 `Portfolio` 类以便该类能够支持迭代：
 
 ```python
 class Portfolio:
@@ -230,6 +233,8 @@ class Portfolio:
 After you've made this change, your `report.py` program should work again.   While you're
 at it, fix up your `pcost.py` program to use the new `Portfolio` object. Like this:
 
+修改完成后， `report.py` 程序应该能够再次运行。当你遇到这个问题的时候，请改进 `pcost.py` 程序，以便能够像下面这样使用新的 `Portfolio` 对象：
+
 ```python
 # pcost.py
 
@@ -246,6 +251,8 @@ def portfolio_cost(filename):
 
 Test it to make sure it works:
 
+对此进行测试并确保其能正常工作：
+
 ```python
 >>> import pcost
 >>> pcost.portfolio_cost('Data/portfolio.csv')
@@ -253,11 +260,13 @@ Test it to make sure it works:
 >>>
 ```
 
-### Exercise 6.3: Making a more proper container
+### 练习 6.3：创建一个更合适的容器Making a more proper container
 
 If making a container class, you often want to do more than just
 iteration. Modify the `Portfolio` class so that it has some other
 special methods like this:
+
+通常，创建一个容器类时，不仅仅想要该类能够迭代。请修改 `Portfolio` 类，使其具有以下特殊的方法：
 
 ```python
 class Portfolio:
@@ -290,6 +299,8 @@ class Portfolio:
 
 Now, try some experiments using this new class:
 
+现在，使用该类进行一些试验：
+
 ```
 >>> import report
 >>> portfolio = report.read_portfolio('Data/portfolio.csv')
@@ -314,4 +325,6 @@ Python normally work.  For container objects, supporting iteration,
 indexing, containment, and other kinds of operators is an important
 part of this.
 
-[Contents](../Contents.md) \| [Previous (5.2 Encapsulation)](../05_Object_model/02_Classes_encapsulation.md) \| [Next (6.2 Customizing Iteration)](02_Customizing_iteration.md)
+有关迭代的一个重要观察——通常，如果代码和 Python 其它部分说相同的词汇并且正常工作，那么该代码并认为是 “Pythonic” 的。对于容器对象，支持迭代、索引，包含以及其它类型的操作，是重要的部分。
+
+[目录](../Contents.md) \| [上一节 (5.2 封装)](../05_Object_model/02_Classes_encapsulation.md) \| [下一节 (6.2 自定义迭代)](02_Customizing_iteration.md)

@@ -29,7 +29,7 @@ b = foo.spam('Hello')
 
 ### 命名空间
 
-模块是命名值的集合，有时也称为 *命名空间*。名称是源文件中定义的所有全局变量和函数。导入之后，模块名称用作前缀。因此，称为命名空间。
+模块是命名值的集合，有时也称为*命名空间*。名称是源文件中定义的所有全局变量和函数。导入之后，模块名称用作前缀。因此，称为命名空间。
 
 ```python
 import foo
@@ -271,7 +271,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 在本练习开始时，请使用交互示例作为指南。之后，应该能够获得与之前完全相同的输出。
 
-### 练习 3.14：使用更多的的库导入
+### 练习 3.14：使用更多的库导入
 
 在第 1 节中，编写了一个读取股票投资组合和计算费用的程序 `pcost.py`。
 
@@ -286,6 +286,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ### 说明
 
-当完成练习后，您应该拥有三个程序。包含通用目的函数 `parse_csv()` 的`fileparse.py` 程序。用于生成报告，且包含`read_portfolio()` 和 `read_prices()` 函数的 `report.py` 程序。最后，利用 `report.py` 程序中编写的`read_portfolio()` 函数去计算股票投资组合费用的`pcost.py` 程序，
+当完成练习后，您应该拥有三个程序。包含通用目的函数 `parse_csv()` 的`fileparse.py` 程序。用于生成报告，且包含 `read_portfolio()` 和 `read_prices()` 函数的 `report.py` 程序。最后，利用 `report.py` 程序中编写的`read_portfolio()` 函数去计算股票投资组合费用的 `pcost.py` 程序。
 
 [目录](../Contents.md) \| [上一节 (3.3 错误检查)](03_Error_checking.md) \| [下一节 (3.5 主模块)](05_Main_module.md)
