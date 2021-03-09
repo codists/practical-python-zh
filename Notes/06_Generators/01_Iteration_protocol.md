@@ -138,11 +138,6 @@ StopIteration
 
 ### 练习 6.2：支持迭代
 
-On occasion, you might want to make one of your own objects support
-iteration--especially if your object wraps around an existing
-list or other iterable.  In a new file `portfolio.py`, define the
-following class:-
-
 有时候，你可能想要使自己的类对象支持迭代——尤其是你的类对象封装了已有的列表或者其它可迭代对象时。请在新的 `portfolio.py` 文件中定义如下类：
 
 ```python
@@ -165,11 +160,7 @@ class Portfolio:
         return total_shares
 ```
 
-This class is meant to be a layer around a list, but with some
-extra methods such as the `total_cost` property.  Modify the `read_portfolio()`
-function in `report.py` so that it creates a `Portfolio` instance like this:
-
-该类是列表上的一层，有一些额外的方法，如： `total_cost` property。请修改 `report.py` 文件中的 `read_portfolio()` 函数，以便 `read_portfolio()` 函数能够像下面这样创建 `Portfolio` 的实例：
+Portfolio 类封装了一个列表，同时拥有一些方法，如： `total_cost` property。请修改 `report.py` 文件中的 `read_portfolio()` 函数，以便 `read_portfolio()` 函数能够像下面这样创建 `Portfolio` 类的实例：
 
 ```
 # report.py
@@ -194,10 +185,7 @@ def read_portfolio(filename):
 ...
 ```
 
-Try running the `report.py` program. You will find that it fails spectacularly due to the fact
-that `Portfolio` instances aren't iterable.
-
-请尝试运行 `report.py` 程序。你会发现程序因为  `Portfolio`  实例是不可迭代的运行失败。
+接着运行 `report.py` 程序。你会发现程序运行失败，原因很明显，因为 `Portfolio` 的实例不是可迭代对象。
 
 ```python
 >>> import report
@@ -205,9 +193,7 @@ that `Portfolio` instances aren't iterable.
 ... crashes ...
 ```
 
-Fix this by modifying the `Portfolio` class to support iteration:
-
-请修改 `Portfolio` 类以便该类能够支持迭代：
+可以通过修改 `Portfolio` 类，使 `Portfolio` 类支持迭代来解决此问题：
 
 ```python
 class Portfolio:
@@ -230,10 +216,7 @@ class Portfolio:
         return total_shares
 ```
 
-After you've made this change, your `report.py` program should work again.   While you're
-at it, fix up your `pcost.py` program to use the new `Portfolio` object. Like this:
-
-修改完成后， `report.py` 程序应该能够再次运行。当你遇到这个问题的时候，请改进 `pcost.py` 程序，以便能够像下面这样使用新的 `Portfolio` 对象：
+修改完成后， `report.py` 程序应该能够再次正常运行。同时，请修改 `pcost.py` 程序，以便能够像下面这样使用新的 `Portfolio` 对象：
 
 ```python
 # pcost.py
@@ -249,9 +232,7 @@ def portfolio_cost(filename):
 ...
 ```
 
-Test it to make sure it works:
-
-对此进行测试并确保其能正常工作：
+对 `pcost.py` 程序进行测试并确保其能正常工作：
 
 ```python
 >>> import pcost
@@ -260,13 +241,9 @@ Test it to make sure it works:
 >>>
 ```
 
-### 练习 6.3：创建一个更合适的容器Making a more proper container
+### 练习 6.3：创建一个更合适的容器
 
-If making a container class, you often want to do more than just
-iteration. Modify the `Portfolio` class so that it has some other
-special methods like this:
-
-通常，创建一个容器类时，不仅仅想要该类能够迭代。请修改 `Portfolio` 类，使其具有以下特殊的方法：
+通常，我们创建一个容器类时，不仅希望该类能够迭代，同时也希望该类能够具有一些其它用途。请修改 `Portfolio` 类，使其具有以下这些特殊方法：
 
 ```python
 class Portfolio:
@@ -297,9 +274,7 @@ class Portfolio:
         return total_shares
 ```
 
-Now, try some experiments using this new class:
-
-现在，使用该类进行一些试验：
+现在，使用 `Portfolio` 类进行一些实验：
 
 ```
 >>> import report
@@ -319,12 +294,7 @@ False
 >>>
 ```
 
-One important observation about this--generally code is considered
-"Pythonic" if it speaks the common vocabulary of how other parts of
-Python normally work.  For container objects, supporting iteration,
-indexing, containment, and other kinds of operators is an important
-part of this.
-
-有关迭代的一个重要观察——通常，如果代码和 Python 其它部分说相同的词汇并且正常工作，那么该代码并认为是 “Pythonic” 的。对于容器对象，支持迭代、索引，包含以及其它类型的操作，是重要的部分。
+有关上述代码的一个重要发现——通常，如果一段代码和 Python 的其它代码"类似（speaks the common vocabulary of how other parts of Python normally work）"，那么该代码被认为是 “Pythonic” 的。同理，对于容器对象，其重要组成部分应该包括：支持迭代、可以进行索引、对所包含的元素进行判断，以及其它操作等等。
 
 [目录](../Contents.md) \| [上一节 (5.2 封装)](../05_Object_model/02_Classes_encapsulation.md) \| [下一节 (6.2 自定义迭代)](02_Customizing_iteration.md)
+
