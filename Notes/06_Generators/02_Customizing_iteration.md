@@ -1,14 +1,14 @@
-[Contents](../Contents.md) \| [Previous (6.1 Iteration Protocol)](01_Iteration_protocol.md) \| [Next (6.3 Producer/Consumer)](03_Producers_consumers.md)
+[目录](../Contents.md) \| [上一节 (6.1 迭代协议)](01_Iteration_protocol.md) \| [下一节 (6.3 生产者/消费者)](03_Producers_consumers.md)
 
-# 6.2 Customizing Iteration
+# 6.2 自定义迭代
 
-This section looks at how you can customize iteration using a generator function.
+本节探究如何使用生成器函数自定义迭代。
 
-### A problem
+### 问题
 
-Suppose you wanted to create your own custom iteration pattern.
+假设你想要自定义迭代模式。
 
-For example, a countdown.
+例如：倒数：
 
 ```python
 >>> for x in countdown(10):
@@ -18,11 +18,11 @@ For example, a countdown.
 >>>
 ```
 
-There is an easy way to do this.
+有一个j简单方法可以做到这一点。
 
-### Generators
+### 生成器
 
-A generator is a function that defines iteration.
+生成器（generator）是定义了迭代的函数：
 
 ```python
 def countdown(n):
@@ -31,7 +31,7 @@ def countdown(n):
         n -= 1
 ```
 
-For example:
+示例:
 
 ```python
 >>> for x in countdown(10):
@@ -41,11 +41,9 @@ For example:
 >>>
 ```
 
-A generator is any function that uses the `yield` statement.
+任何使用了 `yield` 语句的函数称为生成器。
 
-The behavior of generators is different than a normal function.
-Calling a generator function creates a generator object. It does not
-immediately execute the function.
+生成器函数的行为不同于普通于普通函数。调用生成器函数会创建一个生成器对象（generator object），而不是立即执行函数：
 
 ```python
 def countdown(n):
@@ -65,7 +63,7 @@ def countdown(n):
 >>>
 ```
 
-The function only executes on `__next__()` call.
+生成器函数只在 `__next__()` 方法被调用时才执行：
 
 ```python
 >>> x = countdown(10)
@@ -77,8 +75,7 @@ Counting down from 10
 >>>
 ```
 
-`yield` produces a value, but suspends the function execution.
-The function resumes on next call to `__next__()`.
+`yield` 生成一个值，但是挂起（suspend）函数执行。生成器函数会在下次调用 `__next__()` 方法时恢复（resume），
 
 ```python
 >>> x.__next__()
@@ -87,7 +84,7 @@ The function resumes on next call to `__next__()`.
 8
 ```
 
-When the generator finally returns, the iteration raises an error.
+当生成器返回最后一个值后，再次迭代将会触发一个错误（译注：StopIteration）。
 
 ```python
 >>> x.__next__()
@@ -98,21 +95,15 @@ File "<stdin>", line 1, in ? StopIteration
 >>>
 ```
 
-*Observation: A generator function implements the same low-level
- protocol that the for statements uses on lists, tuples, dicts, files,
- etc.*
+*观察：生成器函数实现的协议与 for 语句在列表、元组、字典、文件上使用的底层协议相同。*
 
-## Exercises
+## 练习
 
-### Exercise 6.4: A Simple Generator
+### 练习 6.4：一个简单的生成器
 
-If you ever find yourself wanting to customize iteration, you should
-always think generator functions.  They're easy to write---make
-a function that carries out the desired iteration logic and use `yield`
-to emit values.
+如果想要自定义迭代，那么你应该始终考虑生成器函数。生成器函数非常容易编写——创建一个函数，执行所需的迭代逻辑，并使用 `yield` 发送一个值。
 
-For example, try this generator that searches a file for lines containing
-a matching substring:
+例如，创建一个在文件各行中查找匹配子串的生成器：
 
 ```python
 >>> def filematch(filename, substr):
@@ -140,36 +131,21 @@ name,shares,price
 >>>
 ```
 
-This is kind of interesting--the idea that you can hide a bunch of
-custom processing in a function and use it to feed a for-loop.
-The next example looks at a more unusual case.
+这是一种有趣的思想——你可以在函数中隐藏自定义的处理过程，并将该函数应用于 for  循环。下一个例子探究一种更不寻常的情况。
 
-### Exercise 6.5: Monitoring a streaming data source
+### 练习 6.5：监视流数据源
 
-Generators can be an interesting way to monitor real-time data sources
-such as log files or stock market feeds.  In this part, we'll
-explore this idea.  To start, follow the next instructions carefully.
+生成器可应用于监视实时数据源（如：日志文件，股票市场消息）。本部分，我们将对“使用生成器监视实时数据源”这一思想进行探索。首先，请严格遵循以下说明。
 
-The program `Data/stocksim.py` is a program that
-simulates stock market data.  As output, the program constantly writes
-real-time data to a file `Data/stocklog.csv`.  In a
-separate command window go into the `Data/` directory and run this program:
+`Data/stocksim.py` 用来模仿股市数据，将实时数据不断的写入到 `Data/stocklog.csv` 文件。请打开一个独立的命令行窗口，进入到 `Data/` 目录，然后运行 `stocksim.py` 程序：
 
 ```bash
 bash % python3 stocksim.py
 ```
 
-If you are on Windows, just locate the `stocksim.py` program and
-double-click on it to run it.  Now, forget about this program (just
-let it run).  Using another window, look at the file
-`Data/stocklog.csv` being written by the simulator.  You should see
-new lines of text being added to the file every few seconds.  Again,
-just let this program run in the background---it will run for several
-hours (you shouldn't need to worry about it).
+如果你使用的是 Windows 系统，那么请找到 `stocksim.py` 文件，然后双击该文件运行。然后，让我们先把这个程序放到一边（让它一直在那运行），打开另外一个命令行窗口，查看正在被模拟程序（译注：`stocksim.py`）写入数据的 `Data/stocklog.csv` 文件（译注：如果使用的是 Linux 系统，那么可以进入到 Data 目录下，然后使用 `tail -f  stocklog.csv` 命令查看）。你应该可以看到每隔几秒新的文本行被添加到 `Data/stocklog.csv` 文件中。同样，让程序在后台运行——该程序会运行几个小时（对此不用担心）。
 
-Once the above program is running, let's write a little program to
-open the file, seek to the end, and watch for new output.  Create a
-file `follow.py` and put this code in it:
+ `stocksim.py` 程序运行后，让我们编写一个程序来打开 `Data/stocklog.csv` 文件、移动到文件末尾、并查看新的输出。请在 Work 目录下创建 `follow.py` 文件，并把以下代码放入其中：
 
 ```python
 # follow.py
@@ -192,26 +168,15 @@ while True:
         print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
 ```
 
-If you run the program, you'll see a real-time stock ticker.  Under the hood,
-this code is kind of like the Unix `tail -f` command that's used to watch a log file.
+运行  `follow.py ` 程序，你将会看到实时的股票报价（stock ticker）。 `follow.py ` 里的代码类似于 Unix 系统查看日志文件的  `tail -f` 命令。
 
-Note: The use of the `readline()` method in this example is
-somewhat unusual in that it is not the usual way of reading lines from
-a file (normally you would just use a `for`-loop).  However, in
-this case, we are using it to repeatedly probe the end of the file to
-see if more data has been added (`readline()` will either
-return new data or an empty string).
+注意事项：在本示例中，`readline()` 方法的使用与通常从文件中读取行的方式稍微有点不同（通常使用 `for` 循环）。在这种情况下，我们使用 `readline()`  来重复探测文件的末尾，以查看是否添加了新的数据（`readline()` 方法返回新的数据或者空字符串）。
 
-### Exercise 6.6: Using a generator to produce data
+### 练习 6.6：使用生成器生成数据
 
-If you look at the code in Exercise 6.5, the first part of the code is producing
-lines of data whereas the statements at the end of the `while` loop are consuming
-the data.  A major feature of generator functions is that you can move all
-of the data production code into a reusable function.
+查看练习 6.5 中代码你会发现，代码的第一部分产生了几行数据，而 `while`  循环末尾的语句消费数据。生成器的一个主要特性是你可以将生成数据的代码移动到可重用的函数中。
 
-Modify the code in Exercise 6.5  so that the file-reading is performed by
-a generator function `follow(filename)`.   Make it so the following code
-works:
+请修改练习 6.5 的代码，以便通过生成器函数 `follow(filename)`  执行文件读取。请实现更改以便下面的代码能够工作：
 
 ```python
 >>> for line in follow('Data/stocklog.csv'):
@@ -220,7 +185,7 @@ works:
 ... Should see lines of output produced here ...
 ```
 
-Modify the stock ticker code so that it looks like this:
+请修改股票报价代码，使代码看起来像下面这样：
 
 
 ```python
@@ -234,11 +199,9 @@ if __name__ == '__main__':
             print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
 ```
 
-### Exercise 6.7: Watching your portfolio
+### 练习 6.7：查看股票投资组合
 
-Modify the `follow.py` program so that it watches the stream of stock
-data and prints a ticker showing information for only those stocks
-in a portfolio.  For example:
+请修改 `follow.py` 程序，以便程序能够查看股票数据流，并打印股票投资组合中的那些股票的信息。示例：
 
 ```python
 if __name__ == '__main__':
@@ -255,16 +218,10 @@ if __name__ == '__main__':
             print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
 ```
 
-Note: For this to work, your `Portfolio` class must support the `in`
-operator.  See [Exercise 6.3](01_Iteration_protocol) and make sure you
-implement the `__contains__()` operator.
+注意事项：要想这段代码能够运行， `Portfolio` 类必须支持 `in` 运算符。请参阅 [练习 6.3 ](01_Iteration_protocol) ，确保 `Portfolio` 类实现了 `__contains__()` 运算符。
 
-### Discussion
+### 讨论
 
-Something very powerful just happened here.  You moved an interesting iteration pattern
-(reading lines at the end of a file) into its own little function.   The `follow()` function
-is now this completely general purpose utility that you can use in any program.  For
-example, you could use it to watch server logs, debugging logs, and other similar data sources.
-That's kind of cool.
+在这里，你将一个有趣的迭代模式（在文件末尾读取行）移动到函数中。`follow()`函数现在是可以在任何程序中使用的完全通用的实用程序。例如，你可以使用 `follow()` 函数查看服务器日志、调试日志、其它类似的数据源。
 
-[Contents](../Contents.md) \| [Previous (6.1 Iteration Protocol)](01_Iteration_protocol.md) \| [Next (6.3 Producer/Consumer)](03_Producers_consumers.md)
+[目录](../Contents.md) \| [上一节 (6.1 迭代协议)](01_Iteration_protocol.md) \| [下一节 (6.3 生产者/消费者)](03_Producers_consumers.md)
