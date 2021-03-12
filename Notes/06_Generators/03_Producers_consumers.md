@@ -1,14 +1,12 @@
-[Contents](../Contents.md) \| [Previous (6.2 Customizing Iteration)](02_Customizing_iteration.md) \| [Next (6.4 Generator Expressions)](04_More_generators.md)
+[目录](../Contents.md) \| [上一节 (6.2 自定义迭代)](02_Customizing_iteration.md) \| [下一节 (6.4 生成器表达式)](04_More_generators.md)
 
-# 6.3 Producers, Consumers and Pipelines
+# 6.3 生产者，消费者和管道
 
-Generators are a useful tool for setting various kinds of
-producer/consumer problems and dataflow pipelines.  This section
-discusses that.
+生成器在设置各种生产者/消费者问题（producer/consumer problems）和数据流管道（pipeline）中非常有用。本节将对此进行讨论。
 
-### Producer-Consumer Problems
+### 生产者消费者问题
 
-Generators are closely related to various forms of *producer-consumer* problems.
+生成器与各种形式的 *生产者消费者* 问题密切相关。
 
 ```python
 # Producer
@@ -24,15 +22,15 @@ for line in follow(f):    # Consumes value from `yield` above
     ...
 ```
 
-`yield` produces values that `for` consumes.
+`yield` 语句生成给  `for` 语句消费的值。
 
-### Generator Pipelines
+### 生成器管道
 
-You can use this aspect of generators to set up processing pipelines (like Unix pipes).
+你可以使用生成器的这方面特性来设置进程管道（类似于 Unix 管道（pipe））。
 
 *producer* &rarr; *processing* &rarr; *processing* &rarr; *consumer*
 
-Processing pipes have an initial data producer, some set of intermediate processing stages and a final consumer.
+进程管道包括初始的数据生产者、中间的处理阶段、最后的消费者。
 
 **producer** &rarr; *processing* &rarr; *processing* &rarr; *consumer*
 
@@ -43,8 +41,7 @@ def producer():
     ...
 ```
 
-The producer is typically a generator. Although it could also be a list of some other sequence.
-`yield` feeds data into the pipeline.
+通常情况下，生产者是一个生成器，尽管也可以是其它的序列列表。`yield` 将数据输入管道。
 
 *producer* &rarr; *processing* &rarr; *processing* &rarr; **consumer**
 
@@ -54,7 +51,7 @@ def consumer(s):
         ...
 ```
 
-Consumer is a for-loop. It gets items and does something with them.
+消费者是一个 for 循环，获取数据（译注：items）并对数据执行某些操作。
 
 *producer* &rarr; **processing** &rarr; **processing** &rarr; *consumer*
 
@@ -66,9 +63,7 @@ def processing(s):
         ...
 ```
 
-Intermediate processing stages simultaneously consume and produce items.
-They might modify the data stream.
-They can also filter (discarding items).
+中间的处理阶段同时消费和生产数据。它们可能修改数据流，也可能筛选数据流（丢弃数据）。
 
 *producer* &rarr; *processing* &rarr; *processing* &rarr; *consumer*
 
@@ -89,7 +84,7 @@ def consumer(s):
         ...
 ```
 
-Code to setup the pipeline
+设置管道的代码如下：
 
 ```python
 a = producer()
@@ -97,17 +92,15 @@ b = processing(a)
 c = consumer(b)
 ```
 
-You will notice that data incrementally flows through the different functions.
+你会发现数据逐渐地流向不同的函数。
 
-## Exercises
+## 练习
 
-For this exercise the `stocksim.py` program should still be running in the background.
-You’re going to use the `follow()` function you wrote in the previous exercise.
+对于本练习，`stocksim.py` 程序仍需要在后台运行。并且，你将使用到上一节练习（译注：练习 6.7）编写的  `follow()`  函数。
 
-### Exercise 6.8: Setting up a simple pipeline
+### 练习 6.8：创建一个简单的管道
 
-Let's see the pipelining idea in action.  Write the following
-function:
+让我们来看看管道的思想。请创建下面这个函数：
 
 ```python
 >>> def filematch(lines, substr):
@@ -118,10 +111,7 @@ function:
 >>>
 ```
 
-This function is almost exactly the same as the first generator
-example in the previous exercise except that it's no longer
-opening a file--it merely operates on a sequence of lines given
-to it as an argument.  Now, try this:
+`filematch()`  函数除了不再打开文件，几乎与上一节练习的第一个生成器示例完全相同——仅仅对作为参数给出的行序列进行操作。现在，请尝试如下操作：
 
 ```
 >>> from follow import follow
@@ -133,13 +123,11 @@ to it as an argument.  Now, try this:
 ... wait for output ...
 ```
 
-It might take awhile for output to appear, but eventually you
-should see some lines containing data for IBM.
+虽然输出可能需要一定时间才会出现，但是，最后你一定会看到包含 IBM 数据的行。
 
-### Exercise 6.9: Setting up a more complex pipeline
+### 练习 6.9：创建一个复杂的管道
 
-Take the pipelining idea a few steps further by performing
-more actions.
+通过执行更多操作来进一步理解管道的思想。
 
 ```
 >>> from follow import follow
@@ -156,14 +144,11 @@ more actions.
 ...
 ```
 
-Well, that's interesting.  What you're seeing here is that the output of the
-`follow()` function has been piped into the `csv.reader()` function and we're
-now getting a sequence of split rows.
+这非常有趣。你在这里可以看到， `follow()` 函数的输出被传递到 `csv.reader()`函数，并且，我们现在得到了一系列拆分的行。
 
-### Exercise 6.10: Making more pipeline components
+### 练习 6.10：创建更多管道组件
 
-Let's extend the whole idea into a larger pipeline.  In a separate file `ticker.py`,
-start by creating a function that reads a CSV file as you did above:
+让我们把这样的思想扩展到更大的管道中。首先，创建 `ticker.py` 文件，然后在 `ticker.py` 文件里面创建一个函数，像上面一样读取 CSV 文件：
 
 ```python
 # ticker.py
@@ -182,7 +167,7 @@ if __name__ == '__main__':
         print(row)
 ```
 
-Write a new function that selects specific columns:
+接着，创建一个选择特定列的新函数：
 
 ```
 # ticker.py
@@ -197,7 +182,7 @@ def parse_stock_data(lines):
     return rows
 ```
 
-Run your program again.  You should see output narrowed down like this:
+再次运行程序，你应该可以看到输出缩小如下：
 
 ```
 ['BA', '98.35', '0.16']
@@ -207,8 +192,7 @@ Run your program again.  You should see output narrowed down like this:
 ...
 ```
 
-Write generator functions that convert data types and build dictionaries.
-For example:
+再接着，创建一个生成器函数以转换数据类型并构建字典。示例：
 
 ```python
 # ticker.py
@@ -231,7 +215,7 @@ def parse_stock_data(lines):
 ...
 ```
 
-Run your program again.  You should now a stream of dictionaries like this:
+再次运行程序，你应该能够看到像下面这样的字典流：
 
 ```
 { 'name':'BA', 'price':98.35, 'change':0.16 }
@@ -241,9 +225,9 @@ Run your program again.  You should now a stream of dictionaries like this:
 ...
 ```
 
-### Exercise 6.11: Filtering data
+### 练习 6.11：筛选数据
 
-Write a function that filters data.  For example:
+创建一个筛选数据的函数。示例：
 
 ```python
 # ticker.py
@@ -255,7 +239,7 @@ def filter_symbols(rows, names):
             yield row
 ```
 
-Use this to filter stocks to just those in your portfolio:
+使用该函数可以筛选出投资组合中的股票：
 
 ```python
 import report
@@ -266,11 +250,9 @@ for row in rows:
     print(row)
 ```
 
-### Exercise 6.12: Putting it all together
+### 练习 6.12：整合所有的代码
 
-In the `ticker.py` program, write a function `ticker(portfile, logfile, fmt)`
-that creates a real-time stock ticker from a given portfolio, logfile,
-and table format.  For example::
+请在 `ticker.py` 文件中编写函数 `ticker(portfile, logfile, fmt)` ，该函数根据给定的投资组合、日志文件和表格格式创建实时的股票报价器。示例：
 
 ```python
 >>> from ticker import ticker
@@ -292,12 +274,8 @@ CAT,78.05,-0.47
 ...
 ```
 
-### Discussion
+### 讨论
 
-Some lessons learned: You can create various generator functions and
-chain them together to perform processing involving data-flow
-pipelines.  In addition, you can create functions that package a
-series of pipeline stages into a single function call (for example,
-the `parse_stock_data()` function).
+心得体会：你可以创建各种生成器函数，并把它们链接在一起执行涉及数据流的管道处理。另外，你可以创建一个函数，把一系列的管道阶段打包到一个单独的函数中调用（例如 `parse_stock_data()` 函数）。
 
-[Contents](../Contents.md) \| [Previous (6.2 Customizing Iteration)](02_Customizing_iteration.md) \| [Next (6.4 Generator Expressions)](04_More_generators.md)
+[目录](../Contents.md) \| [上一节 (6.2 自定义迭代)](02_Customizing_iteration.md) \| [下一节 (6.4 生成器表达式)](04_More_generators.md)
