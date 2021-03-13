@@ -1,13 +1,12 @@
-[Contents](../Contents.md) \| [Previous (6.3 Producer/Consumer)](03_Producers_consumers.md) \| [Next (7 Advanced Topics)](../07_Advanced_Topics/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (6.3 生产者/消费者)](03_Producers_consumers.md) \| [下一节 (7 高级主题)](../07_Advanced_Topics/00_Overview.md)
 
-# 6.4 More Generators
+# 6.4 有关生成器的更多信息
 
-This section introduces a few additional generator related topics
-including generator expressions and the itertools module.
+本节介绍其它与生成器相关的主题，包括生成器表达式（generator expressions）和 itertools 模块。
 
-### Generator Expressions
+### 生成器表达式
 
-A generator version of a list comprehension.
+生成器表达式可以理解为列表解析式（list comprehension）的生成器版本：
 
 ```python
 >>> a = [1,2,3,4]
@@ -21,25 +20,25 @@ A generator version of a list comprehension.
 >>>
 ```
 
-Differences with List Comprehensions.
+生成器表达式与列表列表解析式的区别：
 
-* Does not construct a list.
-* Only useful purpose is iteration.
-* Once consumed, can't be reused.
+* 不构造列表
+* 唯一有用的目的是迭代
+* 一旦被消费，无法重复使用
 
-General syntax.
+生成器表达式语法：
 
 ```python
 (<expression> for i in s if <conditional>)
 ```
 
-It can also serve as a function argument.
+生成器表达式也可以用作函数参数：
 
 ```python
 sum(x*x for x in a)
 ```
 
-It can be applied to any iterable.
+生成器表达式可应用于任何迭代：
 
 ```python
 >>> a = [1,2,3,4]
@@ -52,9 +51,7 @@ It can be applied to any iterable.
 >>>
 ```
 
-The main use of generator expressions is in code that performs some
-calculation on a sequence, but only uses the result once.  For
-example, strip all comments from a file.
+生成器表达式在代码中的一个主要用途是：对序列进行计算，但只使用一次结果。例如，跳过文件中的所有注释。
 
 ```python
 f = open('somefile.txt')
@@ -64,25 +61,25 @@ for line in lines:
 f.close()
 ```
 
-With generators, the code runs faster and uses little memory. It's
-like a filter applied to a stream.
+使用生成器，代码运行更快并且占用的内存更少，类似应用于流的过滤器。
 
-### Why Generators
+### 为什么使用生成器
 
-* Many problems are much more clearly expressed in terms of iteration.
-  * Looping over a collection of items and performing some kind of operation (searching, replacing, modifying, etc.).
-  * Processing pipelines can be applied to a wide range of data processing problems.
-* Better memory efficiency.
-  * Only produce values when needed.
-  * Contrast to constructing giant lists.
-  * Can operate on streaming data
-* Generators encourage code reuse
-  * Separates the *iteration* from code that uses the iteration
-  * You can build a toolbox of interesting iteration functions and *mix-n-match*.
 
-### `itertools` module
+* 许多问题以迭代的形式进行表示会更清晰
+  * 对集合中的元素进行遍历，并执行某些操作（如查找、替换，修改等）。
+  * 处理管道（processing pipelines）可应用于各种数据处理问题。
+* 内存效率更高
+  * 只在需要的时候才生成值。
+  * 不构造庞大的列表。
+  * 可对流数据进行操作。
+* 生成器表达式鼓励代码复用
+  * 从使用迭代的代码中分离出迭代。
+  * 构建迭代函数工具箱，混合搭配（mix-n-match）使用各种工具。
 
-The `itertools` is a library module with various functions designed to help with iterators/generators.
+### `itertools` 模块
+
+`itertools` 是 Python 自带的一个库模块，包含各种函数，旨在帮助开发迭代器/生成器。
 
 ```python
 itertools.chain(s1,s2)
@@ -97,20 +94,19 @@ itertools.tee(s, ncopies)
 itertools.izip(s1, ... , sN)
 ```
 
-All functions process data iteratively.
-They implement various kinds of iteration patterns.
+`itertools`  模块中所有的函数都可以迭代地处理数据。并且，这些函数实现了各类迭代模式。
 
-More information at [Generator Tricks for Systems Programmers](http://www.dabeaz.com/generators/) tutorial from PyCon '08.
+有关生成器的更多信息可以查看 PyCon '08 上的 [Generator Tricks for Systems Programmers](http://www.dabeaz.com/generators/) 教程。
 
-## Exercises
+## 练习
 
-In the previous exercises, you wrote some code that followed lines being written to a log file and parsed them into a sequence of rows.
-This exercise continues to build upon that.  Make sure the `Data/stocksim.py` is still running.
+在上一节练习中，我们编写代码监视写入日志文件的数据，并将其解析为行序列。
 
-### Exercise 6.13: Generator Expressions
+本次练习将以上一节练习中的代码为基础，所以请确保 `Data/stocksim.py` 仍在运行。
 
-Generator expressions are a generator version of a list comprehension.
-For example:
+### 练习 6.13：生成器表达式
+
+生成器表达式是列表解析式的生成器版本。示例：
 
 ```python
 >>> nums = [1, 2, 3, 4, 5]
@@ -127,8 +123,7 @@ For example:
 25
 ```
 
-Unlike a list a comprehension, a generator expression can only be used once.
-Thus, if you try another for-loop, you get nothing:
+与列表解析式不同，生成器表达式只能使用一次。因此，如果你遍历完生成器中的所有元素后，再次对生成器进行遍历，那么你将一无所获。
 
 ```python
 >>> for n in squares:
@@ -137,10 +132,9 @@ Thus, if you try another for-loop, you get nothing:
 >>>
 ```
 
-### Exercise 6.14: Generator Expressions in Function Arguments
+### 练习 6.14：函数参数中的生成器表达式
 
-Generator expressions are sometimes placed into function arguments.
-It looks a little weird at first, but try this experiment:
+有时，生成器表达式会作为函数参数使用。虽然这看起来有点怪，但请尝试以下实验：
 
 ```python
 >>> nums = [1,2,3,4,5]
@@ -150,18 +144,13 @@ It looks a little weird at first, but try this experiment:
 55
 >>>
 ```
-In the above example, the second version using generators would
-use significantly less memory if a large list was being manipulated.
+在上面的示例中，如果正在操作庞大的列表，那么使用生成器的第二个版本占用的内存会显著减少。
 
-In your `portfolio.py` file, you performed a few calculations
-involving list comprehensions.  Try replacing these with
-generator expressions.
+在  `portfolio.py` 文件中，我们执行了一些与列表相关的计算，请尝试将其替换为生成器表达式。
 
-### Exercise 6.15: Code simplification
+### 练习 6.15：简化代码
 
-Generators expressions are often a useful replacement for
-small generator functions.  For example, instead of writing a
-function like this:
+通常，对于简单的生成器函数，可以使用生成器表达式进行替换。例如，与其这样编写函数：
 
 ```python
 def filter_symbols(rows, names):
@@ -170,14 +159,12 @@ def filter_symbols(rows, names):
             yield row
 ```
 
-You could write something like this:
+不如使用生成器表达式进行替换：
 
 ```python
 rows = (row for row in rows if row['name'] in names)
 ```
 
-Modify the `ticker.py` program to use generator expressions
-as appropriate.
+请修改 `ticker.py` 程序来适当的使用生成器表达式。
 
-
-[Contents](../Contents.md) \| [Previous (6.3 Producer/Consumer)](03_Producers_consumers.md) \| [Next (7 Advanced Topics)](../07_Advanced_Topics/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (6.3 生产者/消费者)](03_Producers_consumers.md) \| [下一节 (7 高级主题)](../07_Advanced_Topics/00_Overview.md)
