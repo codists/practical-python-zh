@@ -1,24 +1,24 @@
-[Contents](../Contents.md) \| [Previous (7.1 Variable Arguments)](01_Variable_arguments.md) \| [Next (7.3 Returning Functions)](03_Returning_functions.md)
+[目录](../Contents.md) \| [上一节 (7.1可变参数)](01_Variable_arguments.md) \| [下一节 (7.3 返回函数)](03_Returning_functions.md)
 
-# 7.2 Anonymous Functions and Lambda
+# 7.2 匿名函数和 Lambda
 
-### List Sorting Revisited
+### 再探列表排序
 
-Lists can be sorted *in-place*. Using the `sort` method.
+列表可以使用 `sort` 方法进行*原地（in-place）排序*：
 
 ```python
 s = [10,1,7,3]
 s.sort() # s = [1,3,7,10]
 ```
 
-You can sort in reverse order.
+也可以进行降序排序（译注：原文使用的是  `sort in reverse order`，很多时候翻译为倒序排序或者反向排序，个人认为容易引起歧义，故翻译为降序排序）：
 
 ```python
 s = [10,1,7,3]
 s.sort(reverse=True) # s = [10,7,3,1]
 ```
 
-It seems simple enough. However, how do we sort a list of dicts?
+对单个列表排序似乎非常简单，但是，如果对字典列表排序，那么我们怎么做呢？
 
 ```python
 [{'name': 'AA', 'price': 32.2, 'shares': 100},
@@ -30,11 +30,9 @@ It seems simple enough. However, how do we sort a list of dicts?
 {'name': 'IBM', 'price': 70.44, 'shares': 100}]
 ```
 
-By what criteria?
+通过什么样的规则进行排序呢？
 
-You can guide the sorting by using a *key function*. The *key
-function* is a function that receives the dictionary and returns the
-value of interest for sorting.
+你可以使用键函数（key function）指导排序。键函数是这样的一种函数：接受一个字典并且返回一个用于排序的值。
 
 ```python
 def stock_name(s):
@@ -43,7 +41,7 @@ def stock_name(s):
 portfolio.sort(key=stock_name)
 ```
 
-Here's the result.
+排序结果如下：
 
 ```python
 # Check how the dictionaries are sorted by the `name` key
@@ -58,25 +56,19 @@ Here's the result.
 ]
 ```
 
-### Callback Functions
+### 回调函数
 
-In the above example, the key function is an example of a callback
-function. The `sort()` method "calls back" to a function you supply.
-Callback functions are often short one-line functions that are only
-used for that one operation.  Programmers often ask for a short-cut
-for specifying this extra processing.
+在上面的示例中，键函数是一个回调函数（callback function）。`sort()` 方法调用了 `stock_name（）`函数，然后 `stock_name（）` 函数返回一个值给 `sort()` 方法。通常，回调函数是一个简短的单行函数，只用于一个操作。程序员经常会要求提供一种快捷方法来指定这种额外的处理。
 
-### Lambda: Anonymous Functions
+### Lambda： 匿名函数
 
-Use a lambda instead of creating the function.  In our previous
-sorting example.
+在之前的排序示例中，我们可以使用 lambda， 而不是创建（具名）函数。
 
 ```python
 portfolio.sort(key=lambda s: s['name'])
 ```
 
-This creates an *unnamed* function that evaluates a *single* expression.
-The above code is much shorter than the initial code.
+上面的代码创建了一个匿名（*unnamed*）函数用来计算单个表达式，比初始代码短很多。
 
 ```python
 def stock_name(s):
@@ -88,16 +80,16 @@ portfolio.sort(key=stock_name)
 portfolio.sort(key=lambda s: s['name'])
 ```
 
-### Using lambda
+### 使用 lambda
 
-* lambda is highly restricted.
-* Only a single expression is allowed.
-* No statements like `if`, `while`, etc.
-* Most common use is with functions like `sort()`.
+* lambda 是受到严格限制的。
+* 只允许一个表达式。
+* 没有 `if`，`while` 之类的语句。
+* 多和其它函数一起使用，类似于 `sort()` 方法。
 
-## Exercises
+## 练习
 
-Read some stock portfolio data and convert it into a list:
+读取股票投资组合数据，并将数据转换为列表：
 
 ```python
 >>> import report
@@ -115,10 +107,9 @@ Stock('IBM', 100, 70.44)
 >>>
 ```
 
-### Exercise 7.5: Sorting on a field
+### 练习 7.5：对字段进行排序
 
-Try the following statements which sort the portfolio data
-alphabetically by stock name.
+请尝试下面的语句，这些语句按股票名称的字母顺序对投资组合数据进行排序。
 
 ```python
 >>> def stock_name(s):
@@ -132,14 +123,11 @@ alphabetically by stock name.
 >>>
 ```
 
-In this part, the `stock_name()` function extracts the name of a stock from
-a single entry in the `portfolio` list.   `sort()` uses the result of
-this function to do the comparison.
+在此部分，`stock_name()` 函数从 `portfolio` 列表的单个条目中提取股票名称。`sort()` 方法使用 `stock_name()` 函数的返回值进行比较并排序。
 
-### Exercise 7.6: Sorting on a field with lambda
+### 练习 7.6：使用 lambda 对字段进行排序
 
-Try sorting the portfolio according the number of shares using a
-`lambda` expression:
+请尝试使用 `lambda` 表达式，按股份数目对投资组合数据进行排序：
 
 ```python
 >>> portfolio.sort(key=lambda s: s.shares)
@@ -150,7 +138,7 @@ Try sorting the portfolio according the number of shares using a
 >>>
 ```
 
-Try sorting the portfolio according to the price of each stock
+尝试按每只股票的价格对投资组合数据进行排序：
 
 ```python
 >>> portfolio.sort(key=lambda s: s.price)
@@ -161,8 +149,6 @@ Try sorting the portfolio according to the price of each stock
 >>>
 ```
 
-Note: `lambda` is a useful shortcut because it allows you to
-define a special processing function directly in the call to `sort()` as
-opposed to having to define a separate function first.
+注意事项：`lambda` 是一种非常有用的快捷方式，因为它让你直接在 `sort()` 方法的调用中定义一个特殊的处理函数，而不必事先定义一个单独的函数。
 
-[Contents](../Contents.md) \| [Previous (7.1 Variable Arguments)](01_Variable_arguments.md) \| [Next (7.3 Returning Functions)](03_Returning_functions.md)
+[目录](../Contents.md) \| [上一节 (7.1可变参数)](01_Variable_arguments.md) \| [下一节 (7.3 返回函数)](03_Returning_functions.md)
