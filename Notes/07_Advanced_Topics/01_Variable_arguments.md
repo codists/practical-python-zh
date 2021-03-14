@@ -1,28 +1,25 @@
+[目录](../Contents.md) \| [上一节 (6.4 生成器表达式)](../06_Generators/04_More_generators.md) \| [下一节 (7.2 匿名函数)](02_Anonymous_function.md)
 
-[Contents](../Contents.md) \| [Previous (6.4 Generator Expressions)](../06_Generators/04_More_generators.md) \| [Next (7.2 Anonymous Functions)](02_Anonymous_function.md)
+# 7.1 可变参数
 
-# 7.1 Variable Arguments
+本节介绍可变（variadic）参数。有时，可变参数使用 `*args` 和 `**kwargs` 进行表示。
 
-This section covers variadic function arguments, sometimes described as
-`*args` and `**kwargs`.
+### 可变位置参数（`*args`）
 
-### Positional variable arguments (*args)
-
-A function that accepts *any number* of arguments is said to use variable arguments.
-For example:
+如果一个函数接受任意数量的（位置）参数，那么我们称该函数使用了可变参数（variable arguments）。示例：
 
 ```python
 def f(x, *args):
     ...
 ```
 
-Function call.
+函数调用：
 
 ```python
 f(1,2,3,4,5)
 ```
 
-The extra arguments get passed as a tuple.
+额外的参数作为元组进行传递：
 
 ```python
 def f(x, *args):
@@ -30,23 +27,22 @@ def f(x, *args):
     # args -> (2,3,4,5)
 ```
 
-### Keyword variable arguments (**kwargs)
+### 可变关键字参数（`**kwargs`）
 
-A function can also accept any number of keyword arguments.
-For example:
+一个函数也可以接受任意数量的关键字参数。示例：
 
 ```python
 def f(x, y, **kwargs):
     ...
 ```
 
-Function call.
+函数调用：
 
 ```python
 f(2, 3, flag=True, mode='fast', header='debug')
 ```
 
-The extra keywords are passed in a dictionary.
+额外的参数作为字典进行传递：
 
 ```python
 def f(x, y, **kwargs):
@@ -55,22 +51,22 @@ def f(x, y, **kwargs):
     # kwargs -> { 'flag': True, 'mode': 'fast', 'header': 'debug' }
 ```
 
-### Combining both
+### 可变位置参数与可变关键字参数结合使用
 
-A function can also accept any number of variable keyword and non-keyword arguments.
+一个函数可以同时接受可变非关键字参数和可变关键字参数。
 
 ```python
 def f(*args, **kwargs):
     ...
 ```
 
-Function call.
+函数调用:
 
 ```python
 f(2, 3, flag=True, mode='fast', header='debug')
 ```
 
-The arguments are separated into positional and keyword components
+这些参数被分为位置参数和关键字参数两部分。
 
 ```python
 def f(*args, **kwargs):
@@ -79,20 +75,18 @@ def f(*args, **kwargs):
     ...
 ```
 
-This function takes any combination of positional or keyword
-arguments.  It is sometimes used when writing wrappers or when you
-want to pass arguments through to another function.
+上述函数接受任意数量的位置参数和关键字参数。当编写包装器（wrappers）或要将参数传递给另一个函数时使用。
 
-### Passing Tuples and Dicts
+### 传递元组和字典
 
-Tuples can be expanded into variable arguments.
+元组可扩展为可变参数:
 
 ```python
 numbers = (2,3,4)
 f(1, *numbers)      # Same as f(1,2,3,4)
 ```
 
-Dictionaries can also be expanded into keyword arguments.
+字典也可以扩展为关键字参数:
 
 ```python
 options = {
@@ -104,11 +98,11 @@ f(data, **options)
 # Same as f(data, color='red', delimiter=',', width=400)
 ```
 
-## Exercises
+## 练习
 
-### Exercise 7.1: A simple example of variable arguments
+### 练习 7.1: 可变参数的简单示例
 
-Try defining the following function:
+尝试定义下列函数：
 
 ```python
 >>> def avg(x,*more):
@@ -123,20 +117,18 @@ Try defining the following function:
 >>>
 ```
 
-Notice how the parameter `*more` collects all of the extra arguments.
+请注意 `*more` 是如何收集其它所有参数的。　
 
-### Exercise 7.2: Passing tuple and dicts as arguments
+### 练习 7.2：将元组和字典作为参数进行传递
 
-Suppose you read some data from a file and obtained a tuple such as
-this:
+假设你从文件中读取数据，并获得一个元组。例如：
 
 ```
 >>> data = ('GOOG', 100, 490.1)
 >>>
 ```
 
-Now, suppose you wanted to create a `Stock` object from this
-data.  If you try to pass `data` directly, it doesn't work:
+现在，假设你想根据上面的数据创建一个 `Stock` 对象。如果你直接传 `data` ，那就行不通了：
 
 ```
 >>> from stock import Stock
@@ -147,7 +139,7 @@ TypeError: __init__() takes exactly 4 arguments (2 given)
 >>>
 ```
 
-This is easily fixed using `*data` instead.  Try this:
+这个问题很容易解决，直接使用 `*data` 即可。试试看：
 
 ```python
 >>> s = Stock(*data)
@@ -156,7 +148,7 @@ Stock('GOOG', 100, 490.1)
 >>>
 ```
 
-If you have a dictionary, you can use `**` instead. For example:
+如果你拥有的是一个字典，那么你可以改用 `**`。示例：
 
 ```python
 >>> data = { 'name': 'GOOG', 'shares': 100, 'price': 490.1 }
@@ -165,10 +157,9 @@ Stock('GOOG', 100, 490.1)
 >>>
 ```
 
-### Exercise 7.3: Creating a list of instances
+### 练习 7.3：创建实例列表
 
-In your `report.py` program, you created a list of instances
-using code like this:
+在  `report.py`  程序中，我们使用如下代码创建了一个实例列表：
 
 ```python
 def read_portfolio(filename):
@@ -186,13 +177,11 @@ def read_portfolio(filename):
     return Portfolio(portfolio)
 ```
 
-You can simplify that code using `Stock(**d)` instead.  Make that change.
+我们可以改用 `Stock(**d)` 来简化代码。请完成修改。
 
-### Exercise 7.4: Argument pass-through
+### 练习 7.4：参数传递
 
-The `fileparse.parse_csv()` function has some options for changing the
-file delimiter and for error reporting.  Maybe you'd like to expose those
-options to the `read_portfolio()` function above.   Make this change:
+`fileparse.parse_csv()` 函数具有一些选项，用于更改文件分隔符和错误报告。也许你会想要这些选择暴露给上面的 `read_portfolio()` 函数。请完成修改：
 
 ```
 def read_portfolio(filename, **opts):
@@ -210,7 +199,7 @@ def read_portfolio(filename, **opts):
     return Portfolio(portfolio)
 ```
 
-Once you've made the change, trying reading a file with some errors:
+修改完成后，尝试阅读读取一些带有错误的文件：
 
 ```python
 >>> import report
@@ -222,7 +211,7 @@ Row 7: Reason invalid literal for int() with base 10: ''
 >>>
 ```
 
-Now, try silencing the errors:
+现在，尝试隐藏错误：
 
 ```python
 >>> import report
@@ -230,4 +219,4 @@ Now, try silencing the errors:
 >>>
 ```
 
-[Contents](../Contents.md) \| [Previous (6.4 Generator Expressions)](../06_Generators/04_More_generators.md) \| [Next (7.2 Anonymous Functions)](02_Anonymous_function.md)
+[目录](../Contents.md) \| [上一节 (6.4 生成器表达式)](../06_Generators/04_More_generators.md) \| [下一节 (7.2 匿名函数)](02_Anonymous_function.md)
