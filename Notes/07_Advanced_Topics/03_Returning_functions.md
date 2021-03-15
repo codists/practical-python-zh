@@ -1,12 +1,12 @@
-[Contents](../Contents.md) \| [Previous (7.2 Anonymous Functions)](02_Anonymous_function.md) \| [Next (7.4 Decorators)](04_Function_decorators.md)
+[目录](../Contents.md) \| [上一节 (7.2 匿名函数)](02_Anonymous_function.md) \| [下一节 (7.4 装饰器)](04_Function_decorators.md)
 
-# 7.3 Returning Functions
+# 7.3 返回函数Returning Functions
 
-This section introduces the idea of using functions to create other functions.
+本节介绍使用函数创建其它函数的思想。
 
-### Introduction
+### 简介
 
-Consider the following function.
+考虑以下函数：
 
 ```python
 def add(x, y):
@@ -16,7 +16,7 @@ def add(x, y):
     return do_add
 ```
 
-This is a function that returns another function.
+这是返回其它函数的函数。
 
 ```python
 >>> a = add(3,4)
@@ -27,10 +27,9 @@ Adding 3 4
 7
 ```
 
-### Local Variables
+### 局部变量
 
-Observe how the inner function refers to variables defined by the outer
-function.
+请观察内部函数是如何引用外部函数定义的变量的。
 
 ```python
 def add(x, y):
@@ -41,8 +40,7 @@ def add(x, y):
     return do_add
 ```
 
-Further observe that those variables are somehow kept alive after
-`add()` has finished.
+进一步观察会发现，在 `add()` 函数结束后，这些变量仍然保持存活。
 
 ```python
 >>> a = add(3,4)
@@ -53,9 +51,9 @@ Adding 3 4      # Where are these values coming from?
 7
 ```
 
-### Closures
+### 闭包
 
-When an inner function is returned as a result, that inner function is known as a *closure*.
+当内部函数作为结果返回时，该内部函数称为闭包（closure）。
 
 ```python
 def add(x, y):
@@ -66,23 +64,19 @@ def add(x, y):
     return do_add
 ```
 
-*Essential feature: A closure retains the values of all variables
- needed for the function to run properly later on.*   Think of a
-closure as a function plus an extra environment that holds the values
-of variables that it depends on.
+基本特性：闭包保留该函数以后正常运行所需的所有变量的值。可以将闭包视作一个函数，该函数拥有一个额外的环境来保存它所依赖的变量的值。
 
-### Using Closures
+### 使用闭包
 
-Closure are an essential feature of Python. However, their use if often subtle.
-Common applications:
+虽然闭包是 Python 的基本特性，但是它们的用法通常很微妙。常见应用：
 
-* Use in callback functions.
-* Delayed evaluation.
-* Decorator functions (later).
+* 在回调函数中使用。
+* 延迟计算。
+* 装饰器函数（稍后介绍）。
 
-### Delayed Evaluation
+### 延迟计算
 
-Consider a function like this:
+考虑这样的函数：
 
 ```python
 def after(seconds, func):
@@ -91,7 +85,7 @@ def after(seconds, func):
     func()
 ```
 
-Usage example:
+使用示例：
 
 ```python
 def greeting():
@@ -100,9 +94,9 @@ def greeting():
 after(30, greeting)
 ```
 
-`after` executes the supplied function... later.
+`after` （延迟30 秒后）执行给定的函数......
 
-Closures carry extra information around.
+闭包附带了其它信息。
 
 ```python
 def add(x, y):
@@ -119,19 +113,15 @@ after(30, add(2, 3))
 # `do_add` has the references x -> 2 and y -> 3
 ```
 
-### Code Repetition
+### 代码重复
 
-Closures can also be used as technique for avoiding excessive code repetition.
-You can write functions that make code.
+闭包也可以用作一种避免代码大量重复的技术。
 
-## Exercises
+## 练习
 
-### Exercise 7.7: Using Closures to Avoid Repetition
+### 练习 7.7：使用闭包避免重复
 
-One of the more powerful features of closures is their use in
-generating repetitive code.  If you refer back to [Exercise
-5.7](../05_Object_model/02_Classes_encapsulation), recall the code for
-defining a property with type checking.
+闭包的一个更强大的特性是用于生成重复的代码。让我们回顾 [练习 5.7](../05_Object_model/02_Classes_encapsulation) 代码，该代码中定义了带有类型检查的属性：
 
 ```python
 class Stock:
@@ -152,11 +142,9 @@ class Stock:
     ...
 ```
 
-Instead of repeatedly typing that code over and over again, you can
-automatically create it using a closure.
+与其一遍又一遍地输入代码，不如使用闭包自动创建代码。
 
-Make a file `typedproperty.py` and put the following code in
-it:
+请创建 `typedproperty.py` 文件，并把下述代码放到文件中：
 
 ```python
 # typedproperty.py
@@ -176,7 +164,7 @@ def typedproperty(name, expected_type):
     return prop
 ```
 
-Now, try it out by defining a class like this:
+现在，通过定义下面这样的类来尝试以下：
 
 ```python
 from typedproperty import typedproperty
@@ -192,7 +180,7 @@ class Stock:
         self.price = price
 ```
 
-Try creating an instance and verifying that type-checking works.
+请尝试创建一个实例，并验证类型检查是否有效：
 
 ```python
 >>> s = Stock('IBM', 50, 91.1)
@@ -203,12 +191,9 @@ Try creating an instance and verifying that type-checking works.
 >>>
 ```
 
-### Exercise 7.8: Simplifying Function Calls
+### 练习 7.8：简化函数调用
 
-In the above example, users might find calls such as
-`typedproperty('shares', int)` a bit verbose to type--especially if
-they're repeated a lot.  Add the following definitions to the
-`typedproperty.py` file:
+在上面示例中，用户可能会发现调用诸如 `typedproperty('shares', int)` 这样的方法稍微有点冗长 ——尤其是多次重复调用的时候。请将以下定义添加到 `typedproperty.py` 文件中。
 
 ```python
 String = lambda name: typedproperty(name, str)
@@ -216,7 +201,7 @@ Integer = lambda name: typedproperty(name, int)
 Float = lambda name: typedproperty(name, float)
 ```
 
-Now, rewrite the `Stock` class to use these functions instead:
+现在，请重新编写  `Stock`  类以使用以下函数：
 
 ```python
 class Stock:
@@ -230,13 +215,10 @@ class Stock:
         self.price = price
 ```
 
-Ah, that's a bit better.   The main takeaway here is that closures and `lambda`
-can often be used to simplify code and eliminate annoying repetition.  This
-is often good.
+啊，好一点了。这里的要点是：闭包和 `lambda` 常用于简化代码，并消除令人讨厌的代码重复。这通常很不错。
 
-### Exercise 7.9: Putting it into practice
+### 练习 7.9：付诸实践
 
-Rewrite the `Stock` class in the file `stock.py` so that it uses typed properties
-as shown.
+请重新编写  `stock.py` 文件中的 `Stock` 类，以便使用上面展示的类型化特性（typed properties）。
 
-[Contents](../Contents.md) \| [Previous (7.2 Anonymous Functions)](02_Anonymous_function.md) \| [Next (7.4 Decorators)](04_Function_decorators.md)
+[目录](../Contents.md) \| [上一节 (7.2 匿名函数)](02_Anonymous_function.md) \| [下一节 (7.4 装饰器)](04_Function_decorators.md)
