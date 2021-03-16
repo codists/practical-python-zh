@@ -1,6 +1,6 @@
 [目录](../Contents.md) \| [上一节 (7.2 匿名函数)](02_Anonymous_function.md) \| [下一节 (7.4 装饰器)](04_Function_decorators.md)
 
-# 7.3 返回函数Returning Functions
+# 7.3 返回函数
 
 本节介绍使用函数创建其它函数的思想。
 

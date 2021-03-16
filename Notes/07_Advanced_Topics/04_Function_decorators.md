@@ -1,20 +1,19 @@
-[Contents](../Contents.md) \| [Previous (7.3 Returning Functions)](03_Returning_functions.md) \| [Next (7.5 Decorated Methods)](05_Decorated_methods.md)
+[目录](../Contents.md) \| [上一节 (7.3 返回函数)](03_Returning_functions.md) \| [下一节 (7.5 装饰方法)](05_Decorated_methods.md)
 
-# 7.4 Function Decorators
+# 7.4 函数装饰器
 
-This section introduces the concept of a decorator.  This is an advanced
-topic for which we only scratch the surface.
+本节介绍装饰器（decorator）。因为这是一个高级主题，所以我们只做简单介绍。
 
-### Logging Example
+### 日志示例
 
-Consider a function.
+考虑这样一个函数：
 
 ```python
 def add(x, y):
     return x + y
 ```
 
-Now, consider the function with some logging added to it.
+考虑给 `add(x, y)` 函数添加日志功能：
 
 ```python
 def add(x, y):
@@ -22,7 +21,7 @@ def add(x, y):
     return x + y
 ```
 
-Now a second function also with some logging.
+也带有日志功能的 `sub(x, y)`函数：
 
 ```python
 def sub(x, y):
@@ -30,19 +29,15 @@ def sub(x, y):
     return x - y
 ```
 
-### Observation
+### 观察
 
-*Observation: It's kind of repetitive.*
+*观察： 这是一种重复。*
 
-Writing programs where there is a lot of code replication is often
-really annoying.  They are tedious to write and hard to maintain.
-Especially if you decide that you want to change how it works (i.e., a
-different kind of logging perhaps).
+在有大量重复代码的地方编写程序通常很烦人。这些代码不仅写起来枯燥，维护起来也很麻烦。尤其是你决定更改其工作方式的时候（例如，可能是另一种类型的日志记录）。
 
-### Code that makes logging
+### 记录日志的代码
 
-Perhaps you can make a function that makes functions with logging
-added to them. A wrapper.
+也许你可以创建一个添加了日志功能的函数。例如包装器（wrapper）：
 
 ```python
 def logged(func):
@@ -52,7 +47,7 @@ def logged(func):
     return wrapper
 ```
 
-Now use it.
+使用该函数：
 
 ```python
 def add(x, y):
@@ -61,17 +56,15 @@ def add(x, y):
 logged_add = logged(add)
 ```
 
-What happens when you call the function returned by `logged`?
+当调用 `logged` 返回的函数时会发生什么？
 
 ```python
 logged_add(3, 4)      # You see the logging message appear
 ```
 
-This example illustrates the process of creating a so-called *wrapper function*.
+此示例阐明了创建所谓的*包装器函数（wrapper function）* 的过程。
 
-A wrapper is a function that wraps around another function with some
-extra bits of processing, but otherwise works in the exact same way
-as the original function.
+包装器是一个函数，它包装了另一个带有额外处理功能的函数，但在其它方面与原始函数的工作方式完全相同。
 
 ```python
 >>> logged_add(3, 4)
@@ -80,12 +73,11 @@ Calling add   # Extra output. Added by the wrapper
 >>>
 ```
 
-*Note: The `logged()` function creates the wrapper and returns it as a result.*
+注意事项：`logged()`  函数创建了一个包装器，并作为结果返回。
 
-## Decorators
+## 装饰器
 
-Putting wrappers around functions is extremely common in Python.
-So common, there is a special syntax for it.
+在 Python 中，在函数中使用包装器非常常见。因为如此普遍，所以有一个特殊的语法。
 
 ```python
 def add(x, y):
@@ -98,23 +90,17 @@ def add(x, y):
     return x + y
 ```
 
-The special syntax performs the same exact steps as shown above. A decorator is just new syntax.
-It is said to *decorate* the function.
+该特殊语法执行与上面完全相同的确切步骤。装饰器只是一种新语法，用于装饰函数。
 
-### Commentary
+### 说明
 
-There are many more subtle details to decorators than what has been presented here.
-For example, using them in classes. Or using multiple decorators with a function.
-However, the previous example is a good illustration of how their use tends to arise.
-Usually, it's in response to repetitive code appearing across a wide range of
-function definitions.  A decorator can move that code to a central definition.
+对于装饰器而言，还有许多比这里展示的更微妙的细节，例如，在类里面使用装饰器，或者对同一个函数使用多个装饰器。不过，这里的例子已经很好的说明了如何使用它们。一般而言，它是对出现在各种函数定义中的重复代码的响应。装饰器可以将重复代码移至中心定义。
 
-## Exercises
+## 练习
 
-### Exercise 7.10: A decorator for timing
+### 练习 7.10：计时装饰器
 
-If you define a function, its name and module are stored in the
-`__name__` and `__module__` attributes. For example:
+如果你定义了一个函数，那么函数的名称和函数所属模块的名称会分别存储到 `__name__` 和 `__module__`属性中。示例：
 
 ```python
 >>> def add(x,y):
@@ -127,10 +113,7 @@ If you define a function, its name and module are stored in the
 >>>
 ```
 
-In a file `timethis.py`, write a decorator function `timethis(func)`
-that wraps a function with an extra layer of logic that prints out how
-long it takes for a function to execute.  To do this, you'll surround
-the function with timing calls like this:
+请创建 `timethis.py` 文件，并在文件中编写 `timethis(func)` 函数。`timethis(func)` 函数包装一个具有额外逻辑层的函数，逻辑层打印出函数执行所需要的事件。为此，你将在函数中添加如下计时调用。
 
 ```python
 start = time.time()
@@ -139,7 +122,7 @@ end = time.time()
 print('%s.%s: %f' % (func.__module__, func.__name__, end-start))
 ```
 
-Here is an example of how your decorator should work:
+（`timethis(func)`）装饰器工作方式示例：
 
 ```python
 >>> from timethis import timethis
@@ -153,8 +136,6 @@ __main__.countdown : 0.076562
 >>>
 ```
 
-Discussion:  This `@timethis` decorator can be placed in front of any
-function definition.   Thus, you might use it as a diagnostic tool for
-performance tuning.
+讨论：`@timethis` 装饰器可以放在任何函数的前面，即你应该把装饰器用作性能调优（performance tuning）的诊断工具。
 
-[Contents](../Contents.md) \| [Previous (7.3 Returning Functions)](03_Returning_functions.md) \| [Next (7.5 Decorated Methods)](05_Decorated_methods.md)
+[目录](../Contents.md) \| [上一节 (7.3 返回函数)](03_Returning_functions.md) \| [下一节 (7.5 装饰方法)](05_Decorated_methods.md)
