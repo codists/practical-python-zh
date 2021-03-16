@@ -1,13 +1,12 @@
-[Contents](../Contents.md) \| [Previous (7.4 Decorators)](04_Function_decorators.md) \| [Next (8 Testing and Debugging)](../08_Testing_debugging/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (7.4 装饰器)](04_Function_decorators.md) \| [下一节 (8 测试和调试)](../08_Testing_debugging/00_Overview.md)
 
-# 7.5 Decorated Methods
+# 7.5 装饰方法
 
-This section discusses a few built-in decorators that are used in
-combination with method definitions.
+本节讨论一些与方法定义结合使用的内置装饰器。
 
-### Predefined Decorators
+### 预定义的装饰器
 
-There are predefined decorators used to specify special kinds of methods in class definitions.
+在类定义中，有许多预定义的装饰器用于指定特殊类型的方法。
 
 ```python
 class Foo:
@@ -27,13 +26,11 @@ class Foo:
         ...
 ```
 
-Let's go one by one.
+让我们逐个查看吧。
 
-### Static Methods
+### 静态方法
 
-`@staticmethod` is used to define a so-called *static* class methods
-(from C++/Java).  A static method is a function that is part of the
-class, but which does *not* operate on instances.
+`@staticmethod` 用于定义所谓的静态类方法（ *static* class method，来自于 C++/Java）。静态方法是一个函数，这个函数是类的一部分，但不是在实例上进行操作。
 
 ```python
 class Foo(object):
@@ -41,20 +38,16 @@ class Foo(object):
     def bar(x):
         print('x =', x)
 
->>> Foo.bar(2) x=2
+>>> Foo.bar(2) 
+x=2
 >>>
 ```
 
-Static methods are sometimes used to implement internal supporting
-code for a class.  For example, code to help manage created instances
-(memory management, system resources, persistence, locking, etc).
-They're also used by certain design patterns (not discussed here).
+静态方法有时用于实现类的内部支持代码，例如，用于帮助管理已创建的实例（内存管理，系统资源，持久化，锁等等）。有时也用于某些设计模式（这里暂不讨论）。
 
-### Class Methods
+### 类方法
 
-`@classmethod` is used to define class methods.  A class method is a
-method that receives the *class* object as the first parameter instead
-of the instance.
+`@classmethod` 用于定义类方法（class methods）。类方法是一种将 *类* 对象而不是实例作为第一个参数的方法。
 
 ```python
 class Foo:
@@ -73,9 +66,10 @@ class Foo:
 >>>
 ```
 
-Class methods are most often used as a tool for defining alternate constructors.
+类方法常用作定义替代构造函数（constructor）的工具。
 
 ```python
+import time
 class Date:
     def __init__(self,year,month,day):
         self.year = year
@@ -92,7 +86,7 @@ class Date:
 d = Date.today()
 ```
 
-Class methods solve some tricky problems with features like inheritance.
+类方法可以和继承等特性一起使用以解决棘手的问题。
 
 ```python
 class Date:
@@ -109,12 +103,11 @@ class NewDate(Date):
 d = NewDate.today()
 ```
 
-## Exercises
+## 练习
 
-### Exercise 7.11: Class Methods in Practice
+### 练习 7.11：实践中的类方法
 
-In your `report.py` and `portfolio.py` files, the creation of a `Portfolio`
-object is a bit muddled.  For example, the `report.py` program has code like this:
+在 `report.py` 和 `portfolio.py` 文件中， `Portfolio` 类的创建稍微有点混乱。例如，`report.py`  程序具有如下代码：
 
 ```python
 def read_portfolio(filename, **opts):
@@ -132,8 +125,7 @@ def read_portfolio(filename, **opts):
     return Portfolio(portfolio)
 ```
 
-and the `portfolio.py` file defines `Portfolio()` with an odd initializer
-like this:
+且 `portfolio.py` 文件中定义的  `Portfolio` 具有一个奇怪的初始化：
 
 ```python
 class Portfolio:
@@ -142,10 +134,7 @@ class Portfolio:
     ...
 ```
 
-Frankly, the chain of responsibility is all a bit confusing because the
-code is scattered.    If a `Portfolio` class is supposed to contain
-a list of `Stock` instances, maybe you should change the class to be a bit more clear.
-Like this:
+坦白说，因为代码分散在各文件中，所以责任链稍微有点混乱。如果 `Portfolio` 类应该包含 `Stock` 类的实例列表，那么你应该修改该类以使其更清晰。示例：
 
 ```python
 # portfolio.py
@@ -163,8 +152,7 @@ class Portfolio:
     ...
 ```
 
-If you want to read a portfolio from a CSV file, maybe you should make a
-class method for it:
+如果想要从 CSV 文件中读取投资组合数据，那么你也许应该为此创建一个类方法：
 
 ```python
 # portfolio.py
@@ -195,7 +183,7 @@ class Portfolio:
         return self
 ```
 
-To use this new Portfolio class, you can now write code like this:
+要使用新的 Portfolio 类，你可以这样编写代码：
 
 ```
 >>> from portfolio import Portfolio
@@ -205,7 +193,6 @@ To use this new Portfolio class, you can now write code like this:
 >>>
 ```
 
-Make these changes to the `Portfolio` class and modify the `report.py`
-code to use the class method.
+请对 `Portfolio` 类进行修改，然后修改 `report.py` 的代码以使用类方法。
 
-[Contents](../Contents.md) \| [Previous (7.4 Decorators)](04_Function_decorators.md) \| [Next (8 Testing and Debugging)](../08_Testing_debugging/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (7.4 装饰器)](04_Function_decorators.md) \| [下一节 (8 测试和调试)](../08_Testing_debugging/00_Overview.md)
