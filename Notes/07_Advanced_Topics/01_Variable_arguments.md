@@ -181,7 +181,7 @@ def read_portfolio(filename):
 
 ### 练习 7.4：参数传递
 
-`fileparse.parse_csv()` 函数具有一些选项，用于更改文件分隔符和错误报告。也许你会想要这些选择暴露给上面的 `read_portfolio()` 函数。请完成修改：
+`fileparse.parse_csv()` 函数具有一些选项，用于更改文件分隔符和错误报告。也许你会想把这些选择暴露给上面的 `read_portfolio()` 函数。请完成修改：
 
 ```
 def read_portfolio(filename, **opts):
