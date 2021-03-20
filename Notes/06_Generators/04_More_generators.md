@@ -165,6 +165,6 @@ def filter_symbols(rows, names):
 rows = (row for row in rows if row['name'] in names)
 ```
 
-请修改 `ticker.py` 程序来适当的使用生成器表达式。
+请修改 `ticker.py` 程序来适当地使用生成器表达式。
 
 [目录](../Contents.md) \| [上一节 (6.3 生产者/消费者)](03_Producers_consumers.md) \| [下一节 (7 高级主题)](../07_Advanced_Topics/00_Overview.md)

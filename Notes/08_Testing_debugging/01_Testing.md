@@ -1,43 +1,34 @@
-[Contents](../Contents.md) \| [Previous (7.5 Decorated Methods)](../07_Advanced_Topics/05_Decorated_methods.md) \| [Next (8.2 Logging)](02_Logging.md)
+[目录](../Contents.md) \| [上一节 (7.5 装饰方法](../07_Advanced_Topics/05_Decorated_methods.md) \| [下一节 (8.2 日志)](02_Logging.md)
 
-# 8.1 Testing
+# 8.1 测试
 
-## Testing Rocks, Debugging Sucks
+## 多测试，少调试（Testing Rocks, Debugging Sucks）
 
-The dynamic nature of Python makes testing critically important to
-most applications.  There is no compiler to find your bugs. The only
-way to find bugs is to run the code and make sure you try out all of
-its features.
+Python 的动态性质使得测试对大多数程序而言至关重要。编译器不会发现你的 bug，发现 bug 的唯一方式是运行代码，并确保尝试了所有的特性。
 
-## Assertions
+## 断言（Assertions）
 
-The `assert` statement is an internal check for the program.  If an
-expression is not true, it raises a `AssertionError` exception.
+`assert` 语句用于程序的内部检查。如果表达式不为真，则会触发 `AssertionError` 异常。
 
-`assert` statement syntax.
+`assert` 语句语法：
 
 ```python
 assert <expression> [, 'Diagnostic message']
 ```
 
-For example.
+示例：
 
 ```python
 assert isinstance(10, int), 'Expected int'
 ```
 
-It shouldn't be used to check the user-input (i.e., data entered
-on a web form or something).  It's purpose is more for internal
-checks and invariants (conditions that should always be true).
+ `assert` 语句不应用于检查用户的输入（例如，在网页表单输入的数据）。 `assert` 语句旨在用于内部检查或者用于不变量（invariant，始终为 True 的条件）。
 
-### Contract Programming
+### 契约式编程
 
-Also known as Design By Contract, liberal use of assertions is an
-approach for designing software. It prescribes that software designers
-should define precise interface specifications for the components of
-the software.
+契约式编程（contract programming）也称为契约式设计（Design By Contract），自由使用断言是一种软件设计方法。契约式编程规定软件设计人员应该为软件组件定义精确的接口规范。
 
-For example, you might put assertions on all inputs of a function.
+例如，你可以在所有的函数输入中使用断言：
 
 ```python
 def add(x, y):
@@ -46,8 +37,7 @@ def add(x, y):
     return x + y
 ```
 
-Checking inputs will immediately catch callers who aren't using
-appropriate arguments.
+如果函数调用者没有使用正确的参数，那么检查输入可以立即捕捉到。
 
 ```python
 >>> add(2, 3)
@@ -59,9 +49,9 @@ AssertionError: Expected int
 >>>
 ```
 
-### Inline Tests
+### 内联测试
 
-Assertions can also be used for simple tests.
+断言也可以用于简单的测试。
 
 ```python
 def add(x, y):
@@ -70,18 +60,15 @@ def add(x, y):
 assert add(2,2) == 4
 ```
 
-This way you are including the test in the same module as your code.
+这样，你就可以将测试与代码包含在同一模块中。
 
-*Benefit: If the code is obviously broken, attempts to import the
- module will crash.*
+*好处：如果代码明显被破坏，那么尝试导入模块将会导致程序崩溃。*
 
-This is not recommended for exhaustive testing. It's more of a
-basic "smoke test".  Does the function work on any example at all?
-If not, then something is definitely broken.
+对于详尽的测试，不推荐这样做。这种做法更像是基本的“冒烟测试（smoke test）”。函数是否可以在所有的用例上正常工作？如果不可以，那么肯定是有问题的。
 
-### `unittest` Module
+### `unittest` 模块
 
-Suppose you have some code.
+假设你有下面这样一段代码：
 
 ```python
 # simple.py
@@ -90,7 +77,7 @@ def add(x, y):
     return x + y
 ```
 
-Now, suppose you want to test it.  Create a separate testing file like this.
+现在，你想对这些代码进行测试，请创建一个单独的测试文件，如下所示：
 
 ```python
 # test_simple.py
@@ -99,7 +86,7 @@ import simple
 import unittest
 ```
 
-Then define a testing class.
+然后定义一个测试类：
 
 ```python
 # test_simple.py
@@ -112,9 +99,9 @@ class TestAdd(unittest.TestCase):
     ...
 ```
 
-The testing class must inherit from `unittest.TestCase`.
+测试类必须继承自`unittest.TestCase`。
 
-In the testing class, you define the testing methods.
+在测试类中，定义测试方法：
 
 ```python
 # test_simple.py
@@ -134,11 +121,11 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(r, 'helloworld')
 ```
 
-*Important: Each method must start with `test`.
+*重要提示：每个方法的名称必须以 `test` 开头。*
 
-### Using `unittest`
+### 使用 `unittest` 
 
-There are several built in assertions that come with `unittest`. Each of them asserts a different thing.
+`unittest` 中内置了一些断言，每种断言对不同的事情进行诊断。
 
 ```python
 # Assert that expr is True
@@ -157,12 +144,11 @@ self.assertAlmostEqual(x,y,places)
 self.assertRaises(exc, callable, arg1, arg2, ...)
 ```
 
-This is not an exhaustive list. There are other assertions in the
-module.
+上述列表并不是一个完整的列表，`unittest` 模块还有其它断言。
 
-### Running `unittest`
+### 运行 `unittest`
 
-To run the tests, turn the code into a script.
+要运行测试，请把代码转换为脚本。
 
 ```python
 # test_simple.py
@@ -173,7 +159,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-Then run Python on the test file.
+然后使用 Python 执行测试文件：
 
 ```bash
 bash % python3 test_simple.py
@@ -190,21 +176,15 @@ Ran 2 tests in 0.000s
 FAILED (failures=1)
 ```
 
-### Commentary
+### 说明
 
-Effective unit testing is an art and it can grow to be quite
-complicated for large applications.
+高效的单元测试是一种艺术。对于大型应用而言，单元测试可能会变得非常复杂。
 
-The `unittest` module has a huge number of options related to test
-runners, collection of results and other aspects of testing. Consult
-the documentation for details.
+`unittest` 模块具有大量与测试执行器（test runners），测试结果集（collection of results）以及测试其他方面相关的选项。相关详细信息，请查阅文档。
 
-### Third Party Test Tools
+### 第三方测试工具
 
-The built-in `unittest` module has the advantage of being available everywhere--it's
-part of Python.  However, many programmers also find it to be quite verbose.
-A popular alternative is [pytest](https://docs.pytest.org/en/latest/).   With pytest,
-your testing file simplifies to something like the following:
+虽然内置 `unittest` 模块的优势是可以随处使用——因为它是 Python 的一部分，但是许多程序员也觉得 `unittest` 非常繁琐。另一个流行的的测试工具是 [pytest](https://docs.pytest.org/en/latest/)。使用 pytest，测试文件可以简化为以下形式：
 
 ```python
 # test_simple.py
@@ -217,30 +197,19 @@ def test_str():
     assert simple.add('hello','world') == 'helloworld'
 ```
 
-To run the tests, you simply type a command such as `python -m pytest`.  It will
-discover all of the tests and run them.
+要运行测试，只需要输入一个命令即可，例如：`python -m pytest` 。它将会发现所有的测试并运行这些测试。
 
-There's a lot more to `pytest` than this example, but it's usually pretty easy to
-get started should you decide to try it out.
+除了这个示例之外，`pytest` 还有很多内容。如果你决定尝试一下，通常很容易上手。
 
-## Exercises
+## 练习
 
-In this exercise, you will explore the basic mechanics of using
-Python's `unittest` module.
+在本次练习中，我们将探索使用 Python `unittest` 模块的基本机制（mechanics）。
 
-In earlier exercises, you wrote a file `stock.py` that contained a
-`Stock` class.  For this exercise, it assumed that you're using the
-code written for [Exercise
-7.9](../07_Advanced_Topics/03_Returning_functions) involving
-typed-properties.  If, for some reason, that's not working, you might
-want to copy the solution from `Solutions/7_9` to your working
-directory.
+在前面的练习中，我们编写了一个包含 `Stock` 类的 `stock.py` 文件。对于本次练习，假设我们使用的是 [练习7.9](../07_Advanced_Topics/03_Returning_functions) 中编写的与类型化属性相关的代码（译注：`typedproperty.py`）。如果因为某些原因，练习 7.9 的代码无法正常工作，你可以从 `Solutions/7_9` 中复制 `typedproperty.py` 到工作目录中。
 
-### Exercise 8.1: Writing Unit Tests
+### 练习 8.1：编写单元测试
 
-In a separate file `test_stock.py`, write a set a unit tests
-for the `Stock` class.   To get you started, here is a small
-fragment of code that tests instance creation:
+请创建一个单独的 `test_stock.py` 文件，为 `Stock` 编写单元测试集。为了让你入门，这里有一小段测试实例创建的代码：
 
 
 ```python
@@ -260,7 +229,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-Run your unit tests.   You should get some output that looks like this:
+运行单元测试，你应该可以获得一些像下面这有的输出：
 
 ```
 .
@@ -270,16 +239,13 @@ Ran 1 tests in 0.000s
 OK
 ```
 
-Once you're satisifed that it works, write additional unit tests that
-check for the following:
+然后，编写其它单元测试来检查以下各项内容：
 
-- Make sure the `s.cost` property returns the correct value (49010.0)
-- Make sure the `s.sell()` method works correctly.  It should
-  decrement the value of `s.shares` accordingly.
-- Make sure that the `s.shares` attribute can't be set to a non-integer value.
+* 确保 `s.cost` 属性返回正确的值（49010.0）。
+* 确保 `s.sell()` 方法正常工作。它应该相应地减小 `s.shares`。
+* 确保 `s.shares`  属性只能设置为整数值。
 
-For the last part, you're going to need to check that an exception is raised.
-An easy way to do that is with code like this:
+对于最后一部分，你需要检查异常的触发。要做到这些，一种简单的方法是使用如下代码：
 
 ```python
 class TestStock(unittest.TestCase):
@@ -290,4 +256,4 @@ class TestStock(unittest.TestCase):
              s.shares = '100'
 ```
 
-[Contents](../Contents.md) \| [Previous (7.5 Decorated Methods)](../07_Advanced_Topics/05_Decorated_methods.md) \| [Next (8.2 Logging)](02_Logging.md)
+[目录](../Contents.md) \| [上一节 (7.5 装饰方法](../07_Advanced_Topics/05_Decorated_methods.md) \| [下一节 (8.2 日志)](02_Logging.md)
