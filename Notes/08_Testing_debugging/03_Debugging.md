@@ -1,10 +1,10 @@
-[Contents](../Contents.md) \| [Previous (8.2 Logging)](02_Logging.md) \| [Next (9 Packages)](../09_Packages/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (8.2 日志)](02_Logging.md) \| [下一节 (9 包)](../09_Packages/00_Overview.md)
 
-# 8.3 Debugging
+# 8.3 调试
 
-### Debugging Tips
+### 调试建议
 
-So, your program has crashed...
+假设程序崩溃了：
 
 ```bash
 bash % python3 blah.py
@@ -20,11 +20,11 @@ Traceback (most recent call last):
 AttributeError: 'int' object has no attribute 'append'
 ```
 
-Now what?!
+那么现在该怎么办呢？
 
-### Reading Tracebacks
+### 阅读回溯信息
 
-The last line is the specific cause of the crash.
+最后一行是程序崩溃的具体原因：
 
 ```bash
 bash % python3 blah.py
@@ -41,13 +41,13 @@ Traceback (most recent call last):
 AttributeError: 'int' object has no attribute 'append'
 ```
 
-However, it's not always easy to read or understand.
+不过，回溯信息并不总是那么阅读或理解。
 
-*PRO TIP: Paste the whole traceback into Google.*
+*专业建议：将整个回溯粘贴到谷歌。*
 
-### Using the REPL
+### 使用交互式解释器（REPL）
 
-Use the option `-i` to keep Python alive when executing a script.
+执行脚本的 时候，可以使用选项 `-i` 使 Python 保持存活（keep alive）。
 
 ```bash
 bash % python3 -i blah.py
@@ -64,14 +64,13 @@ AttributeError: 'int' object has no attribute 'append'
 >>>
 ```
 
-It preserves the interpreter state. That means that you can go poking
-around after the crash. Checking variable values and other state.
+选项 `-i` 可以保留解释器状态。这意味着可以在程序崩溃后查找错误信息。对变量的值和其它状态进行检查。
 
-### Debugging with Print
+### 使用打印进行调试
 
-`print()` debugging is quite common.
+使用 `print()` 函数进行调试非常常见。
 
-*Tip: Make sure you use `repr()`*
+*建议：确保使用的是  `repr()` 函数*。
 
 ```python
 def spam(x):
@@ -79,7 +78,7 @@ def spam(x):
     ...
 ```
 
-`repr()` shows you an accurate representation of a value. Not the *nice* printing output.
+`repr()`  函数显示一个值的准确表示，而不是格式良好的输出。
 
 ```python
 >>> from decimal import Decimal
@@ -93,9 +92,9 @@ Decimal('3.4')
 >>>
 ```
 
-### The Python Debugger
+### Python 的调试器
 
-You can manually launch the debugger inside a program.
+可以在程序内手动启动调试器（debugger）。
 
 ```python
 def some_function():
@@ -104,10 +103,9 @@ def some_function():
     ...
 ```
 
-This starts the debugger at the `breakpoint()` call.
+上述操作会在  `breakpoint()` 调用时启动调试器。
 
-In earlier Python versions, you did this.  You'll sometimes see this
-mentioned in other debugging guides.
+在 Python 的早期版本中，可能会看到下面这样的调试指南：
 
 ```python
 import pdb
@@ -116,19 +114,19 @@ pdb.set_trace()       # Instead of `breakpoint()`
 ...
 ```
 
-### Run under debugger
+（译注：Python 3.7 之后，可以使用内置函数 `breakpoint()` 代替 ` import pdb; pdb.set_trace()`）
 
-You can also run an entire program under debugger.
+### 在调试解释器下运行程序
+
+也可以在调试器下运行整个程序：
 
 ```bash
 bash % python3 -m pdb someprogram.py
 ```
 
-It will automatically enter the debugger before the first
-statement. Allowing you to set breakpoints and change the
-configuration.
+上述操作会在第一行语句之前自动进入调试器，允许设置断点和修改配置。
 
-Common debugger commands:
+常见的调试器命令：
 
 ```code
 (Pdb) help            # Get help
@@ -143,7 +141,7 @@ Common debugger commands:
 (Pdb) !statement      # Execute statement
 ```
 
-For breakpoints location is one of the following.
+断点的位置可以用下列任意一种方式进行表示：
 
 ```code
 (Pdb) b 45            # Line 45 in current file
@@ -152,10 +150,10 @@ For breakpoints location is one of the following.
 (Pdb) b module.foo    # Function foo() in a module
 ```
 
-## Exercises
+## 练习
 
-### Exercise 8.4:  Bugs? What Bugs?
+### 练习 8.4：Bugs? 什么是 Bugs?
 
-It runs. Ship it!
+有 bug，我们就解决 bug（It runs. Ship it!）。
 
-[Contents](../Contents.md) \| [Previous (8.2 Logging)](02_Logging.md) \| [Next (9 Packages)](../09_Packages/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (8.2 日志)](02_Logging.md) \| [下一节 (9 包)](../09_Packages/00_Overview.md)

@@ -180,7 +180,7 @@ FAILED (failures=1)
 
 高效的单元测试是一种艺术。对于大型应用而言，单元测试可能会变得非常复杂。
 
-`unittest` 模块具有大量与测试执行器（test runners），测试结果集（collection of results）以及测试其他方面相关的选项。相关详细信息，请查阅文档。
+`unittest` 模块具有大量与测试运行器（test runners），测试结果集（collection of results）以及测试其他方面相关的选项。相关详细信息，请查阅文档。
 
 ### 第三方测试工具
 
