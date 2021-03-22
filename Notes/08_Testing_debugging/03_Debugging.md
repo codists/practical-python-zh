@@ -41,7 +41,7 @@ Traceback (most recent call last):
 AttributeError: 'int' object has no attribute 'append'
 ```
 
-不过，回溯信息并不总是那么阅读或理解。
+不过，回溯信息并不总是那么易于阅读或理解。
 
 *专业建议：将整个回溯粘贴到谷歌。*
 
