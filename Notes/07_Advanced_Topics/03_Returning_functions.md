@@ -164,7 +164,7 @@ def typedproperty(name, expected_type):
     return prop
 ```
 
-现在，通过定义下面这样的类来尝试以下：
+现在，通过定义下面这样的类来尝试一下：
 
 ```python
 from typedproperty import typedproperty
