@@ -1,19 +1,14 @@
-[Contents](../Contents.md) \| [Prev (8 Testing and Debugging)](../08_Testing_debugging/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (8 测试和调试)](../08_Testing_debugging/00_Overview.md)
 
-# 9 Packages
+# 9 包
 
-We conclude the course with a few details on how to organize your code
-into a package structure.  We'll also discuss the installation of
-third party packages and preparing to give your own code away to others.
+我们将以“如何把代码组织成包结构”这一主题结束本课程。同时，也将对第三方包的安装、如何将自己的代码提供给其他人使用进行讨论。
 
-The subject of packaging is an ever-evolving, overly complex part of
-Python development.  Rather than focus on specific tools, the main
-focus of this section is on some general code organization principles
-that will prove useful no matter what tools you later use to give code
-away or manage dependencies.
+在 Python 开发中，打包（packaging）是一个演进的，复杂的主题。本节主要关注一些通用的代码组织原则，而不是特定的工具。无论以后使用那种工具来分发代码或者管理依赖，这些通用的代码组织原则都是有用的。
 
-* [9.1 Packages](01_Packages.md)
-* [9.2 Third Party Modules](02_Third_party.md)
-* [9.3 Giving your code to others](03_Distribution.md)
+* [9.1 包](01_Packages.md)
+* [9.2 第三方模块](02_Third_party.md)
+* [9.3 将代码提供给其他人（使用）](03_Distribution.md)
 
-[Contents](../Contents.md) \| [Prev (8 Testing and Debugging)](../08_Testing_debugging/00_Overview.md)
+[目录](../Contents.md) \| [上一节 (8 测试和调试)](../08_Testing_debugging/00_Overview.md)
+
