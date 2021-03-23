@@ -4,6 +4,8 @@
 
 本节介绍装饰器（decorator）。因为这是一个高级主题，所以我们只做简单介绍。
 
+译注：根据译者个人的猜测，在《设计模式》(《 Design Patterns: Elements of Reusable Object-Oriented Software》)一书中写到 `decorator also known as wrapper`，所以下文提到包装器（wrapper），其实说的就是装饰器。这里为了保持和原文一致，所以翻译的时候没有将“包装器”替换为“装饰器”。
+
 ### 日志示例
 
 考虑这样一个函数：
