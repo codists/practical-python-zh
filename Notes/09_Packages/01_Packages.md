@@ -1,14 +1,18 @@
-[Contents](../Contents.md) \| [Previous (8.3 Debugging)](../08_Testing_debugging/03_Debugging.md) \| [Next (9.2 Third Party Packages)](02_Third_party.md)
+[目录](../Contents.md) \| [上一节 (8.3 调试)](../08_Testing_debugging/03_Debugging.md) \| [下一节 (9.2 第三方包)](02_Third_party.md)
 
-# 9.1 Packages
+# 9.1 包
 
 If writing a larger program, you don't really want to organize it as a
 large of collection of standalone files at the top level.  This
 section introduces the concept of a package.
 
-### Modules
+如果编写更大的程序，我们真的不会想在顶层将程序组织成独立文件。本节对包（package）的概念进行介绍。
+
+### 模块
 
 Any Python source file is a module.
+
+任何一个 Python 源文件称为一个模块。
 
 ```python
 # foo.py
@@ -20,6 +24,8 @@ def spam(b):
 
 An `import` statement loads and *executes* a module.
 
+`import` 语句加载并*执行* 一个模块。
+
 ```python
 # program.py
 import foo
@@ -29,10 +35,12 @@ b = foo.spam('Hello')
 ...
 ```
 
-### Packages vs Modules
+### 包 vs 模块
 
 For larger collections of code, it is common to organize modules into
 a package.
+
+对于更大的代码集合，通常把模块组织成包。
 
 ```code
 # From this
@@ -51,15 +59,25 @@ porty/
 You pick a name and make a top-level directory. `porty` in the example
 above (clearly picking this name is the most important first step).
 
+首先，选择一个名字并用该名字创建顶级目录。如上述的 `porty` （显然，第一步最重要的是选择名字）。
+
 Add an `__init__.py` file to the directory. It may be empty.
+
+接着，添加 `__init__.py` 文件到该目录中。`__init__.py` 文件可以是一个空文件。
 
 Put your source files into the directory.
 
-### Using a Package
+最后，把源文件放到该目录中。
+
+### Using a Package使用包
 
 A package serves as a namespace for imports.
 
 This means that there are now multilevel imports.
+
+包作为命名空间用于导入。
+
+这意味着现在有了多层导入。
 
 ```python
 import porty.report
@@ -76,7 +94,7 @@ from porty.report import read_portfolio
 port = read_portfolio('portfolio.csv')
 ```
 
-### Two problems
+### Two problems两个问题
 
 There are two main problems with this approach.
 
@@ -85,10 +103,17 @@ There are two main problems with this approach.
 
 So, basically everything breaks. But, other than that, it works.
 
-### Problem: Imports
+这种方法存在两个主要的问题：
+
+* 同一包内不同文件之间的导入无效。
+* 包中的主脚本无效。
+
+### Problem: Imports问题：导入
 
 Imports between files in the same package *must now include the
 package name in the import*.  Remember the structure.
+
+在导入的时候，同一包内的不同文件之间的导入必须包含包名。请记住这个结构：
 
 ```code
 porty/
@@ -100,6 +125,8 @@ porty/
 
 Modified import example.
 
+请根据上述规则（同一包内的不同文件之间的导入必须包含包名）修改以下导入示例：
+
 ```python
 # report.py
 from porty import fileparse
@@ -110,6 +137,8 @@ def read_portfolio(filename):
 
 All imports are *absolute*, not relative.
 
+所有的导入都是绝对的，而不是相对的。
+
 ```python
 # report.py
 import fileparse    # BREAKS. fileparse not found
@@ -117,7 +146,7 @@ import fileparse    # BREAKS. fileparse not found
 ...
 ```
 
-### Relative Imports
+### Relative Imports相对导入
 
 Instead of directly using the package name,
 you can use `.` to refer to the current package.
@@ -441,4 +470,4 @@ porty-app/
         typedproperty.py
 ```
 
-[Contents](../Contents.md) \| [Previous (8.3 Debugging)](../08_Testing_debugging/03_Debugging.md) \| [Next (9.2 Third Party Packages)](02_Third_party.md)
+[目录](../Contents.md) \| [上一节 (8.3 调试)](../08_Testing_debugging/03_Debugging.md) \| [下一节 (9.2 第三方包)](02_Third_party.md)
