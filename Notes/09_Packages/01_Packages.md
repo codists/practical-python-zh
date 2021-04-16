@@ -134,7 +134,7 @@ from . import modname
 
 ### 问题：主脚本
 
-将包内的子模块作为主脚本运行是会导致程序中断：
+将包内的子模块作为主脚本运行会导致程序中断：
 
 ```bash
 bash $ python porty/pcost.py # BREAKS
@@ -256,11 +256,11 @@ follow.py         # Follow a log file
 typedproperty.py  # Typed class properties
 ```
 
-在本次练习中，我们将整理这些代码并将它们放如一个通用包中。
+在本次练习中，我们将整理这些代码并将它们放入一个通用包中。
 
 ### 练习 9.1：创建一个简单的包
 
-请创建一个名为 `porty` 的目录并将上述所有的 Python 文件放如其中。另外，在 `porty` 目录中创建一个空的 `__init__.py` 文件。最后，文件目录看起来像这样：
+请创建一个名为 `porty` 的目录并将上述所有的 Python 文件放入其中。另外，在 `porty` 目录中创建一个空的 `__init__.py` 文件。最后，文件目录看起来像这样：
 
 ```
 porty/
