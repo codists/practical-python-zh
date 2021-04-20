@@ -226,7 +226,7 @@ File "<stdin>", line 1, in ?
 AttributeError: 'Stock' object has no attribute 'prices'
 ```
 
-管这样可以防止错误和限制对象的使用，但实际上使用 `__slots__` 是为了提高性能，提高 Python 利用内存的效率。
+尽管这样可以防止错误和限制对象的使用，但实际上使用 `__slots__` 是为了提高性能，提高 Python 利用内存的效率。
 
 ### 关于封装的最终说明
 
